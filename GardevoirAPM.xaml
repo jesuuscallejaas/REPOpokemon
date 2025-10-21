@@ -1,0 +1,1139 @@
+﻿<UserControl
+    x:Class="IPOkemonApp.GardevoirAPM"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    <UserControl.Resources>
+        <Storyboard x:Name="Estática" AutoReverse="True" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="6">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="26">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        <Storyboard x:Name="AtaqueDebil">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-0.422"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-5.148">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.2000000" Value="-0.26"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1.77">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="3.045">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5000000" Value="0.594"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2.081">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="3.762">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5000000" Value="0.782"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="29">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="734">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5000000" Value="40.03"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="31">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5000000" Value="14.547"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-0.43"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5000000" Value="5.362"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.2000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="AtaqueFuerte">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espiral_ojo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.8">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <SineEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espiral_ojo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="34.999">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="34.999"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0.748"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espiral_ojo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="35.333">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="35.333"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0.954"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espiral_ojo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="-2.72"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espiral_ojo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-41">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ElasticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="-41"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="-3.354"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda_redonda" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0.795">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.6000000" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.8000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda_redonda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="3.291">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3000000" Value="7.728">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="18.201">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda_redonda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="3.226">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3000000" Value="7.581">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="17.936">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda_redonda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="13">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3000000" Value="43">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="9">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.8000000" Value="454.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.6000000" Value="-1504.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.8000000" Value="-1504.5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.2000000" Value="884.912"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="onda_redonda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-9">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="-45">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.8000000" Value="12.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.6000000" Value="63.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.8000000" Value="63.5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.2000000" Value="-45.912"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Defensiva">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Alas" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Alas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="6.652"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="228.244"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="228.244"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1.012"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Alas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="7.767"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="284.454"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="284.454"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1.609"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Alas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-7.517"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="-797.52"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="-797.52"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="27.98"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Alas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="28.519"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="1396.82"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="1396.82"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-1.68"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Alas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1625.67"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="900"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Escudo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="escudo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.3"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Descanso" AutoReverse="True">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="canvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-0.255"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-20.823">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="zzz" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="62.379"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-264">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="zzz" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-7.605"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-12">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="zzz" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.98">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="zzz" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="10.567">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Cansado">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gota" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gota" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="10.882">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gota" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.47">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Herido">
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="Heridas" To="1" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="sangre1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="sangre" To="1" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+        </Storyboard>
+        <Storyboard x:Name="Derrotado">
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="ellBrilloOjo" To="0" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ptSombraOjoArriba" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="ellPupila" To="0" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="ellIrisRojo" To="0" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="ptOjoBlanco" To="0" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ptColorRojoOjo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="muerto" To="1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="50"/>
+
+            <RowDefinition Height="50"/>
+
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height="50"/>
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="50"/>
+
+            <ColumnDefinition Width="*"/>
+
+            <ColumnDefinition Width="50"/>
+
+        </Grid.ColumnDefinitions>
+
+
+        <Image x:Name="fondo" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/AssetsGardevoirAPM/background.jpg" Grid.Column="1" Margin="10,0,0,0" Grid.Row="2"/>
+
+
+        <Viewbox Grid.Column="1" Grid.Row="2">
+            <Canvas x:Name="canvas" UseLayoutRounding="True" Height="500" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.505,1.038" >
+                <Canvas.RenderTransform>
+                    <CompositeTransform/>
+                </Canvas.RenderTransform>
+
+                <Canvas x:Name="Cuerpo" HorizontalAlignment="Left" Height="357" Canvas.Left="67.875" Canvas.Top="64.46099853515625" VerticalAlignment="Top" Width="355" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+
+                    <Canvas x:Name="cnvBrazoIzq" Height="94" Canvas.Left="108.999" Canvas.Top="101.391" Width="158" RenderTransformOrigin="0.928,0.194" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="0.049" TranslateX="0.009" TranslateY="-0.007"/>
+                        </Canvas.RenderTransform>
+
+                        <Path x:Name="ptBrazoIzq" Height="94" Stroke="Black" Stretch="Fill" Width="158" Fill="#FF7DBF8F"
+                            Data="M294.66667,166.70667 L280.66632,187.53967 C280.66632,187.53967 263.99892,207.71095 258.33212,209.69505 258.33212,209.69505 250.93098,215.19323 235.79159,222.35797 220.6522,229.5227 185.03723,244.55191 185.03723,244.55191 185.03723,244.55191 176.5454,247.68765 183.81957,248.56296 183.82365,248.56345 183.82773,248.56394 183.83182,248.56443 L195.20128,243.65597 C195.20128,243.65597 167.17661,254.63689 178.43728,253.72181 189.69795,252.80673 198.93141,253.02505 198.93141,253.02505 L207.82332,246.77007 C207.82332,246.77007 186.90615,261.36503 197.8305,258.94644 208.75485,256.52784 239.41078,248.1556 271.76041,209.94483 304.11004,171.73406 308.51365,175.75625 308.51365,175.75625 L304.37715,177.83298 C304.37715,177.83298 309.68234,187.36571 312.5104,189.8179 315.11558,192.07683 322.72111,200.39214 323.14424,200.64353 323.56736,200.89491 335.38416,198.38105 335.38416,198.38105 L333.47894,188.91215 C333.47894,188.91215 321.66031,191.04894 314.48017,167.35575 L314.09892,165.91027 C314.09892,165.91027 308.25315,167.91687 294.97307,165.84757 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraDedosBrazoIzq" Fill="#FF5C9A6F" Height="4" Canvas.Left="11.562" Stroke="Black" Stretch="Fill" Canvas.Top="83.001" Width="17" StrokeThickness="0"
+                            Data="M188.7832,252.75748 L197.33366,250.53967 201.83417,249.43186 204.74276,248.52203 203.42035,249.67583 202.52384,250.33838 201.71551,250.98515 200.55446,251.83701 199.60844,252.59116 197.04191,252.66495 192.66224,252.61766 190.60467,252.71249 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraBrazoIzq" Fill="#FF5C9A6F" Height="39" Canvas.Left="19.516" Stroke="Black" Stretch="Fill" Canvas.Top="54.1" Width="65" StrokeThickness="0"
+                            Data="M201.00044,253.78344 L203.62533,252.83133 210.43198,250.06996 218.63706,246.11398 229.45983,239.69579 235.82201,235.33623 C235.82201,235.33623 243.39882,230.54214 243.51275,230.3536 243.62668,230.16507 245.99722,228.8235 245.99722,228.8235 L242.14504,233.05155 C242.14504,233.05155 222.84244,251.54663 201.6645,255.70562 201.6645,255.70562 195.53625,257.55159 200.25199,254.0221" UseLayoutRounding="False"/>
+                        <Path x:Name="ptSombraPechoCentro" Fill="#FF5C9A6F" Height="13" Canvas.Left="137" Stroke="Black" Stretch="Fill" Canvas.Top="21.806" Width="20" StrokeThickness="0"
+                            Data="M313.8848,188.8484 L320.73236,187.36524 323.74555,187.32644 324.63941,187.38462 325.7207,187.79403 327.04708,188.16445 328.3302,188.3984 329.74308,188.52513 330.37744,188.52513 C330.37744,188.52513 330.88204,189.80421 330.88204,189.84109 330.88204,189.87797 331.92007,193.78899 331.92007,193.78899 L328.21405,194.38862 324.24065,194.88076 322.08499,195.2379 317.67826,191.45895 316.54144,190.72509 314.98245,189.6613 z" UseLayoutRounding="False"/>
+
+                    </Canvas>
+
+                    <Canvas x:Name="cnvCabeza" Height="126" Canvas.Left="190.589" Width="114" RenderTransformOrigin="0.653,0.982" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="-1.419"/>
+                        </Canvas.RenderTransform>
+                        <Path x:Name="ptCabezaAbajoIzquierda" Fill="#FF5C9A6F" Height="12" Canvas.Left="45.561" Stroke="Black" Stretch="Fill" Canvas.Top="90.287" Width="9" StrokeThickness="0.2"
+                            Data="M304.33333,156.95667 L308.20868,154.748 310.0957,156.31288 311.23029,158.46019 312.135,160.80285 312.65212,162.8741 C312.65212,162.8741 312.91747,163.97401 312.91747,164.47193 L312.92422,167.37057 312.92422,169.48548 311.96458,168.57002 304.03266,157.84995 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptCabeza" Height="103" Stroke="Black" Stretch="Fill" Width="114" Fill="#FF7DBF8F" StrokeThickness="1"
+                            Data="M311.5,165.54 C311.98545,165.91321 296.83333,166.53999 291.16667,164.87333 285.5,163.20666 277.27187,163.26666 265.07186,146.55408 252.87185,129.84149 257.67028,98.345819 269.78197,86.936455 281.89366,75.527091 296.04968,65.607511 325.17138,68.654503 354.29307,71.701495 384.40605,108.8781 364.51308,130.27874 356.41761,138.98777 349.18634,142.10763 343.72341,143.81385 335.76232,146.30033 331.30388,144.77209 331.30388,144.77209 331.30388,144.77209 335.14333,109.29733 272.41713,101.47172 L288.82757,117.04309 289.41068,117.3625 277.41523,116.72367 291.24332,129.26062 288.57766,133.25327 295.90822,133.33313 C295.90822,133.33313 301.55191,140.51991 313.23498,142.79572 313.23498,142.79572 314.60946,153.99513 302.73896,156.39072 302.73896,156.39072 311.01455,165.16679 311.5,165.54 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptCabezaAbajoDerecha" Height="32" Canvas.Left="62.004" Stroke="Black" Stretch="Fill" Canvas.Top="77.079" Width="43" Fill="#FF7DBF8F"
+                            Data="M346.75,143.04 C346.75,143.04 355.5,153.95666 363.08333,154.87333 363.08333,154.87333 360.19098,163.17309 341.13541,166.13142 341.13541,166.13142 343.31278,170.56565 343.57407,172.74093 L338.26127,172.1634 C338.26127,172.1634 338.0027,163.58313 322.23033,149.7227 322.23033,149.7227 318.91322,146.4226 319.69886,143.1225 319.69886,143.1225 330.14257,142.46248 330.91945,141.55495 L331.13524,142.51903 331.35104,143.06395 331.3942,144.32144 331.95528,144.53103 C331.95528,144.53103 338.64501,145.78853 346.75901,142.81245" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptCaraYCuello" Height="90" Canvas.Left="16.036" Stroke="Black" Stretch="Fill" Canvas.Top="35.329" Width="65" Fill="#FFCCCAD6"
+                            Data="M332.1875,188.665 C332.1875,188.665 327.062,188.72749 322.2495,183.41499 317.437,178.10249 314.1749,168.25553 314.1749,168.25553 314.1749,168.25553 312.92402,164.16073 312.86148,160.19968 312.79893,156.23862 309.30092,153.01797 308.91948,152.75441 308.53805,152.49084 314.10371,149.71785 314.10371,141.07026 L314.0451,139.72667 C314.0451,139.72667 304.9329,138.6846 296.39021,129.1762 L289.29517,129.1098 291.72063,124.92179 278.63591,111.64195 289.8349,111.7079 273.80804,94.892072 C273.80804,94.892072 328.21872,100.68703 332.44355,138.09085 332.44355,138.09085 330.0004,139.803 321.21364,140.19811 321.21364,140.19811 319.84205,144.45652 324.42831,148.36373 329.01457,152.27093 338.2728,162.85112 339.38722,170.84114 L329.78088,170.70944 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptOjoBlanco" Height="26" Canvas.Left="44.189" Stroke="Black" Stretch="Fill" Canvas.Top="43.454" Width="26" Fill="White"
+                            Data="M302.875,107.915 C302.875,107.915 300.25,124.6025 313.0625,132.1025 313.0625,132.1025 321.81618,136.82661 328.90749,128.13423 328.90749,128.13423 319.09838,114.34592 308.79358,110.07986 z" UseLayoutRounding="False" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform/>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <Path x:Name="ptColorRojoOjo" Height="24" Canvas.Left="44.617" Stroke="Black" Stretch="Fill" Canvas.Top="43.829" Width="15" Fill="#FFCC6671"
+                            Data="M317,116.3525 C317.50911,118.77708 319.4375,128.4145 312.25,131.102 312.25,131.102 301.31022,126.18501 302.98336,108.42415 302.98336,108.42415 316.49089,113.92792 317,116.3525 z" UseLayoutRounding="False" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform/>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <Path x:Name="ptSombraCabezaAbajoDerecha" Height="19" Canvas.Left="63.177" Stroke="Black" Stretch="Fill" Canvas.Top="79.438" Width="17" StrokeThickness="0" Fill="#FF5C9A6F"
+                            Data="M336.1875,163.6025 L337.09325,161.47799 C337.09325,161.47799 337.59467,159.62263 337.35408,156.65719 L336.42999,155.96047 335.70191,155.46132 334.95298,154.76203 333.88652,153.73499 332.54123,151.72753 331.66105,150.08101 331.17477,149.03029 330.75702,149.10202 330.22239,149.17374 330.22883,150.2855 330.37425,151.3614 330.73778,152.53293 330.98895,153.13065 331.17402,153.561 331.57199,154.14662 333.03242,156.31061 335.18396,159.32137 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraPeloAtras" Height="21" Canvas.Left="40.357" Stroke="Black" Stretch="Fill" Canvas.Top="71.392" Width="16" Fill="#FF5C9A6F"
+                            Data="M299.66667,135.95667 C299.66667,135.95667 296.35018,148.20561 302.80851,156.58061 302.80851,156.58061 313.44193,156.84 314.35545,142.52219 314.35545,142.52219 304.24923,140.29887 300.21587,135.85041 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraPeloAtrasDerecha" Height="14" Canvas.Left="65.484" Stroke="Black" Stretch="Fill" Canvas.Top="77.423" Width="37" Fill="#FF5C9A6F"
+                            Data="M347.91377,143.68468 L347.23586,142.91911 C339.21221,146.13516 331.93074,144.68716 331.93074,144.68716 L331.2973,141.607 329.39696,141.91746 327.28547,142.30532 325.21622,142.55912 324.625,143.415 C324.625,143.415 334.54399,160.87229 360.66899,155.87229 L358.55175,154.76721 C358.55175,154.76721 352.62786,150.58696 347.91377,143.68468 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraPeloDelanteIzquierda" Height="47" Canvas.Left="23.858" Stroke="Black" Stretch="Fill" Canvas.Top="55.662" Width="31" Fill="#FF5C9A6F"
+                            Data="M312,166.29 C312,166.29 277.5,160.16499 283,120.16499 L291.25356,128.22851 289.07511,132.28116 295.93929,132.44828 299.26862,135.53999 C299.26862,135.53999 296.39142,148.53354 302.51575,156.17926 L305.22854,159.27097 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraCaraCuello" Height="33" Canvas.Left="39.911" Stroke="Black" Stretch="Fill" Canvas.Top="68.871" Width="37" StrokeThickness="0" Fill="#FF7196B3"
+                            Data="M313.94888,164.07219 C313.94888,164.07219 324.83299,165.123 334.74966,164.33133 L334.71963,164.18998 333.51814,163.68996 331.35546,162.90957 329.35798,162.2765 327.69091,161.80668 323.9663,160.86304 321.59336,160.12247 320.76733,159.62477 320.52703,159.13902 320.58711,158.87226 320.73729,158.70901 320.82741,158.63336 321.51826,158.64082 C321.51826,158.64082 328.70068,158.533 331.26534,158.18303 L330.5845,157.21725 C330.5845,157.21725 317.70416,158.88817 301.40864,156.21929 L299.18558,156.25105 C299.18558,156.25105 305.089,158.04011 314.74487,158.55506 314.74487,158.55506 316.0858,160.53523 310.28434,161.78279 310.28434,161.78279 312.06103,162.16756 313.15289,162.80605 313.57689,163.05399 313.77771,163.33826 313.84375,163.65811 313.86645,163.76808 313.85877,163.65015 313.87379,163.80941 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraPeloFrente" Height="45" Canvas.Left="22.974" Stroke="Black" Stretch="Fill" Canvas.Top="35.329" Width="86" StrokeThickness="0" Fill="#FF5C9A6F"
+                            Data="M280.84731,99.50579 L292.41701,99.289665 300.78431,100.11711 306.04469,100.70321 312.84479,101.90472 328.82662,105.53675 C328.82662,105.53675 337.52382,108.12787 348.89706,107.34699 L354.34051,107.14005 358.90827,107.00706 C358.90827,107.00706 350.49831,110.80956 337.65916,112.03866 334.86006,112.30662 332.56915,112.26475 329.16664,112.2359 328.6594,112.2316 328.02209,112.18372 327.53312,112.17407 327.53312,112.17407 328.82363,107.67584 313.60525,103.8532 307.47276,102.31281 299.10444,100.92277 285.94176,99.934779 z" UseLayoutRounding="False"/>
+
+                        <Ellipse x:Name="ellIrisRojo" Height="13" Canvas.Left="49" Stroke="Black" Canvas.Top="50" Width="8" StrokeThickness="0" Fill="#FFAF5961" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <CompositeTransform/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+
+                        <Ellipse x:Name="ellPupila" Height="6" Canvas.Left="51" Stroke="Black" Canvas.Top="54" Width="4" Fill="Black" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <CompositeTransform/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+
+                        <Path x:Name="ptSombraOjoArriba" Fill="#FFAF5961" Height="13" Canvas.Left="45.567" Stroke="Black" Stretch="Fill" Canvas.Top="44.985" Width="13" StrokeThickness="0"
+                            Data="M304.42135,117.4853 C304.42135,117.4853 308.92983,116.45502 315.64858,122.23627 L315.70438,120.09847 315.53566,117.36652 314.40321,116.19143 309.71088,112.82491 304.17882,109.88313 303.95021,113.77342 z" UseLayoutRounding="False" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform/>
+                            </Path.RenderTransform>
+                        </Path>
+
+                        <Ellipse x:Name="ellBrilloOjo" Height="8" Canvas.Left="50.691" Stroke="Black" Canvas.Top="48.581" Width="7" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <CompositeTransform/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+
+                        <Path x:Name="ptLineaCabeza1" Height="67" Stroke="Black" Stretch="Fill" Canvas.Top="14.079" Width="45" Canvas.Left="39.89"
+                            Data="M332.625,144.665 C332.625,144.665 351.625,132.28999 338.125,107.53999 324.625,82.789993 297.45397,78.316598 297.45397,78.316598" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptLineaCabeza2" Height="80" Canvas.Left="67.057" Stroke="Black" Stretch="Fill" Width="38" Canvas.Top="0.704"
+                            Data="M333.25,144.54 C333.25,144.54 361,140.91499 361.75,110.03999 362.5,79.164993 325.93031,65.679165 325.93031,65.679165" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptLineaCabeza3" Height="50" Canvas.Left="75.349" Stroke="Black" Stretch="Fill" Canvas.Top="31.329" Width="35"
+                            Data="M333.93378,144.80197 C333.93378,144.80197 375.50034,141.37333 367.83368,97.039993" UseLayoutRounding="False"/>
+                    </Canvas>
+                    <Canvas x:Name="cnvFalda" Canvas.Top="134.079" Width="324" Height="222" RenderTransformOrigin="0.813,0.001" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="0.153"/>
+                        </Canvas.RenderTransform>
+
+                        <Path x:Name="ptFalda" Height="222" Stroke="Black" Stretch="Fill" Width="324" Fill="#FFCCCAD6"
+                            Data="M322.65374,200.85606 C322.65374,200.85606 343.24966,219.78967 300.24966,270.28967 257.24966,320.78967 204.80952,310.06371 142.02662,329.65782 79.243713,349.25193 77.76367,367.57236 64.835031,383.53432 64.835031,383.53432 97.679477,368.69535 156.90093,356.40648 156.90093,356.40648 150.05305,365.30964 183.15113,354.65092 L187.33594,353.39695 C187.33594,353.39695 191.54958,353.96209 204.10402,368.13192 216.65846,382.30175 211.32208,375.58306 218.67721,383.85924 226.03234,392.13543 226.77464,395.00686 233.4957,392.11746 L239.62498,388.7655 C239.62498,388.7655 259.88282,404.92798 270.71175,420.69238 270.77664,420.78685 270.8412,420.8813 270.9054,420.97574 270.9054,420.97574 297.40922,406.11491 305.90566,397.32419 L332.28267,413.14748 C332.28267,413.14748 452.45684,353.24503 352.6705,225.65406 352.6705,225.65406 347.72385,217.78427 342.65492,204.72378 L337.16357,208.00983 334.69246,198.52842 z" UseLayoutRounding="False" RenderTransformOrigin="0.827,0.004"/>
+
+                        <Path x:Name="ptFalda_verde" Height="166" Canvas.Left="237.687" Stroke="Black" Stretch="Fill" Canvas.Top="45" Width="76" Fill="#FF7DBF8F"
+                            Data="M353.33333,243.54 C353.33333,243.54 402.5565,324.36698 305.5565,395.36698 L326.74584,407.49081 C326.74584,407.49081 427.59409,353.21644 356.74957,247.51918 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptLinea1Falda" Height="90" Canvas.Left="169.563" Stroke="Black" Stretch="Fill" Canvas.Top="99.875" Width="95"
+                            Data="M240.31887,387.40479 L237.24967,385.04032 C237.24967,385.04032 323.24435,348.4473 344.60065,303.11917" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptLinea2Falda" Height="69" Canvas.Left="90.458" Stroke="Black" Stretch="Fill" Canvas.Top="88.875" Width="156"
+                            Data="M159.14147,355.74915 C159.14147,355.74915 160.06227,355.17258 160.38566,354.49957 162.36391,350.38256 174.43429,334.9293 249.00007,323.53023 249.00007,323.53023 297.90933,315.62716 313.38057,287.7539" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraFaldaArriba" Height="21" Canvas.Left="255.703" Stroke="Black" Stretch="Fill" Canvas.Top="0.953" Width="25" StrokeThickness="0" Fill="#FF7196B3"
+                            Data="M327.74098,211.3364 C327.74098,211.3364 333.79575,219.88848 347.56141,219.58121 L346.07928,217.00638 343.985,212.56621 341.50178,206.95617 336.23615,209.81907 333.95193,201.59226 323.86679,203.51622 C323.86679,203.51622 324.50888,204.0005 325.36263,205.35514 325.80129,206.05116 326.38113,207.06665 326.65103,208.31447 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptLineaFaldaDebajoTriangulo" Height="40" Canvas.Left="270.5" Stroke="Black" Stretch="Fill" Canvas.Top="8.417" Width="17"
+                            Data="M338.50163,206.91499 C338.50163,206.91499 345.25119,237.6797 354.25119,247.1797" UseLayoutRounding="False"/>
+                        <Path x:Name="ptParteVerdeAbajoFalda" Fill="#FF5C9A6F" Height="9" Canvas.Left="93.789" Stroke="Black" Stretch="Fill" Canvas.Top="151.714" Width="27"
+                            Data="M161.5,358.915 C161.5,358.915 169.48835,345.70486 188.64254,352.17092 L187.66667,352.7988 C187.66667,352.7988 166.69979,360.08631 161.70967,358.93798 z" UseLayoutRounding="False"/>
+                    </Canvas>
+                    <Canvas x:Name="cnvBrazoDer" Height="85" Canvas.Left="280.333" Canvas.Top="128.89" Width="75" RenderTransformOrigin="-0.264,-0.477" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="-0.797" TranslateX="-0.172" TranslateY="0.153"/>
+                        </Canvas.RenderTransform>
+
+                        <Path x:Name="ptBrazoDer" Fill="#FF7DBF8F" Height="85" Stroke="Black" Stretch="Fill" Width="75"
+                            Data="M352.83764,193.41892 C352.87816,193.6287 369.41667,218.70666 376.08333,224.62333 382.75,230.53999 416.70353,266.46986 421.33638,270.99159 421.33638,270.99159 422.69319,271.60821 411.34546,271.97817 L405.40191,270.31336 400.89648,263.96239 C400.89648,263.96239 410.7714,279.99397 406.20425,276.91098 401.6371,273.82798 382.4633,265.36851 360.5739,221.71232 360.5739,221.71232 355.03983,208.84675 348.86801,199.67771 L348.26733,198.91363 352.42593,193.58567 C352.42593,193.58567 352.79712,193.20914 352.83764,193.41892 z" UseLayoutRounding="False"/>
+
+                        <Path x:Name="ptSombraBrazoDerecho" Fill="#FF5C9A6F" Height="30" Canvas.Left="1.167" Stroke="Black" Stretch="Fill" Canvas.Top="1.22" Width="20" StrokeThickness="0"
+                            Data="M362.84818,223.9594 C362.84818,223.9594 367.3396,221.58581 368.7146,217.46081 L360.48609,205.57705 353.76788,195.40393 352.83334,196.43245 350.23654,199.98494 352.71656,203.88458 356.17406,210.33402 358.32792,214.6186 360.17003,218.70427 362.16801,223.20325 z" UseLayoutRounding="False"/>
+                        <Path x:Name="ptHombroDerecho" Height="24" Canvas.Left="-24.98" Stroke="Black" Stretch="Fill" Canvas.Top="-43.484" Width="21" Fill="#FF7DBF8F"
+                            Data="M323.16667,149.70667 C323.16667,149.70667 333.74966,153.123 340.83299,165.873 340.83299,165.873 343.3272,171.38774 342.83647,172.48234 L338.87112,171.73933 338.50111,171.65681 338.29555,171.65681 C338.29555,171.65681 337.71998,162.86837 323.86523,150.61406 z" UseLayoutRounding="False"/>
+                        <Path x:Name="ptSombraHombroDer" Height="12" Canvas.Left="-23.902" Stroke="Black" Stretch="Fill" Canvas.Top="-42.025" Width="13" StrokeThickness="0" Fill="#FF5C9A6F" RenderTransformOrigin="0.5,0.5"
+                            Data="M337.04237,163.5868 L337.44896,163.13116 337.58179,162.85773 337.09424,162.46601 335.73476,161.8328 331.74321,160.1184 329.67981,159.49584 325.64669,158.42183 322.70891,157.77803 326.99542,159.40865 329.13498,160.43792 333.1038,162.49413 336.17775,164.06683 z" UseLayoutRounding="False">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="1.57"/>
+                                    <TranslateTransform X="-0.013699120143867205" Y="-0.00018770112442823006"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                    </Canvas>
+
+                </Canvas>
+
+                <Path x:Name="ptTrianguloPecho" Fill="#FFCD6F7C" Height="37" Canvas.Left="328.729" Stroke="Black" Stretch="Fill" Canvas.Top="171.441" Width="29" HorizontalAlignment="Left" VerticalAlignment="Top"
+Data="M329.83333,172.37333 C330.91529,170.97178 353.33368,173.707 357.58368,173.207 357.58368,173.207 360.69843,193.29489 336.49948,206.06361 336.49948,206.06361 328.75137,173.77489 329.83333,172.37333 z" RenderTransformOrigin="-0.203,0.488" UseLayoutRounding="False">
+                    <Path.RenderTransform>
+                        <CompositeTransform Rotation="0.557" TranslateX="0.287" TranslateY="0.58"/>
+                    </Path.RenderTransform>
+                </Path>
+                <Path x:Name="ptCirculoRojoEspalda" Fill="#FF914B52" Height="26" Canvas.Left="308.795" Stroke="Black" Stretch="Fill" Canvas.Top="186.54" Width="19" HorizontalAlignment="Center" VerticalAlignment="Center"
+      Data="M308.91667,186.54 C308.91667,186.54 306.16632,206.78999 326.83299,211.78999 326.83299,211.78999 326.66262,201.37437 309.50162,187.17124 z" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <CompositeTransform/>
+                    </Path.RenderTransform>
+                </Path>
+                <Image x:Name="onda" Source="/AssetsGardevoirAPM/Onda.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Opacity="0" Height="184" Canvas.Left="305.235" Canvas.Top="118.23" Width="141">
+                    <Image.RenderTransform>
+                        <CompositeTransform Rotation="-0.43"/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Espiral_ojo" 
+       Height="54" 
+       Width="76" 
+       Source="/AssetsGardevoirAPM/Espiral.png" 
+       Opacity="0" 
+       RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Canvas.Left="271" Canvas.Top="98" VerticalAlignment="Top">
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="onda_redonda" 
+       Height="62" 
+       Width="55" 
+       Source="/AssetsGardevoirAPM/OndaRedonda.png" 
+       Opacity="0"
+       RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Canvas.Left="472" Canvas.Top="200" VerticalAlignment="Top">
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Alas" Height="65" Width="108" Source="/AssetsGardevoirAPM/Espiral2.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Opacity="0" HorizontalAlignment="Left" Canvas.Left="254.647" Canvas.Top="88.941" VerticalAlignment="Top">
+                    <Image.RenderTransform>
+                        <CompositeTransform Rotation="1625.666"/>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock x:Name="zzz" Height="87" TextWrapping="Wrap" Width="171" FontFamily="Cooper Black" FontSize="72" Opacity="0" RenderTransformOrigin="0.5,0.5" FocusVisualPrimaryBrush="{x:Null}" HorizontalAlignment="Left" Canvas.Left="710" Canvas.Top="107" VerticalAlignment="Top">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF4C068A"/>
+                            <GradientStop Color="#FFDFCAF1" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform/>
+                    </TextBlock.RenderTransform><Run Text="ZZZ"/><LineBreak/><Run/></TextBlock>
+                <Ellipse x:Name="escudo" Height="473" Width="500" RenderTransformOrigin="0.5,0.5" FocusVisualPrimaryBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="27" Opacity="0">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF34ABF7"/>
+                            <GradientStop Color="Gray" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Canvas x:Name="Heridas" Height="194" Canvas.Left="220" Canvas.Top="95" Width="174" Opacity="0">
+                    <Canvas x:Name="Herida" Height="3" Canvas.Left="66" Canvas.Top="27" Width="13">
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="Gray" Height="1" Canvas.Left="0.385" Stroke="#FF9590AF" Stretch="Fill" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="2.295" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.714" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.213" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="3.615" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.512" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="1.912" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.486" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="Herida_Copiar" Height="3" Canvas.Left="107" Canvas.Top="136" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="-17.919"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="Gray" Height="1" Canvas.Left="0.385" Stroke="#FF9590AF" Stretch="Fill" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="2.295" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.714" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.213" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="3.615" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.512" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="1.912" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.486" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="Herida_Copiar1" Height="3" Canvas.Left="114" Canvas.Top="152" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="15.961"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="Gray" Height="1" Canvas.Left="0.385" Stroke="#FF9590AF" Stretch="Fill" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="2.295" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.714" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.213" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="3.615" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.512" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="1.912" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.486" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="Herida_Copiar2" Height="3" Canvas.Left="98" Canvas.Top="160" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="129.832"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="Gray" Height="1" Canvas.Left="0.385" Stroke="#FF9590AF" Stretch="Fill" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="2.295" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.714" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.213" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="3.615" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.512" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="1.912" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.486" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="Herida_Copiar3" Height="3" Canvas.Left="114" Canvas.Top="191" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="30.352"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="Gray" Height="1" Canvas.Left="0.385" Stroke="#FF9590AF" Stretch="Fill" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="2.295" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.714" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.213" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="3.615" UseLayoutRounding="False" Width="14" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.512" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="1.912" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="4.486" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="1.188" UseLayoutRounding="False" Width="15" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="Herida_Copiar4" Height="3" Canvas.Left="90" Canvas.Top="75" Width="13">
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="Gray" Height="1" Canvas.Left="4.083" Stroke="#FF9590AF" Stretch="Fill" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-0.85">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.751" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="0.966" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.441" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.963" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="2.219" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" Canvas.Left="3.84">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.71" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="0.846" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.956" Stroke="#FF9590AF" Stretch="Fill" Canvas.Top="0.452" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="HeridaVerde" Height="3" Canvas.Left="120" Canvas.Top="17" Width="13">
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FF4C9861" Height="1" Canvas.Left="4.083" Stroke="#FF4C9861" Stretch="Fill" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-0.85">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.751" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.966" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.441" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.963" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.219" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" Canvas.Left="3.84">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.71" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.846" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.956" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.452" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="HeridaVerde_Copiar" Height="3" Canvas.Left="79" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="31.655"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FF4C9861" Height="1" Canvas.Left="4.083" Stroke="#FF4C9861" Stretch="Fill" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-0.85">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.751" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.966" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.441" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.963" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.219" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" Canvas.Left="3.84">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.71" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.846" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.956" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.452" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="HeridaVerde_Copiar1" Height="3" Canvas.Left="46" Canvas.Top="54" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="-66.881"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FF4C9861" Height="1" Canvas.Left="4.083" Stroke="#FF4C9861" Stretch="Fill" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-0.85">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.751" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.966" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.441" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.963" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.219" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" Canvas.Left="3.84">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.71" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.846" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.956" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.452" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="HeridaVerde_Copiar2" Height="3" Canvas.Top="136" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="127.008"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FF4C9861" Height="1" Canvas.Left="4.083" Stroke="#FF4C9861" Stretch="Fill" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-0.85">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.751" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.966" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.441" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.963" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.219" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" Canvas.Left="3.84">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.71" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.846" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.956" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.452" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="HeridaVerde_Copiar3" Height="3" Canvas.Left="161" Canvas.Top="154" Width="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform Rotation="27.081"/>
+                        </Canvas.RenderTransform>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FF4C9861" Height="1" Canvas.Left="4.083" Stroke="#FF4C9861" Stretch="Fill" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-0.85">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.751" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.966" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.441" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.963" UseLayoutRounding="False" Width="11" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="-22.843"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="2.219" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" Canvas.Left="3.84">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="5.71" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.846" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path Data="M141.76471,98 L162.35294,98" Fill="#FFF4F4F5" Height="1" Canvas.Left="7.956" Stroke="#FF4C9861" Stretch="Fill" Canvas.Top="0.452" UseLayoutRounding="False" Width="10" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <CompositeTransform Rotation="50.195"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+                <Image x:Name="sangre1" Height="59" Canvas.Left="166.325" Canvas.Top="237.945" Width="103" Source="/AssetsGardevoirAPM/sangre.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Opacity="0">
+                    <Image.RenderTransform>
+                        <CompositeTransform Rotation="-19.142"/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="sangre" Height="22" Canvas.Left="398.712" Canvas.Top="264.993" Width="40" Source="/AssetsGardevoirAPM/sangre.png" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Opacity="0">
+                    <Image.RenderTransform>
+                        <CompositeTransform Rotation="-1.61"/>
+                    </Image.RenderTransform>
+                </Image>
+                <Canvas x:Name="muerto" Canvas.Left="289.5" Canvas.Top="107" Opacity="0">
+                    <Path Data="M0,72 L97,1.4210855E-14" Fill="#FFF4F4F5" Height="27" Stroke="Black" UseLayoutRounding="False" Width="39" Stretch="Fill" StrokeThickness="7"/>
+                    <Path Data="M0,72 L97,1.4210855E-14" Fill="#FFF4F4F5" Height="27" Stroke="Black" UseLayoutRounding="False" Width="39" Stretch="Fill" RenderTransformOrigin="0.5,0.5" StrokeThickness="7">
+                        <Path.RenderTransform>
+                            <CompositeTransform Rotation="86.116"/>
+                        </Path.RenderTransform>
+                    </Path>
+                </Canvas>
+                <Image x:Name="gota" Height="65" Width="51" HorizontalAlignment="Left" Canvas.Left="260.709" Canvas.Top="76.187" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Source="/AssetsGardevoirAPM/gota.png" Opacity="0">
+                    <Image.RenderTransform>
+                        <CompositeTransform Rotation="0.167"/>
+                    </Image.RenderTransform>
+                </Image>
+            </Canvas>
+        </Viewbox>
+        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/AssetsGardevoirAPM/corazon.png" Height="44" Width="46"/>
+        <Image HorizontalAlignment="Center" Height="45" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="50" Source="/AssetsGardevoirAPM/energia.png"/>
+        <Image x:Name="redPoti" Grid.Column="2" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="45" Source="/AssetsGardevoirAPM/red-potion.png"/>
+        <Image x:Name="YellowPoti" Grid.Column="2" HorizontalAlignment="Center" Height="47" Grid.Row="1" VerticalAlignment="Top" Width="40" Source="/AssetsGardevoirAPM/yellow-potion.png"/>
+
+        <ProgressBar x:Name="BarraVida" Grid.Column="1" VerticalAlignment="Stretch" BorderBrush="#FFFDF6F6" Background="#FFFDF2F2" FocusVisualPrimaryBrush="#FFDCC5C5" Value="50" Foreground="#FF941818">
+            <ProgressBar.FocusVisualSecondaryBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF8A3A3A" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.FocusVisualSecondaryBrush>
+        </ProgressBar>
+        <ProgressBar x:Name="BarraEnergia" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Background="#FFF7F7F3" FocusVisualPrimaryBrush="#FFECEBDD" BorderBrush="#FFF3F3EF" Value="54" Foreground="#FFDFE03A"/>
+        <TextBlock x:Name="Name" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Text="Gardevoir" FontFamily="Perpetua Titling MT" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,3,0" Height="41"/>
+
+
+    </Grid>
+</UserControl>

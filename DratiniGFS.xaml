@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="IPOkemonApp.DratiniGFS"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControlPokemon"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" PreviewKeyDown="controlTeclas"
+	Loaded="DratiniGFS_Loaded"
+	>
+
+	<UserControl.Resources>
+
+
+		<Storyboard x:Name="estadoDerrotado" x:Key="estadoDerrotadoKey">
+			<!-- Animación de escala en el eje X -->
+			<DoubleAnimation
+        Storyboard.TargetName="scaleTransformPokemon"
+        Storyboard.TargetProperty="ScaleX"
+        From="1"
+        To="0.85"
+        Duration="0:0:0.2"
+        AutoReverse="False"
+        RepeatBehavior="2x"
+        EnableDependentAnimation="True"/>
+
+			<!-- Animación de escala en el eje Y -->
+			<DoubleAnimation
+        Storyboard.TargetName="scaleTransformPokemon"
+        Storyboard.TargetProperty="ScaleY"
+        From="1"
+        To="0.85"
+        Duration="0:0:0.2"
+        AutoReverse="False"
+        RepeatBehavior="2x"
+        EnableDependentAnimation="True"/>
+			<!-- Estas animaciones comienzan después de las animaciones de escala -->
+
+			<!-- Giro del canvasPokemon 90 grados hacia la izquierda -->
+			<DoubleAnimation
+        Storyboard.TargetName="rotateTransform"
+        Storyboard.TargetProperty="Angle"
+        From="0"
+        To="-90"
+        Duration="0:0:1"
+        BeginTime="0:0:0.4"
+        EnableDependentAnimation="True"/>
+			<!-- Comienza después de las animaciones de escala -->
+
+			<!-- Desvanecer OjoDERCanvas a opacidad 0 -->
+			<DoubleAnimation
+        Storyboard.TargetName="OjoDERCanvas"
+        Storyboard.TargetProperty="Opacity"
+        From="1"
+        To="0"
+        Duration="0:0:0.1"
+        BeginTime="0:0:0.4"
+        EnableDependentAnimation="True"/>
+			<!-- Comienza después del giro -->
+
+			<!-- Desvanecer OjoIZQCanvas a opacidad 0 -->
+			<DoubleAnimation
+        Storyboard.TargetName="OjoIZQCanvas"
+        Storyboard.TargetProperty="Opacity"
+        From="1"
+        To="0"
+        Duration="0:0:0.1"
+        BeginTime="0:0:0.4"
+        EnableDependentAnimation="True"/>
+			<!-- Comienza después del giro -->
+
+			<!-- Mostrar la imagen de la cruz en la posición de OjoDERCanvas -->
+			<ObjectAnimationUsingKeyFrames
+        Storyboard.TargetName="ImagenCruzDER"
+        Storyboard.TargetProperty="Visibility">
+				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="Visible" />
+			</ObjectAnimationUsingKeyFrames>
+
+			<!-- Mostrar la imagen de la cruz en la posición de OjoIZQCanvas -->
+			<ObjectAnimationUsingKeyFrames
+        Storyboard.TargetName="ImagenCruzIZQ"
+        Storyboard.TargetProperty="Visibility">
+				<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="Visible" />
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="estadoHerido" x:Key="estadoHeridoKey">
+			<!-- Reducir la opacidad para mostrar que está herido -->
+			<DoubleAnimation
+    Storyboard.TargetName="canvasPokemon"
+    Storyboard.TargetProperty="Opacity"
+    From="1" To="0.7" Duration="0:0:0.5"/>
+
+			<!-- Aplanar la pupila derecha (PupilaDER) sin afectar la inclinación del ojo -->
+			<DoubleAnimation
+    Storyboard.TargetName="ScalePupilaDER"
+    Storyboard.TargetProperty="ScaleY"
+    From="1" To="0.05" Duration="0:0:1"/>
+
+			<!-- Aplanar la pupila izquierda (PupilaIZQ) sin afectar la inclinación del ojo -->
+			<DoubleAnimation
+    Storyboard.TargetName="ScalePupilaIZQ"
+    Storyboard.TargetProperty="ScaleY"
+    From="1" To="0.05" Duration="0:0:1" />
+
+			<!-- Giro sobre sí mismo del canvasPokemon -->
+			<DoubleAnimation
+    Storyboard.TargetName="rotateTransform"
+    Storyboard.TargetProperty="Angle"
+    From="-10" To="10" Duration="0:0:4" AutoReverse="True" RepeatBehavior="Forever"/>
+		</Storyboard>
+		<Storyboard x:Name="estadoCansado" x:Key="estadoCansadoKey">
+			<ColorAnimation 
+    BeginTime="00:00:00" 
+    Storyboard.TargetName="PupilaIZQ" 
+    Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+    From="White" 
+    To="#FFFF99"
+    Duration="0:0:3" />
+
+			<DoubleAnimation 
+    BeginTime="00:00:00" 
+    Storyboard.TargetName="ScalePupilaIZQ" 
+    Storyboard.TargetProperty="ScaleX"
+    From="1" 
+    To="0.5"
+    Duration="0:0:3" />
+
+			<DoubleAnimation 
+    BeginTime="00:00:00" 
+    Storyboard.TargetName="ScalePupilaIZQ" 
+    Storyboard.TargetProperty="ScaleY"
+    From="1" 
+    To="0.5"
+    Duration="0:0:3" />
+
+			<ColorAnimation 
+    BeginTime="00:00:00" 
+    Storyboard.TargetName="PupilaDER" 
+    Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+    From="White" 
+    To="#FFFF99"
+    Duration="0:0:3" />
+
+			<DoubleAnimation 
+    BeginTime="00:00:00" 
+    Storyboard.TargetName="ScalePupilaDER" 
+    Storyboard.TargetProperty="ScaleX"
+    From="1" 
+    To="0.5"
+    Duration="0:0:3"  />
+
+			<DoubleAnimation 
+    BeginTime="00:00:00" 
+    Storyboard.TargetName="ScalePupilaDER" 
+    Storyboard.TargetProperty="ScaleY"
+    From="1" 
+    To="0.5"
+    Duration="0:0:3" />
+		</Storyboard>
+		<Storyboard x:Name="animaciónAtaqueDébil" x:Key="AnimacionAtaquePokemon">
+			<!-- Animación para mover el Pokémon hacia la derecha -->
+			<DoubleAnimation 
+    Storyboard.TargetName="translateTransform" 
+    Storyboard.TargetProperty="X" 
+    From="0" To="300" Duration="0:0:0.5" AutoReverse="True" RepeatBehavior="1x" />
+
+			<!-- Animación para inclinar el Pokémon hacia atrás -->
+			<DoubleAnimation 
+    Storyboard.TargetName="rotateTransform" 
+    Storyboard.TargetProperty="Angle" 
+    From="0" To="-20" Duration="0:0:0.5" AutoReverse="True" RepeatBehavior="1x" />
+		</Storyboard>
+		<Storyboard x:Name="animaciónAtaqueFuerte">
+			<!-- Animación para mover la bola de agua a la derecha -->
+			<DoubleAnimation 
+    Storyboard.TargetName="movBola" 
+    Storyboard.TargetProperty="X" 
+    From="0" To="650" Duration="0:0:3" AutoReverse="False" RepeatBehavior="1x" />
+
+			<!-- Animación para hacer girar la bola de agua -->
+			<DoubleAnimation 
+    Storyboard.TargetName="rotBola" 
+    Storyboard.TargetProperty="Angle" 
+    From="0" To="360" Duration="0:0:1" AutoReverse="False" RepeatBehavior="4x" />
+
+			<!-- Animación para aumentar el tamaño de la bola de agua -->
+			<DoubleAnimation 
+    Storyboard.TargetName="escalaBola" 
+    Storyboard.TargetProperty="ScaleX" 
+    From="0.2" To="1" Duration="0:0:2" AutoReverse="False" RepeatBehavior="1x" />
+			<DoubleAnimation 
+    Storyboard.TargetName="escalaBola" 
+    Storyboard.TargetProperty="ScaleY" 
+    From="0.2" To="1" Duration="0:0:2" AutoReverse="False" RepeatBehavior="1x" />
+
+			<!-- Animación para cambiar la visibilidad de imBolaAgua -->
+			<ObjectAnimationUsingKeyFrames 
+    Storyboard.TargetName="imBolaAgua" 
+    Storyboard.TargetProperty="Visibility">
+				<!-- Al inicio del Storyboard, se pone en Visible -->
+				<DiscreteObjectKeyFrame KeyTime="0:0:0">
+					<DiscreteObjectKeyFrame.Value>
+						<Visibility>Visible</Visibility>
+					</DiscreteObjectKeyFrame.Value>
+				</DiscreteObjectKeyFrame>
+				<!-- Al finalizar el Storyboard (a 3 segundos) se vuelve a poner en Collapsed -->
+				<DiscreteObjectKeyFrame KeyTime="0:0:3">
+					<DiscreteObjectKeyFrame.Value>
+						<Visibility>Collapsed</Visibility>
+					</DiscreteObjectKeyFrame.Value>
+				</DiscreteObjectKeyFrame>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="movBase" AutoReverse="True" RepeatBehavior="Forever">
+			<DoubleAnimation
+    Storyboard.TargetName="translateTransform"
+    Storyboard.TargetProperty="Y"
+    From="0"
+    To="-10"
+    Duration="0:0:1" />
+		</Storyboard>
+		<Storyboard x:Name="animaciónEscudo" AutoReverse="False">
+			<DoubleAnimation 
+        Storyboard.TargetName="imBurbuja"
+        Storyboard.TargetProperty="Opacity" 
+        From="0" To="1" Duration="0:0:3" BeginTime="0:0:0"/>
+		</Storyboard>
+		<Storyboard x:Name="animaciónEscudoFin" AutoReverse="False">
+			<DoubleAnimation 
+         Storyboard.TargetName="imBurbuja"
+         Storyboard.TargetProperty="Opacity" 
+         From="1" To="0" Duration="0:0:3" BeginTime="0:0:0"/>
+		</Storyboard>
+		<Storyboard x:Name="animaciónDescanso" x:Key="AnimacionDescansoKey">
+			<!-- Suavemente aumentar la opacidad para simbolizar recuperación -->
+			<DoubleAnimation
+    Storyboard.TargetName="canvasPokemon"
+    Storyboard.TargetProperty="Opacity"
+    From="0.7"
+    To="1"
+    Duration="0:0:3"
+    AutoReverse="False"/>
+
+			<!-- Un leve brillo en los ojos para indicar recuperación -->
+			<ColorAnimation
+    Storyboard.TargetName="PupilaIZQ"
+    Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+    From="#87CEFA"
+    To="White"
+    Duration="0:0:3"/>
+
+			<ColorAnimation
+    Storyboard.TargetName="PupilaDER"
+    Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+    From="#87CEFA"
+    To="White"
+    Duration="0:0:3"/>
+
+			<!-- Suave movimiento ascendente-descendente para simular respiración profunda -->
+			<DoubleAnimation
+    Storyboard.TargetName="translateTransform"
+    Storyboard.TargetProperty="Y"
+    From="0"
+    To="-5"
+    Duration="0:0:2"
+    AutoReverse="True"
+    RepeatBehavior="3x"/>
+
+			<DoubleAnimation
+Storyboard.TargetName="halo"
+Storyboard.TargetProperty="Opacity"
+From="0"
+To="0.8"
+Duration="0:0:1.5"
+AutoReverse="True"/>
+
+			<DoubleAnimation
+Storyboard.TargetName="haloScale"
+Storyboard.TargetProperty="ScaleX"
+From="1"
+To="1.3"
+Duration="0:0:1.5"
+AutoReverse="True"/>
+
+			<DoubleAnimation
+Storyboard.TargetName="haloScale"
+Storyboard.TargetProperty="ScaleY"
+From="1"
+To="1.3"
+Duration="0:0:1.5"
+AutoReverse="True"/>
+
+
+		</Storyboard>
+
+		<Storyboard x:Name="rotaciónOrejas" x:Key="RotateAnimation" RepeatBehavior="Forever">
+			<!-- Animación para OrejaIZQCanvas -->
+			<DoubleAnimation
+        Storyboard.TargetName="OrejaIZQRotateTransform"
+        Storyboard.TargetProperty="Angle"
+        From="0" To="-5" Duration="0:0:1" AutoReverse="True"/>
+
+			<!-- Animación para OrejaDERCanvas -->
+			<DoubleAnimation
+        Storyboard.TargetName="OrejaDERRotateTransform"
+        Storyboard.TargetProperty="Angle"
+        From="0" To="-5" Duration="0:0:1" AutoReverse="True"/>
+		</Storyboard>
+	</UserControl.Resources>
+
+
+	<Grid x:Name="GridBase" SizeChanged="GridBase_SizeChanged" Height="1080" VerticalAlignment="Top">
+
+		<Grid.RenderTransform>
+			<ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
+		</Grid.RenderTransform>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="5*" />
+			<RowDefinition Height="5*" />
+			<RowDefinition Height="30*" />
+			<RowDefinition Height="30*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="22*" />
+			<ColumnDefinition Width="257*" />
+			<ColumnDefinition Width="21*" />
+		</Grid.ColumnDefinitions>
+
+		<!-- Fondo (Imagen) -->
+
+		<!-- Fondo (Imagen) -->
+		
+
+
+		<!-- Fondo (Imagen) -->
+		<Image x:Name="imFondo" HorizontalAlignment="Left" VerticalAlignment="Top"
+Grid.RowSpan="4" Grid.ColumnSpan="3" Source="/AssetsDratiniGFS/fondoPokemon.jpg" Stretch="UniformToFill" Height="1084" Width="1920"/>
+
+		<TextBlock x:Name="txtNombre" Opacity="100"
+               Width="128" Height="50"
+               Text="DRATINI" FontSize="24" FontWeight="Bold"
+               TextAlignment="Center" VerticalAlignment="Top" 
+               HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="3"/>
+		<Viewbox Stretch="Uniform" Grid.Row="2" Grid.Column="1">
+
+			<Canvas x:Name="canvasPokemon" Width="500" Height="500" RenderTransformOrigin="0.5,0.5">
+				
+				
+				<Canvas.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform x:Name="scaleTransformPokemon" ScaleX="0.7" ScaleY="0.7"/>
+						<TranslateTransform x:Name="translateTransform" X="0" Y="0"/>
+						<RotateTransform x:Name="rotateTransform" Angle="0"/>
+					</TransformGroup>
+				</Canvas.RenderTransform>
+
+				<Ellipse x:Name="halo"  
+         Width="500" Height="500"
+         Fill="LightGreen"
+         Opacity="0"
+         RenderTransformOrigin="0.5,0.5" Canvas.Left="0" Canvas.Top="20">
+					<Ellipse.RenderTransform>
+						<ScaleTransform x:Name="haloScale" ScaleX="1" ScaleY="1"/>
+					</Ellipse.RenderTransform>
+				</Ellipse>
+
+				<Canvas x:Name="OrejaDERCanvas" HorizontalAlignment="Left" Height="80" Canvas.Left="360" Canvas.Top="0" VerticalAlignment="Top" Width="49" RenderTransformOrigin="0.5,0.5">
+					<!-- Transformación de rotación para OrejaDERCanvas -->
+					<Canvas.RenderTransform>
+						<TransformGroup>
+							<!-- Rotación de la oreja -->
+							<RotateTransform x:Name="OrejaDERRotateTransform" Angle="0"/>
+						</TransformGroup>
+					</Canvas.RenderTransform>
+
+					<!-- OrejaDER Path -->
+					<Path x:Name="OrejaDER" Fill="#dae2ed" Height="88" Stroke="Black" Stretch="Fill" Width="49" HorizontalAlignment="Center" VerticalAlignment="Center"
+      Data="M496.12498,12.302961 L494.22726,12.168211 492.93276,13.731549 493.30748,23.586747 493.68932,32.150007 494.6637,41.226401 497.81743,50.966948 499.26819,58.619545 501.39672,74.447313 512.682,88.335322 531.02057,92.144695 534.34142,87.888906 537.18564,84.243932 539.81004,71.568703 539.21122,60.682852 533.97392,60.549801 530.83671,59.957237 527.29479,58.966539 512.06722,33.302597 z"/>
+
+					<!-- DetalleOrejaDER Path -->
+					<Path x:Name="DetalleOrejaDER" Fill="#FFF4F4F5" Height="9" Stroke="Black" Stretch="Fill" Width="4" Canvas.Left="35" Canvas.Top="51" HorizontalAlignment="Left" VerticalAlignment="Center"
+          Data="M527.93155,62.956231 L530.97327,71.171372"/>
+				</Canvas>
+
+
+				<Path x:Name="Cuerpo" Fill="#aabfff" Height="333" Stroke="Black" Stretch="Fill" Width="456" HorizontalAlignment="Center" Canvas.Top="48" VerticalAlignment="Center"
+              Data="M345.35414,0.665 C345.35414,0.665 356.87069,0.91435242 357.41665,0.91435242 357.96264,0.91435242 364.83333,2.3288116 364.83333,2.3288116 L372.72222,5.4766769 389.42757,14.024757 392.82894,15.663261 406.04165,31.907646 411.52926,44.350697 412.49999,49.784039 C412.49999,49.784039 394.79976,105.5 394.79976,105.5 L394.55208,109.54631 394.71718,113.38562 397.68941,119.89576 436.03951,185.33105 445.33907,205.82767 452.5226,225.5687 454.42525,231.56219 455.49996,244.79541 C455.49996,244.79541 454.58999,251.42688 454.58999,251.92438 454.58999,252.42184 452.02559,262.87961 452.02559,263.29465 452.02559,263.70969 447.06209,275.36063 447.06209,275.36063 L436.25283,292.88623 429.52462,298.29739 417.72268,309.54779 401.72939,318.92334 386.61843,324.86398 349.77868,332.5 323.96877,332.12332 280.45595,325.12332 245.31453,314.45667 200.10088,293.04001 134.86547,257.92889 89.639226,241.92889 54.263818,234.15112 38.754674,233.04001 C38.754674,233.04001 1.4996692,232.81778 1.4996673,232.81778 -0.021174312,231.62332 0.64548218,231.24835 0.64548552,231.24835 L1.8958311,229.70667 4.6041609,228.12335 26.916663,220.37332 33.583314,218.70667 55.416646,216.20667 76.916661,214.87332 92.555549,215.76222 114.91666,218.87332 129.5833,221.70667 156.77777,228.70667 184.3333,237.54001 206.44443,246.70667 224.16665,254.54001 240.66665,259.87335 259.66665,264.04001 278.16665,267.37332 293.66665,269.70667 307.88887,270.1821 321.44442,268.18309 332.99999,264.87332 C332.99999,264.87332 337.72093,263.76468 341.66664,261.51974 344.59854,259.85161 347.08917,258.18806 347.44442,258.18806 347.86237,258.18806 350.47202,254.63068 352.99998,251.74682 355.51236,248.88073 357.83333,245.37335 357.83333,245.37335 L359.93508,237.55481 361.44442,228.64719 361.33333,217.37332 355.99999,201.45667 348.99999,184.12334 340.8333,167.29 331.3333,151.45667 323.16665,137.29 319.1111,131.6511 319.26479,131.63882 318.90932,131.19747 301.23394,109.24989 293.41411,100.77941 287.60415,92.583785 287.05092,91.795214 279.83331,81.49814 276.08331,71.50311 C276.08331,71.503107 274.74957,53.012304 275.41665,53.012304 276.08371,53.012304 282.33331,39.019262 282.33331,39.019262 L286.49999,33.05497 296.24242,20.971382 311.66665,10.385681 327.25286,4.3128128 333.64581,2.4957564 339.64581,1.3713155 z"/>
+				<Ellipse x:Name="Punto_Cabeza" Fill="#dae2ed" Height="16" Stroke="Black" Width="18" HorizontalAlignment="Left" Canvas.Left="359" Canvas.Top="62" VerticalAlignment="Top"/>
+				<Canvas x:Name="OjoDERCanvas" HorizontalAlignment="Left" Canvas.Left="396" Canvas.Top="59" VerticalAlignment="Center" Width="11">
+					<!-- OjoDER Ellipse -->
+					<Ellipse x:Name="OjoDER" Fill="#3e4756" Height="39" Stroke="Black" Width="9" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+						<Ellipse.RenderTransform>
+							<TransformGroup>
+								<SkewTransform AngleY="29.186"/>
+								<RotateTransform x:Name="RotateOjoDER" Angle="-28.805"/>
+								<TranslateTransform X="1.077" Y="1.958"/>
+							</TransformGroup>
+						</Ellipse.RenderTransform>
+					</Ellipse>
+
+					<!-- PupilaDER Ellipse -->
+					<Ellipse x:Name="PupilaDER" Fill="White" Height="19" Stroke="Black" Width="8" RenderTransformOrigin="0.5,0.5" Canvas.Left="3" Canvas.Top="3" HorizontalAlignment="Left" VerticalAlignment="Top">
+						<Ellipse.RenderTransform>
+							<TransformGroup>
+								<SkewTransform AngleX="-33.703"/>
+								<RotateTransform x:Name="RotatePupilaDER" Angle="-64.11"/>
+								<TranslateTransform X="-5.555" Y="3.049"/>
+								<ScaleTransform x:Name="ScalePupilaDER" ScaleX="1" ScaleY="1"/>
+							</TransformGroup>
+						</Ellipse.RenderTransform>
+					</Ellipse>
+				</Canvas>
+
+				<Canvas x:Name="OjoIZQCanvas" HorizontalAlignment="Left" Height="50" Canvas.Left="311" Canvas.Top="73" VerticalAlignment="Top" Width="33">
+					<!-- OjoIZQ Ellipse -->
+					<Ellipse x:Name="OjoIZQ" Fill="#3e4756" Height="50" Stroke="Black" Width="33" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+						<Ellipse.RenderTransform>
+							<TransformGroup>
+								<SkewTransform AngleY="12.191"/>
+								<RotateTransform x:Name="RotateOjoIZQ" Angle="-22.763"/>
+								<TranslateTransform X="1.764" Y="3.097"/>
+							</TransformGroup>
+						</Ellipse.RenderTransform>
+					</Ellipse>
+
+					<!-- PupilaIZQ Ellipse -->
+					<Ellipse x:Name="PupilaIZQ" Fill="White" Height="27" Stroke="Black" Width="16" RenderTransformOrigin="0.5,0.5" Canvas.Left="9" Canvas.Top="6" HorizontalAlignment="Left" VerticalAlignment="Top">
+						<Ellipse.RenderTransform>
+							<TransformGroup>
+								<SkewTransform AngleY="0.519"/>
+								<RotateTransform x:Name="RotatePupilaIZQ" Angle="-34.414"/>
+								<TranslateTransform X="0.041" Y="0.06"/>
+								<ScaleTransform x:Name="ScalePupilaIZQ" ScaleX="1" ScaleY="1"/>
+							</TransformGroup>
+						</Ellipse.RenderTransform>
+					</Ellipse>
+				</Canvas>
+
+				<!-- Imagen de la cruz en la posición de OjoDERCanvas -->
+				<Image x:Name="ImagenCruzDER" Source="/Assets/ojoCruz.png" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="376" Canvas.Top="59" Width="50" Height="50" Visibility="Collapsed"/>
+
+				<!-- Imagen de la cruz en la posición de OjoIZQCanvas -->
+				<Image x:Name="ImagenCruzIZQ" Source="/Assets/ojoCruz.png" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="311" Canvas.Top="73" Width="50" Height="50" Visibility="Collapsed"/>
+
+				<Ellipse x:Name="Nariz" Height="58" Stroke="Black" Width="84" 
+         RenderTransformOrigin="0.5,0.5" Fill="White" 
+         Canvas.Left="347" Canvas.Top="96">
+					<Ellipse.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="-16.005"/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Ellipse.RenderTransform>
+				</Ellipse>
+
+				<Canvas x:Name="OrejaIZQCanvas" HorizontalAlignment="Left" Height="120" Canvas.Left="209" Canvas.Top="37" VerticalAlignment="Top" Width="97" RenderTransformOrigin="0.5,0.5">
+					<!-- OrejaIZQ Path -->
+
+
+					<!-- DetalleOrejaIZQ Path -->
+
+
+					<!-- Transformación de rotación para OrejaIZQCanvas -->
+					<Canvas.RenderTransform>
+						<RotateTransform x:Name="OrejaIZQRotateTransform" Angle="0"/>
+					</Canvas.RenderTransform>
+
+					<!-- DetalleOrejaIZQ Path -->
+					<Path x:Name="OrejaIZQ" Fill="#dae2ed" Height="120" Stroke="Black" Stretch="Fill" Width="97" HorizontalAlignment="Left" VerticalAlignment="Top"
+          Data="M439.27778,122.65111 L430.65249,108.87874 420.16666,92.135552 400.49674,74.78434 382.65304,63.155212 350.20145,51.652673 344.92285,50.881091 343.55576,51.497745 343.54191,53.621352 344.91312,55.798721 362.57583,82.08804 376.97832,104.10082 377.30882,106.04055 369.35956,106.99378 364.81654,108.76793 364.25403,111.37481 366.23703,113.31454 393.50337,133.19677 400.27864,164.22495 401.93115,166.03974 436.96426,137.53071 437.79052,127.69223 z"/>
+					<Path x:Name="DetalleOrejaIZQ" Fill="#dae2ed" Height="21" Stroke="Black" Stretch="Fill" Width="28" Canvas.Left="59" Canvas.Top="67" HorizontalAlignment="Left" VerticalAlignment="Top"
+          Data="M401.86111,116.26222 L411.94445,118.74667 417.12618,121.34981 423.82586,126.62959 426.40506,130.92917 428.06859,135.79741 426.53174,141.05889 425.72287,142.7787"/>
+
+					<!-- DetalleOrejaIZQLargo Path -->
+					<Path x:Name="DetalleOrejaIZQLargo" Fill="#dae2ed" Height="13" Stroke="Black" Stretch="Fill" Width="52" Canvas.Left="33" Canvas.Top="57" HorizontalAlignment="Left" VerticalAlignment="Top"
+          Data="M426.72917,118.49833 L417.58332,114.12167 407.14604,110.01673 398.87191,108.05654 389.2136,105.95194 385.07414,105.58717 380.64831,105.51066 375.20822,105.37357 373.63105,105.50846"/>
+				</Canvas>
+
+				<Path x:Name="BlancoTripa" Fill="#FFF4F4F5" Height="220" Stroke="Black" Stretch="Fill" Width="366"
+      HorizontalAlignment="Left" Canvas.Left="90" Canvas.Top="162" VerticalAlignment="Top"
+      Data="M529.92121,177.37434 C529.92121,177.37434 520.83334,173.24666 520.83334,173.24666 516.88268,172.6616 511.45057,173.24666 511.45057,173.24666 L504.9326,175.00345 497.35797,179.88942 492.49276,185.75167 490.1593,189.98864 488.33662,196.51994 488.65743,202.60374 489.19213,211.57241 491.65174,220.38158 495.82238,236.03695 499.99302,246.65293 505.44694,259.35375 510.90086,277.2661 513.14659,286.82003 515.6062,315.38716 514.75069,326.25519 513.14659,335.19396 511.87004,340.80652 509.45199,346.56787 506.34511,351.36901 502.55957,356.09817 498.89933,359.86575 493.79053,363.91548 486.79322,368.52043 481.16871,371.67907 474.09789,375.0016 466.95477,377.36384 459.79555,378.94395 452.34976,379.82837 438.47595,381.66038 424.72267,382.2148 413.39329,381.3606 403.59056,380.22168 393.11073,377.69714 377.35621,372.81866 363.01984,366.66844 351.40313,360.58363 317.66709,344.35749 307.06433,339.16006 294.2125,334.91337 265.25638,324.5185 253.3522,321.0958 243.0447,318.814 235.75174,317.79986 234.25244,318.4337 276.70684,336.81487 338.08927,375.60549 383.00325,401.27575 399.45252,408.47335 416.9026,413.62366 439.35652,417.70499 458.98272,421.27234 484.51663,422.01391 504.22922,417.57413 519.50965,413.09232 534.05322,406.25877 549.85194,395.75535 567.81418,376.26707 577.6154,356.65225 583.99185,338.99891 586.18645,321.59866 585.38296,306.22317 580.99048,290.27822 575.84807,274.14344 568.77055,256.25678 562.56349,242.5699 552.60006,224.60019 547.15634,213.22676 537.19291,192.79729 531.3579,180.54512 z" />
+			</Canvas>
+
+		</Viewbox>
+
+
+		<Image x:Name="imBurbuja" Width="500" Height="500" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/AssetsDratiniGFS/burbuja.png" Stretch="UniformToFill" Visibility="Collapsed"/>
+		<Image x:Name="imBolaAgua" Width="500" Height="500" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/AssetsDratiniGFS/bolaDeAgua.png" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+			<Image.RenderTransform>
+				<TransformGroup>
+
+					<!-- RotateTransform (para rotar la imagen sobre sí misma) -->
+					<RotateTransform x:Name="rotBola" Angle="0"/>
+					<!-- TranslateTransform (para mover la imagen en línea recta) -->
+					<TranslateTransform x:Name="movBola" X="0" Y="0"/>
+					<!-- ScaleTransform (para cambiar el tamaño de la imagen) -->
+					<ScaleTransform x:Name="escalaBola" ScaleX="0.2" ScaleY="0.2"/>
+
+				</TransformGroup>
+			</Image.RenderTransform>
+		</Image>
+		<Image x:Name="imCorazon" Source="/AssetsDratiniGFS/corazon.png" Width="70" Height="70" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Image x:Name="imEnergía" Source="/AssetsDratiniGFS/energia.png" Width="70" Height="70" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Image x:Name="impocionEnergía" Source="/AssetsDratiniGFS/yellow-potion.png" Width="100" Height="100" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="pbEnergía_Tapped"/>
+		<ProgressBar x:Name="pbEnergia" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Margin="5,5,5,5" Background="#FFFFFFA6" Foreground="Yellow" Value="21"/>
+		<ProgressBar x:Name="pbVida" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Stretch" Background="#FFFFA4A4" Foreground="Red" Value="50.8" ValueChanged="pbVida_ValueChanged"/>
+		<Image x:Name="impocionVida" Source="/AssetsDratiniGFS/red-potion.png" Width="100" Height="100" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Tapped="pbVida_Tapped"/>
+
+
+	</Grid>
+
+</UserControl>

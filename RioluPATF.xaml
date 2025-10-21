@@ -1,0 +1,654 @@
+﻿<UserControl
+    x:Class="IPOkemonApp.RioluPATF"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Name="Ataque_oseo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Hueso" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.3000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.7000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.8000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Brazo_Izquierdo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="214.992"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Hueso" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-0.901"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="-84.898"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-137.185"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.7000000" Value="-256.602"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Hueso" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.108"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="1.795"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="0.783"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.7000000" Value="3.481"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Hueso" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="48.473"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="-144.782"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-323.973"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01.7000000" Value="-495"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Idle">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Riolu" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="1.06"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Riolu" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-6.747"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Oreja_derecha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-22.588"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="-15.494"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Oreja_izda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="5.563"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="-0.211"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Brazo_Izquierdo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-9.462"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Brazo_derecho" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="6.423"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Ataque_fuerte">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Brazo_Izquierdo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-15.945"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="163.301"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espada" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-118.072"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="60.751"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="60.751"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Espada" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.8000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Descanso">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ojo_Izdo_Dormido" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:04">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ojo_Dcho_Dormido" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:04">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_derecho" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:04">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_izquierdo" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:04">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-11.364"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Aura_Descanso" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:04">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:04.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Aura_Descanso" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Accion_Defensiva">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.65"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.65"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="-111.022"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="-111.022"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="168.332"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="168.332"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Brazo_derecho" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-11.31"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-11.31"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="23.962"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="23.962"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Brazo_Izquierdo" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-21.038"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-21.038"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="53.13"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="53.13"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="8.746"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6000000" Value="-8.746"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Derrotado">
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Pierna_Izquierda" To="75.964" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Pierna_Derecha" To="65.225" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Riolu" To="60" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Riolu" To="39" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Cabeza" To="28.072" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_derecho" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_izquierdo" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ojo_Izdo_Dormido" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ojo_Dcho_Dormido" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Herido">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_izquierdo" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ojo_Izdo_Dormido" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.6000000" Storyboard.TargetName="Cola" To="29.358" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.6000000" Storyboard.TargetName="Oreja_derecha" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.6000000" Storyboard.TargetName="Oreja_izda" To="-23.962" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="Tirita" To="1" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Tirita" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="No_Herido">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_izquierdo" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ojo_Izdo_Dormido" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.6000000" Storyboard.TargetName="Cola" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="29.358"/>
+            <DoubleAnimation Duration="00:00:00.6000000" Storyboard.TargetName="Oreja_izda" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="-23.962"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Tirita" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Tirita" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Oreja_derecha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-15.494"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Cansado">
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Canvas_ojo_derecho" To="-0.1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)"/>
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Canvas_ojo_derecho" To="0.7" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"/>
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Canvas_ojo_izquierdo" To="0.7" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Sudor" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="No_Cansado">
+            <DoubleAnimation Duration="00:00:00.7000000" Storyboard.TargetName="Canvas_ojo_izquierdo" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" From="0.7"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Sudor" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_derecho" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-0.1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Canvas_ojo_derecho" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Quitar_Escudo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:02.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:02.1000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.65"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0.65"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-111.022"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-111.022"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="168.332"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="168.332"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Mostrar_Escudo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.65"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.65"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-111.022"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="-111.022"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="168.332"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="168.332"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="imgNube1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid x:Name="GridRiolu">
+        <Grid.Background>
+            <ImageBrush ImageSource="AssetsRioluPATF/Fondo.png" Stretch="UniformToFill" Opacity="1"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="110.4"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <MediaElement x:Name="mediaDerrota" AutoPlay="True" Opacity="0"/>
+        <ProgressBar x:Name="HealthBar" Grid.Column="1" Margin="9,5,5,5" VerticalAlignment="Stretch" Background="#33B40505" Foreground="Red" Value="50" Canvas.ZIndex="-2"/>
+        <ProgressBar x:Name="EnergyBar" Grid.Column="1" Grid.Row="1" Margin="9,9,5,5" VerticalAlignment="Stretch" Background="#33C9C901" Foreground="Yellow" Value="50" Canvas.ZIndex="-2"/>
+        <Image x:Name="imgHealth" Margin="5,5,5,5" Source="/AssetsRioluPATF/corazon.png"/>
+        <Image x:Name="imgEnergy" Margin="5,9,5,5" Source="/AssetsRioluPATF/energia.png" Grid.Row="1"/>
+        <Image x:Name="imgHealthPot" Margin="5,5,5,5" Source="/AssetsRioluPATF/red-potion.png" Grid.Column="2" PointerReleased="UsePotionRed"/>
+        <Image x:Name="imgEnergyPot" Margin="5,9,5,5" Source="/AssetsRioluPATF/yellow-potion.png" Grid.Row="1" Grid.Column="2" Tapped="imgEnergyPot_Tapped"/>
+        <TextBlock x:Name="TxtBoxNombre" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Text="Riolu" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" />
+        <Viewbox x:Name="VBRiolu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2">
+            <Canvas x:Name="Riolu" HorizontalAlignment="Center" VerticalAlignment="Center" Width="165" Height="225" RenderTransformOrigin="0.5,0.5">
+                <Canvas.RenderTransform>
+                    <CompositeTransform/>
+                </Canvas.RenderTransform>
+                <Path x:Name="Cola" Data="M311.49261,246.40506 C310.5945,247.85454 305.40779,249.65108 300.60827,250.54122 286.21246,261.76784 273.7328,267.00679 260.44839,268.81905 L246.87582,264.04777 250.8041,256.48899 C262.74295,253.63708 273.99928,246.66142 284.85582,237.27034 289.29551,235.14959 294.08798,232.94234 299.31544,230.62842 305.83203,235.66165 310.28918,240.08216 311.49261,246.40506 z" Height="41" Stroke="Black" Stretch="Fill" Width="66" StrokeThickness="0.6" HorizontalAlignment="Center" Canvas.Left="77.059" Canvas.Top="103.984" VerticalAlignment="Center" Fill="#FF5BB3E5" RenderTransformOrigin="0.05,0.829">
+                    <Path.RenderTransform>
+                        <CompositeTransform/>
+                    </Path.RenderTransform>
+                </Path>
+                <Canvas x:Name="Brazo_derecho" HorizontalAlignment="Center" Canvas.Left="38.99199999999999" Canvas.Top="103.98399999999998" VerticalAlignment="Center" Height="51" Width="36" RenderTransformOrigin="0.917,0.033">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="Brazo_derecho_PATH" Data="M39.350552,149.77565 C39.437408,151.46215 40.420751,153.01396 41.879902,153.72073 41.879902,153.72073 45.814997,154.01001 45.814997,154.01001 L48.252438,152.65136 49.598661,153.35463 52.325625,151.11087 53.499255,151.07738 55.50133,149.83829 C56.335646,148.0093 56.719943,146.03857 56.060851,143.72511 L74.688798,109.63517 C76.414395,106.93207 76.553239,105.2122 74.966767,104.12657 74.574833,102.75096 73.882867,102.56159 70.882357,103.79605 L45.433978,138.81772 C42.124976,143.13538 40.371961,146.5908 39.350552,149.77565 z" Height="51" Stroke="Black" Stretch="Fill" Width="36" StrokeThickness="0.6" Fill="#FF5BB3E5" Canvas.Top="0.1" UseLayoutRounding="False"/>
+                    <Path x:Name="Dedo1Derecho" Data="M48.502199,147.2586 L47.315723,152.2501" Fill="#FFF4F4F5" Height="6" Stroke="Black" Stretch="Fill" Width="3" StrokeThickness="0.4" Canvas.Left="8" Canvas.Top="44" UseLayoutRounding="False"/>
+                    <Path x:Name="Dedo2Derecho" Data="M49.495796,148.69497 L48.151842,152.19693" Fill="#FFF4F4F5" Height="4" Stroke="Black" Stretch="Fill" Width="1" StrokeThickness="0.4" Canvas.Left="13" Canvas.Top="44" UseLayoutRounding="False"/>
+                </Canvas>
+                <Canvas x:Name="Pierna_Derecha" HorizontalAlignment="Left" VerticalAlignment="Top" Height="105" Width="87" RenderTransformOrigin="0.823,1.439">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="Pierna_Derecha_PATH" Data="M235.475,271.94 C232.84858,276.96553 232.39215,281.62646 232.85602,283.76557 233.64103,285.62566 234.39682,287.75811 236.03175,289.23735 L231.68269,305.09321 C229.4247,307.78996 226.10833,309.63202 221.7743,310.65229 219.83554,311.69833 219.69868,312.91436 221.45638,316.25459 221.90746,316.80402 222.78564,317.73201 223.6288,317.51469 224.44518,319.44966 226.95546,320.33992 230.23672,320.28159 233.1109,322.76418 236.25369,321.99649 242.10278,318.63877 L246.23609,313.23908 247.90853,288.80933 243.6596,283.58682 244.31892,278.23847 249.15392,275.06092 z" Height="54" Stroke="Black" Stretch="Fill" Width="27" StrokeThickness="0.6" Fill="#FF343C44" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="50.1" Canvas.Top="145.7"/>
+                    <Path x:Name="Dedo1PieDerecho" Data="M226.67614,315.39776 C224.89872,315.98921 224.12056,319.83861 224.30114,320.53272" Height="5" Stroke="Black" Stretch="Fill" Width="4" StrokeThickness="0.4" HorizontalAlignment="Center" Canvas.Left="53.1" Canvas.Top="189.7" VerticalAlignment="Center"/>
+                    <Path x:Name="Dedo2PieDerecho" Data="M232.28244,319.19283 C230.50502,319.78428 229.32522,321.91792 228.90638,324.49536" Height="6" Stroke="Black" Stretch="Fill" Width="4" StrokeThickness="0.4" HorizontalAlignment="Center" Canvas.Left="59.1" Canvas.Top="191.7" VerticalAlignment="Center"/>
+
+                </Canvas>
+                <Canvas x:Name="Pierna_Izquierda" HorizontalAlignment="Center" Canvas.Left="83.942" Canvas.Top="148.809" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="Pierna_Izquierda_PATH" Data="M86.075,148.465 C84.80554,151.15055 84.994794,153.85291 84.888936,156.70421 85.304436,162.23046 86.610184,166.37728 88.230118,170.15959 L89.550497,189.88893 C89.662128,191.78966 89.229365,194.09542 87.977357,195.2532 L85.291773,196.74073 C83.896119,198.48746 83.410896,202.79513 84.40711,205.72507 85.917577,207.44765 87.701303,207.66867 89.740522,206.48574 93.390417,209.27964 95.964951,209.54933 97.258632,206.81245 100.02552,209.69076 102.52271,209.37342 105.12082,205.75893 105.64834,202.9215 105.32386,200.2742 104.1981,197.75018 L104.13524,190.37066 97.943491,166.68256 94.870117,161.36744 93.625845,150.90184 C91.522979,148.77767 88.991922,148.01009 86.075,148.465 z" Height="59" Stroke="Black" Stretch="Fill" Width="23" StrokeThickness="0.6" Fill="#FF343C44" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Path x:Name="Dedo1PieIzquierdo" Data="M98.316701,199.2798 L97.780325,205.19946" Height="7" Canvas.Left="14.031" Stroke="Black" Stretch="Fill" Canvas.Top="50.498" Width="1" StrokeThickness="0.4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Path x:Name="Dedo2PieIzquierdo" Data="M96.176937,198.72741 L95.791465,204.59738" Height="7" Canvas.Left="6.223" Stroke="Black" Stretch="Fill" Canvas.Top="49.864" Width="2" StrokeThickness="0.4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Canvas>
+                <Canvas x:Name="FullBody" HorizontalAlignment="Center" Canvas.Left="57.946" Canvas.Top="103.74000000000001" VerticalAlignment="Center">
+                    <Path x:Name="Cuerpo" Data="M6.3978946,-0.54516411 L16.399314,-0.44514086 25.5,26.028488 C34.693624,35.533519 35.158596,44.384409 26.59876,49.46646 23.099248,51.304329 17.501368,50.137944 6.4879262,45.303 5.2332623,46.91928 3.0485521,48.320175 0.15884539,47.517175 -9.1444407,45.272917 -8.8861812,34.717224 1.3432313,23.103 z" Height="52" Stroke="Black" Stretch="Fill" Width="40" Fill="#FF5BB3E5" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="0.6" />
+                    <Path x:Name="Pecho" Data="M6.3978946,-0.54516411 L16.399314,-0.44514086 20.160583,10.49628 C20.160583,10.49628 12.620594,23.620617 12.620594,23.620617 12.620594,23.620617 7.861165,14.313056 7.861165,14.313056 7.861165,14.313056 3.8894434,22.530739 3.8894434,22.530739 3.8894434,22.530739 2.2184691,17.98999 2.2184691,17.98999 z" Height="26" Canvas.Left="8.754" Stroke="Black" Stretch="Fill" Width="19" Fill="#FF515B63" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="0.6" />
+                    <Image x:Name="Tirita" Source="/AssetsRioluPATF/tirita.png" Stretch="Fill" RenderTransformOrigin="0.499,0.481" Height="21" Canvas.Left="17.941" Width="24" Canvas.Top="28.896" UseLayoutRounding="False" d:LayoutRounding="Auto" Opacity="0">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="40.365" TranslateX="0.211" TranslateY="0.043"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image x:Name="Sudor" Source="/AssetsRioluPATF/gota.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="9" Canvas.Left="16" Canvas.Top="4" Width="9" Opacity="0.998" Visibility="Collapsed">
+                        <Image.RenderTransform>
+                            <CompositeTransform/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Canvas>
+                <Path x:Name="Cuello" Data="M2.5,0.5 L3,0.5 14.5,0.5 C14.5,0.5 14.870558,0.50000012 15,0.5 16.380712,0.50000012 17.5,1.8431458 17.5,3.5000001 17.5,5.1568543 16.380712,6.5000001 15,6.5000001 14.870558,6.5000001 14.743414,6.4881951 14.619275,6.4654332 L2.5,6.4398733 2.4961624,6.4390508 C1.3569555,6.1593119 0.5,4.9497477 0.5,3.5000001 0.5,2.0502526 1.3569555,0.84068823 2.4961624,0.56094927 L2.5,0.56012696 z" Height="7" Stroke="Black" Stretch="Fill" Width="18" Fill="#FF877E39" HorizontalAlignment="Center" Canvas.Left="69.034" Canvas.Top="97.787" VerticalAlignment="Center" StrokeThickness="0.6"/>
+                <Canvas x:Name="Cabeza" HorizontalAlignment="Left" Canvas.Left="46" Canvas.Top="27" VerticalAlignment="Top" Height="24" Width="29" RenderTransformOrigin="1.104,3.053">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="Oreja_izda" Data="M26.14823,0.5 L26.67045,0.96745314 C27.235046,13.703313 26.677017,26.290318 22.306833,39.336521 L22.194267,39.321218 22.15369,39.497025 C20.932896,44.241871 16.625893,47.747953 11.5,47.747953 5.4248677,47.747953 0.50000009,42.823086 0.5,36.747953 0.50000009,34.659627 1.0819424,32.70722 2.092507,31.044054 L2.1622306,30.935295 C7.7699199,19.672577 16.032982,9.6527992 26.14823,0.5 z" Height="48" Stroke="Black" Stretch="Fill" Width="27" Fill="#FF343C44" Canvas.Left="-23.7" Canvas.Top="30.266" RenderTransformOrigin="0.989,0.049" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="0.6">
+                        <Path.RenderTransform>
+                            <CompositeTransform Rotation="-0.211"/>
+                        </Path.RenderTransform>
+                    </Path>
+                    <Canvas x:Name="Forma_cabeza" HorizontalAlignment="Left" Height="73" Canvas.Left="0" Canvas.Top="0" VerticalAlignment="Top" Width="60">
+
+                        <Path x:Name="Cabeza1" Data="M31.5,0.5 C34.610806,0.49999991 35.856583,1.0304653 38.68954,1.8418112 42.344309,2.8885199 46.884204,-12.452482 49.833333,-10.286864 53.312784,-7.7318192 56.794326,12.429157 58.875821,16.1461 61.189002,20.276768 61.033333,25.233641 61.033333,30.240949 61.033333,42.714818 54.364285,53.139484 42.86692,57.453781 L42.527748,57.576484 42.349243,57.69239 C38.548988,60.044925 33.298988,61.5 27.5,61.5 15.90202,61.5 6.5,55.679702 6.5,48.5 6.5,48.275634 6.5091815,48.052597 6.5273252,47.83102 L6.5591116,47.520507 6.2193351,47.077178 C2.6177936,42.257736 2.3524531,36.605169 2.3524531,30.240949 2.3524531,22.139186 3.9320413,14.559283 9.4880759,9.2278939 11.810312,6.9995524 12.897835,-6.357307 15.866667,-7.7933333 18.241302,-8.9419461 22.397986,1.6711951 25.076314,1.1341371 27.148803,0.71856196 29.29758,0.49999994 31.5,0.5 z" Height="73" Stroke="Black" Stretch="Fill" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF5BB3E5" StrokeThickness="0.6"/>
+                        <Path x:Name="Sombra_de_ojos" Data="M49.636084,0.5 C51.57029,1.8247365 51.97924,3.8260579 52.49078,6.2150545 53.131241,9.2061462 53.545761,12.754085 52.891819,15.760824 50.95908,24.647303 46.320302,31.40617 36.881009,31.40617 31.423919,31.40617 21.986436,24.989559 21.986436,24.989559 19.715678,26.428001 17.640343,28.720443 14.758636,31.472251 12.356198,33.766395 13.277681,36.570813 12.191647,37.104103 11.171434,37.343731 9.9208495,37.41718 9.3284674,37.020706 7.2569988,35.6343 4.2357979,31.379586 2.5206394,28.420259 L2.4691171,28.270444 C1.6619691,25.490163 0.5,22.824104 0.5,19.38678 0.5,14.476315 1.140419,11.270388 2.6484146,8.0605296 2.6484146,8.0605296 9.2956219,15.854419 15.960479,15.165129 16.855758,15.325143 45.117001,2.4346663 45.117001,2.4346663 z" HorizontalAlignment="Center" Height="39" Stroke="Black" Stretch="Fill" Canvas.Top="26.556" VerticalAlignment="Center" Width="54" Fill="#FF515B63" StrokeThickness="0.6"/>
+                        <Path x:Name="Linea_nariz" Data="M226.56538,199.48328 C221.70889,200.35584 220.28908,206.66634 221.24696,211.94166" Height="13" Stroke="Black" Stretch="Fill" Width="5" Canvas.Left="4.153" Canvas.Top="46.962" HorizontalAlignment="Center" VerticalAlignment="Top" StrokeThickness="0.6"/>
+                        <Path x:Name="Linea_oreja_izda" Data="M221.72146,173.1988 C220.81374,171.69977 233.65449,163.99891 240.28682,163.5798" Height="10" Stroke="Black" Stretch="Fill" Width="21" Canvas.Left="7" Canvas.Top="11" HorizontalAlignment="Center" VerticalAlignment="Center" StrokeThickness="0.6"/>
+                    </Canvas>
+                    <Path x:Name="Ojo_Izdo_Dormido" Data="M1.6470972,44.075003 L6.6529999,46.056" Fill="#FFF4F4F5" Height="5" Stroke="Black" Stretch="Fill" Canvas.Top="42.486" UseLayoutRounding="False" Width="5" Canvas.Left="2.558" Visibility="Collapsed"/>
+                    <Canvas x:Name="Canvas_ojo_izquierdo" Canvas.Left="1" Canvas.Top="39" HorizontalAlignment="Left" VerticalAlignment="Top" Height="17" RenderTransformOrigin="0.5,0.5">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform/>
+                        </Canvas.RenderTransform>
+                        <Path x:Name="Forma_Ojo_Izdo" Data="M0.98957953,0.5 L4.1575,5.1182975 C4.1575,5.1182975 4.5000001,5.6226854 4.5000001,6.3993359 4.5000001,11.369899 3.6045695,15.399336 2.5000001,15.399336 1.3954305,15.399336 0.25750009,11.330472 0.2575,6.3599088 0.25750009,4.1076224 0.68385187,2.0879974 0.9877052,0.50950527 z" Height="16" Stroke="Black" Stretch="Fill" Width="5" Fill="White" StrokeThickness="0.6" UseLayoutRounding="False" />
+                        <Ellipse x:Name="Forma_Pupila_Izda" Height="13" Canvas.Left="1" Stroke="Black" Canvas.Top="2" Width="3" Fill="#FFDA543C" StrokeThickness="0.8" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Path x:Name="Pupila_Izda_1" Data="M3.329,45.678167 L3.329,45.744833" Fill="#FFF4F4F5" Height="1" Canvas.Left="2.05" Stroke="Black" Stretch="Fill" Canvas.Top="7.141" Width="1" UseLayoutRounding="False"/>
+                        <Path x:Name="Pupila_Izda" Data="M3.329,44.7615 L3.329,48.4115" Fill="#FFF4F4F5" Height="7" Canvas.Left="2.05" Stroke="Black" Stretch="Fill" Canvas.Top="5" Width="1" StrokeThickness="1" UseLayoutRounding="False"/>
+                    </Canvas>
+                    <Canvas x:Name="Canvas_ojo_derecho" Height="20" Canvas.Left="26" Canvas.Top="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.5,0.5">
+                        <Canvas.RenderTransform>
+                            <CompositeTransform ScaleX="1"/>
+                        </Canvas.RenderTransform>
+                        <Path x:Name="Forma_ojo_derecho" Stroke="Black" Data="M0.69646631,2.700005 C5.3751354,1.1599189 11.153593,0.43118676 17.958435,0.5 L17.975133,0.53317636 C19.287622,3.2235574 17.88937,6.1360486 16.316878,9.2088401 13.800887,14.125305 9.5872722,16.788961 5.1624532,14.524569 0.73763371,12.260178 -2.3532212,8.0846807 0.16276954,3.1682149 0.32001899,2.8609359 0.42937933,3.1187308 0.6098784,2.8334673 z" Height="18" RenderTransformOrigin="0.337542197426856,0.533726895643822" Stretch="Fill" Width="22" HorizontalAlignment="Left" Canvas.Top="2" VerticalAlignment="Top" Fill="White" StrokeThickness="0.6">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-27.101"/>
+                                    <TranslateTransform X="-0.037060494943160549" Y="-0.15377087343268414"/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Path x:Name="Forma_Pupila_dcha" Data="M6.9374838,0.5 L6.9509363,0.51186407 C8.4591933,1.8846189 9.5,4.7995571 9.5,8.1736716 9.5,12.868092 7.4852815,16.673672 5,16.673672 2.5147186,16.673672 0.50000003,12.868092 0.5,8.1736716 0.50000003,6.8533658 0.71561861,6.3388585 1,5.2240599 L0.86666667,5.2240599 z" Height="17" Stroke="Black" Stretch="Fill" Width="10" HorizontalAlignment="Left" Canvas.Left="2" VerticalAlignment="Top" Fill="#FFDA543C" StrokeThickness="0.8"/>
+                        <Ellipse x:Name="Pupila_Derecha" Height="10" Stroke="Black" Width="4" HorizontalAlignment="Left" Canvas.Left="5" Canvas.Top="3" VerticalAlignment="Top" Fill="Black"/>
+
+                    </Canvas>
+                    <Path x:Name="Oreja_derecha" Canvas.Left="51.542" Stroke="Black" Canvas.Top="23.148" Stretch="Fill" Width="27" Data="M1.395149,0.5 L2.9627101,0.62257474 C13.993323,16.141156 23.721307,31.111741 26.5,45.707512 26.5,45.707512 26.907237,49.008969 26.554206,50.254315 24.671372,56.89616 16.633293,60.297218 9.9914494,58.414387 2.3343266,57.356939 0.42990776,45.131925 0.35033157,43.670791 -0.64182874,29.338405 0.29661858,14.922186 1.395149,0.5 z" Height="59" RenderTransformOrigin="0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF343C44" StrokeThickness="0.6">
+                        <Path.RenderTransform>
+                            <CompositeTransform Rotation="-15.494" TranslateX="-5.62523868005361" TranslateY="6.5311320523042147"/>
+                        </Path.RenderTransform>
+                    </Path>
+                    <Path x:Name="Boca" Data="M49.437771,224.11727 L55.897771,223.63" Height="1" Stroke="Black" Stretch="Fill" Width="8" HorizontalAlignment="Left" Canvas.Left="16" Canvas.Top="70.75" VerticalAlignment="Top" StrokeThickness="0.6"/>
+                    <Path x:Name="Ojo_Dcho_Dormido" Data="M74.992004,74.256173 L87.033997,67.340777" Fill="#FFF4F4F5" Height="10" Canvas.Left="25.999" Stroke="Black" Stretch="Fill" Canvas.Top="38" UseLayoutRounding="False" Width="17" Visibility="Collapsed"/>
+                </Canvas>
+                <Path x:Name="Hueso" Data="M75.613404,304.30634 L98.451469,277.50832 C95.640928,270.07555 103.91503,268.41562 103.2268,276.69618 110.81525,267.20998 114.0184,281.28816 103.56636,280.46876 L80.251443,308.56458 C83.958214,313.40884 77.76388,316.99389 76.126918,309.34176 66.856526,311.60509 66.18806,304.67761 75.613404,304.30634 z" Fill="#FFD7D19C" Height="45" Stroke="Black" Stretch="Fill" Width="41" RenderTransformOrigin="0.514,0.521" Canvas.Left="76.584" Canvas.Top="27.729" UseLayoutRounding="False" Visibility="Collapsed">
+                    <Path.RenderTransform>
+                        <CompositeTransform Rotation="48.473" TranslateX="-0.901" TranslateY="0.108"/>
+                    </Path.RenderTransform>
+                </Path>
+                <Canvas x:Name="Brazo_Izquierdo" HorizontalAlignment="Center" Canvas.Left="81.522" Canvas.Top="104.53800000000001" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Image x:Name="Espada" Height="142" Width="121" Source="/AssetsRioluPATF/espada.jpg" RenderTransformOrigin="0.496,0.201" UseLayoutRounding="False" d:LayoutRounding="Auto" Canvas.Left="-73.956" Canvas.Top="-4.907" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="-118.072" TranslateX="38.465" TranslateY="23.48"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Path x:Name="Brazo_Izquierdo_PATH" Data="M104.73857,155.74768 C103.09197,158.5555 102.69506,161.1138 104.47025,162.7301 106.786,164.0638 108.86693,164.88669 112.1875,165.0932 115.68219,165.40421 118.90239,164.92281 120.65575,163.12055 123.50843,163.78098 126.08656,163.59451 127.65207,162.08171 L129.6361,159.77318 132.43935,159.44614 C135.26612,158.05625 135.81492,156.31038 136.13014,154.75212 135.82588,152.5013 135.05201,150.15302 132.6915,147.61633 L69.755923,97.926471 C67.987607,96.49741 65.265844,95.926464 61.331788,96.4466 59.629215,97.45837 59.208106,98.553302 59.643596,99.703825 z" Height="60" Stroke="Black" Stretch="Fill" Width="37" StrokeThickness="0.6" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FF5BB3E5" RenderTransformOrigin="0.01,0.011"/>
+                    <Path x:Name="Linea_Mano_Izda_1" Data="M112.8625,156.265 C112.62762,158.65018 111.81663,160.57837 110.512,162.115" Height="7" Canvas.Left="28.99" Stroke="Black" Stretch="Fill" Canvas.Top="51.727" Width="3" StrokeThickness="0.4" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-9.493,-7.318"/>
+                    <Path x:Name="Linea_Mano_Izda_2" Data="M115.53391,154.88367 C115.29903,157.26885 115.16383,158.90792 114.25879,160.51276" Height="6" Canvas.Left="33.09" Stroke="Black" Stretch="Fill" Canvas.Top="50.089" Width="2" StrokeThickness="0.4" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-16.089,-8.242"/>
+                    <Ellipse x:Name="Hueso_Brazo_izquierdo" Height="23" Stroke="Black" Width="7" RenderTransformOrigin="0.232,-1.352" StrokeThickness="0.4" Fill="White" HorizontalAlignment="Center" Canvas.Left="22.733" Canvas.Top="23.567" VerticalAlignment="Center">
+                        <Ellipse.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-33.919"/>
+                                <TranslateTransform X="-23.45" Y="8.297"/>
+                            </TransformGroup>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                </Canvas>
+                <Image x:Name="imgNube1" Height="176" Width="296" Source="/AssetsRioluPATF/niebla.jpg" Stretch="Fill" Opacity="0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Canvas.Left="-262" Canvas.Top="-21" VerticalAlignment="Top" Visibility="Collapsed">
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="imgNube2" Source="/AssetsRioluPATF/niebla.jpg" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="169" Canvas.Left="39" Canvas.Top="74" Width="343" Opacity="0" Visibility="Collapsed">
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="Aura_Descanso" Source="/AssetsRioluPATF/Aura-PNG-Cutout.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="210" Canvas.Left="-71" Canvas.Top="10" Width="306" Visibility="Collapsed" Opacity="0">
+                    <Image.RenderTransform>
+                        <CompositeTransform/>
+                    </Image.RenderTransform>
+                </Image>
+            </Canvas>
+        </Viewbox>
+    </Grid>
+
+</UserControl>

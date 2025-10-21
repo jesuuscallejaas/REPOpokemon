@@ -1,0 +1,1693 @@
+﻿<UserControl
+    x:Class="IPOkemonApp.GengarRSR"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControlDeUsuarioPokemon"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+
+        <Storyboard x:Key="IdleGengar">
+            <!-- Animación de movimiento en el eje X (TranslateTransform) -->
+            <DoubleAnimation 
+        Storyboard.TargetName="transformGengar" 
+        Storyboard.TargetProperty="(TranslateTransform.X)" 
+        From="0" To="10" Duration="0:0:1" AutoReverse="True" />
+
+            <!-- Animación de escala (ScaleTransform) -->
+            <DoubleAnimation 
+        Storyboard.TargetName="scaleGengar" 
+        Storyboard.TargetProperty="(ScaleTransform.ScaleX)" 
+        From="1" To="1.05" Duration="0:0:1" AutoReverse="True" />
+
+            <DoubleAnimation 
+        Storyboard.TargetName="scaleGengar" 
+        Storyboard.TargetProperty="(ScaleTransform.ScaleY)" 
+        From="1" To="1.05" Duration="0:0:1" AutoReverse="True" />
+        </Storyboard>
+
+
+
+
+
+
+        <!-- Definimos la animación para cambiar el color del ojo izquierdo -->
+        <Storyboard x:Name="ojoIzqNegro" x:Key="ojoIzqNegroKey">
+            <ColorAnimation BeginTime="00:00:00" Storyboard.TargetName="OjoIzq"
+         Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+         From="Red" To="Black" Duration="0:0:1" AutoReverse="True" />
+        </Storyboard>
+
+        <!-- Definimos la animación para cambiar el color del ojo derecho -->
+        <Storyboard x:Name="ojoDerNegro" x:Key="ojoDerNegroKey">
+            <ColorAnimation BeginTime="00:00:00" Storyboard.TargetName="OjoDerecho"
+        Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+        From="Red" To="Black" Duration="0:0:1" AutoReverse="True" />
+        </Storyboard>
+
+        <Storyboard x:Name="bocaEnfadadaKey">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo"
+                               Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1.5,1.5 L3.5605695,30 C54.18557,10 104.81057,10 155.43557,30 L157.49612,1.5 157.47257,2.9 
+            C156.40476,10 121.90319,15 79.49807,15 37.092956,15 2.5913668,10 1.5235444,2.9 z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="dientesOcultarKey"  x:Name="dientesOcultarKey">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        Collapsed
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        Collapsed
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        Collapsed
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        Collapsed
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="bocaNormalKey">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo"
+                               Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1.5,1.5 L3.5605695,2.6411837 C54.18557,30.168527 104.81057,30.168527 155.43557,2.6411837 L157.49612,1.5 157.47257,2.9789411 
+            C156.40476,36.481033 121.90319,63.378692 79.49807,63.378692 37.092956,63.378692 2.5913668,36.481033 1.5235444,2.9789411 z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="dientesMostrarKey">
+            <!-- Diente 1 -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="_1Diente"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0" To="1" Duration="0:0:0.3"/>
+
+            <!-- Diente 2 -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="_2Diente"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0" To="1" Duration="0:0:0.3"/>
+
+            <!-- Diente 3 -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="_3Diente"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0" To="1" Duration="0:0:0.3"/>
+
+            <!-- Diente 4 -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="_4Diente"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0" To="1" Duration="0:0:0.3"/>
+        </Storyboard>
+
+        <ExponentialEase x:Key="easeOut" EasingMode="EaseOut" Exponent="4"/>
+
+        <Storyboard x:Name="AtaqueDebilGengar" x:Key="ataqueDebilKey">
+
+            <!-- Brazo derecho (puñetazo hacia abajo con rotación fuerte) -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformBrazoPuño" Storyboard.TargetProperty="Rotation">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Aparición y bajada del puño personalizado -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PuñoGengar" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.60">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Efecto de escala al aparecer el puño (impacto fuerte) -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PuñoGengar"
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="28"/>
+                <!-- bajada precisa -->
+                <EasingDoubleKeyFrame KeyTime="0:0:0.70" Value="25"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Apertura leve de la boca durante el golpe -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Boca_Gengar" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1.3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.45" Value="1.0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Pierna izquierda levantándose levemente -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pierna_Izquierda" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Ojo Izquierdo se ilumina -->
+            <ColorAnimation Storyboard.TargetName="OjoIzq"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="Orange" Duration="0:0:0.15" AutoReverse="True" />
+
+            <!-- Ojo Derecho se ilumina -->
+            <ColorAnimation Storyboard.TargetName="OjoDerecho"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="Orange" Duration="0:0:0.15" AutoReverse="True" />
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PuñoIzquierdoGengar"
+                           Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.75">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PuñoIzquierdoGengar"
+                           Storyboard.TargetProperty="Opacity">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.65" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Vibración del cuerpo (eje X) -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformGengar"
+                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="-3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.40" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Vibración del cuerpo (eje Y, ligera) -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformGengar"
+                           Storyboard.TargetProperty="Y">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="-1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.40" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="CansadoGengar" x:Key="CansadoGengar">
+
+            <!-- Gotas -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Gota1" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Gota2" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Movimiento sudor -->
+            <DoubleAnimation Storyboard.TargetName="Gota1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                 From="0" To="35" Duration="0:0:1" RepeatBehavior="Forever" AutoReverse="True" />
+            <DoubleAnimation Storyboard.TargetName="Gota2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                 From="0" To="35" Duration="0:0:1.2" RepeatBehavior="Forever" AutoReverse="True" />
+
+            <!-- Vibración cuerpo -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformGengar" Storyboard.TargetProperty="Y" RepeatBehavior="Forever">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Color ojos -->
+            <ColorAnimation Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="DarkRed" Duration="0:0:0.5" AutoReverse="True" RepeatBehavior="Forever"/>
+            <ColorAnimation Storyboard.TargetName="OjoDerecho" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="DarkRed" Duration="0:0:0.5" AutoReverse="True" RepeatBehavior="Forever"/>
+
+            <!-- Achinar ojos -->
+            <DoubleAnimation Storyboard.TargetName="OjoIzq"
+                 Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                 To="0.3" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="OjoDerecho"
+                 Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                 To="0.3" Duration="0:0:0.2"/>
+
+            <!-- Pupilas alineadas y más pequeñas -->
+            <DoubleAnimation Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="(Canvas.Left)"
+                 To="213" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="(Canvas.Top)"
+                 To="225" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="(Canvas.Left)"
+                 To="289" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="(Canvas.Top)"
+                 To="230" Duration="0:0:0.2"/>
+
+            <DoubleAnimation Storyboard.TargetName="PupilaIzq"
+                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                 To="0.7" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaIzq"
+                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                 To="0.6" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaDer"
+                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                 To="0.6" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaDer"
+                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                 To="0.5" Duration="0:0:0.2"/>
+
+            <!-- Líneas de ojos más arriba -->
+            <DoubleAnimation Storyboard.TargetName="transLineaOjoIzq" Storyboard.TargetProperty="Y"
+                 To="-16" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="transLineaOjoDer" Storyboard.TargetProperty="Y"
+                 To="-11" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="rotLineaOjoIzq" Storyboard.TargetProperty="Angle"
+                 To="3.25" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="rotLineaOjoDer" Storyboard.TargetProperty="Angle"
+                 To="4.18" Duration="0:0:0.2"/>
+
+            <!-- Boca curvada triste estilo emoji (versión final) -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo"
+                               Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1,22 C45,2 115,2 159,22 C115,35 45,35 1,22 Z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+        <Storyboard x:Name="DerrotadoGengar" x:Key="DerrotadoGengar">
+
+            <!-- Mostrar ojos X -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar ojos normales -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar imagen KO -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="KOImage" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Caída del cuerpo -->
+            <DoubleAnimation Storyboard.TargetName="transformGengar" Storyboard.TargetProperty="Y"
+                 To="30" Duration="0:0:0.5" />
+
+            <!-- Temblor final -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformGengar" Storyboard.TargetProperty="X" RepeatBehavior="2x">
+                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Mostrar texto final -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="Opacity"
+                 From="0" To="1" Duration="0:0:0.5" BeginTime="0:0:1" />
+
+            <DoubleAnimation Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                 To="1.2" Duration="0:0:0.5" BeginTime="0:0:1" />
+
+            <DoubleAnimation Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                 To="1.2" Duration="0:0:0.5" BeginTime="0:0:1" />
+            <!-- Ocultar pupilas -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar líneas de los ojos -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo"
+                           Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1,26 C45,10 115,10 159,26 C115,38 45,38 1,26 Z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtDerrotadoSombra" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="txtDerrotadoSombra" Storyboard.TargetProperty="Opacity"
+             To="1" Duration="0:0:0.4"/>
+
+        </Storyboard>
+
+        <Storyboard x:Key="DerrotadoGengarReset" x:Name="DerrotadoGengarReset">
+
+            <!-- Mostrar ojos normales -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar líneas y pupilas -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar ojos X -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar imagen KO -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="KOImage" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar mensaje derrotado -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="Opacity"
+                 To="0" Duration="0:0:0.2"/>
+
+            <!-- Restaurar curva de boca original -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo" Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1.5,1.5 L3.5605695,2.6411837 C54.18557,30.168527 104.81057,30.168527 155.43557,2.6411837 L157.49612,1.5000089 157.47257,2.9789411 C156.40476,36.481033 121.90319,63.378692 79.49807,63.378692 37.092956,63.378692 2.5913668,36.481033 1.5235444,2.9789411 z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar dientes -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Subir cuerpo de Gengar (posición normal) -->
+            <DoubleAnimation Storyboard.TargetName="transformGengar" Storyboard.TargetProperty="Y"
+                 To="0" Duration="0:0:0.5"/>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtDerrotadoSombra" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="txtDerrotadoSombra" Storyboard.TargetProperty="Opacity"
+             To="0" Duration="0:0:0.2"/>
+
+        </Storyboard>
+
+        <Storyboard x:Key="RestaurarOjosNormales">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="KOImage" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtDerrotado" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Restaurar curva de boca normal -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo" Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1.5,1.5 L3.5605695,2.6411837 C54.18557,30.168527 104.81057,30.168527 155.43557,2.6411837 L157.49612,1.5000089 157.47257,2.9789411 C156.40476,36.481033 121.90319,63.378692 79.49807,63.378692 37.092956,63.378692 2.5913668,36.481033 1.5235444,2.9789411 z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar dientes -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txtDerrotadoSombra" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="txtDerrotadoSombra" Storyboard.TargetProperty="Opacity"
+             To="0" Duration="0:0:0.2"/>
+
+        </Storyboard>
+        <Storyboard x:Name="HeridoGengar"  x:Key="HeridoGengar">
+
+            <!-- Mostrar corazón herido -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="corazonHerido"
+                               Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar lágrimas -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lagrimaIzq"
+                               Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lagrimaDer"
+                               Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Animación de caída de lágrima izquierda -->
+            <DoubleAnimation Storyboard.TargetName="transLagrimaIzq"
+                 Storyboard.TargetProperty="Y"
+                 From="0" To="40"
+                 Duration="0:0:1" 
+                 AutoReverse="True"
+                 RepeatBehavior="Forever"/>
+
+            <DoubleAnimation Storyboard.TargetName="lagrimaIzq"
+                 Storyboard.TargetProperty="Opacity"
+                 From="1" To="0"
+                 Duration="0:0:1"
+                 AutoReverse="True"
+                 RepeatBehavior="Forever"/>
+
+            <!-- Animación de caída de lágrima derecha -->
+            <DoubleAnimation Storyboard.TargetName="transLagrimaDer"
+                 Storyboard.TargetProperty="Y"
+                 From="0" To="40"
+                 Duration="0:0:1"
+                 AutoReverse="True"
+                 RepeatBehavior="Forever"/>
+
+            <DoubleAnimation Storyboard.TargetName="lagrimaDer"
+                 Storyboard.TargetProperty="Opacity"
+                 From="1" To="0"
+                 Duration="0:0:1"
+                 AutoReverse="True"
+                 RepeatBehavior="Forever"/>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo" Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1,28 C45,18 115,18 159,28 C115,33 45,33 1,28 Z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Color ojos llorosos -->
+            <ColorAnimation Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#4285F4" Duration="0:0:0.2"/>
+            <ColorAnimation Storyboard.TargetName="OjoDerecho" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#4285F4" Duration="0:0:0.2"/>
+
+            <!-- Achinar ojos -->
+            <DoubleAnimation Storyboard.TargetName="OjoIzq"
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+             To="0.5" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="OjoDerecho"
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+             To="0.5" Duration="0:0:0.2"/>
+
+            <!-- Pupilas más bajas y centradas -->
+            <DoubleAnimation Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="(Canvas.Left)"
+            To="220" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="(Canvas.Top)"
+            To="235" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="(Canvas.Left)"
+            To="292" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="(Canvas.Top)"
+            To="236" Duration="0:0:0.2"/>
+
+            <!-- Líneas más bajas -->
+            <DoubleAnimation Storyboard.TargetName="transLineaOjoIzq" Storyboard.TargetProperty="Y"
+            To="-9" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="transLineaOjoDer" Storyboard.TargetProperty="Y"
+             To="-7" Duration="0:0:0.2"/>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="Boca_Gengar"
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             To="0.75" Duration="0:0:0.2" />
+
+            <DoubleAnimation Storyboard.TargetName="Boca_Gengar"
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             To="0.75" Duration="0:0:0.2" />
+
+        </Storyboard>
+
+        <Storyboard x:Name="DefensaGengar">
+
+            <!-- Mostrar escudo -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="escudo" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Animación entrada escudo -->
+            <DoubleAnimation Storyboard.TargetName="escudo"
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+            From="0.5" To="1" Duration="0:0:0.3"/>
+            <DoubleAnimation Storyboard.TargetName="escudo"
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+            From="0.5" To="1" Duration="0:0:0.3"/>
+
+            <!-- DESTELLO -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DestelloDefensa" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DestelloDefensa" Storyboard.TargetProperty="Opacity"
+            From="1" To="0" Duration="0:0:0.4"/>
+            <DoubleAnimation Storyboard.TargetName="DestelloDefensa"
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+            From="1.2" To="1" Duration="0:0:0.4"/>
+            <DoubleAnimation Storyboard.TargetName="DestelloDefensa"
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+            From="1.2" To="1" Duration="0:0:0.4"/>
+
+            <!-- AURA RECTANGULAR -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AuraEscudo" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="AuraEscudo"
+            Storyboard.TargetProperty="Opacity">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0.2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="0.2"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Parpadeo de Gengar -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="cvGengar" Storyboard.TargetProperty="Opacity">
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0.0" Value="1"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0.1" Value="0.2"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Partículas mágicas -->
+            <DoubleAnimation Storyboard.TargetName="Particula1" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="Particula1"
+             Storyboard.TargetProperty="(Canvas.Top)"
+             From="120" To="100" Duration="0:0:0.5"/>
+
+            <DoubleAnimation Storyboard.TargetName="Particula2" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:0.3" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="Particula2"
+             Storyboard.TargetProperty="(Canvas.Left)"
+             From="230" To="250" Duration="0:0:0.5"/>
+
+            <DoubleAnimation Storyboard.TargetName="Particula3" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:0.3" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="Particula3"
+             Storyboard.TargetProperty="(Canvas.Top)"
+             From="190" To="170" Duration="0:0:0.5"/>
+
+        </Storyboard>
+
+        <Storyboard x:Name="DescansarGengar" x:Key="DescansarGengar">
+            <!-- Bajar el cuerpo -->
+            <DoubleAnimation Storyboard.TargetName="transformGengar"
+                 Storyboard.TargetProperty="Y"
+                 From="0" To="20"
+                 Duration="0:0:0.5"
+                 AutoReverse="True" />
+            
+            <DoubleAnimation
+            Storyboard.TargetName="imgZzz"
+            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+            From="0" To="-10"
+            Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever"/>
+        </Storyboard>
+        
+        <!-- Animación para mostrar ojos X al dormir -->
+        <Storyboard x:Key="ojoDormidoKey">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoXDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <!-- Ocultar pupilas y líneas -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PupilaDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LineaOjoDerecho" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <!-- Animación para boca cerrada (línea) -->
+        <Storyboard x:Key="bocaCerradaKey">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo" Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1,27 C60,24 100,24 159,27 C100,30 60,30 1,27 Z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar dientes -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Animación suave de parpadeo -->
+            <DoubleAnimation Storyboard.TargetName="estrella1" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:1.5" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetName="estrella2" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetName="estrella3" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever"/>
+
+            <DoubleAnimation Storyboard.TargetName="estrella4" Storyboard.TargetProperty="Opacity"
+            From="0" To="1" Duration="0:0:1.5" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetName="estrella5" Storyboard.TargetProperty="Opacity"
+            From="0" To="1" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetName="estrella6" Storyboard.TargetProperty="Opacity"
+             From="0" To="1" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever"/>
+
+            <ColorAnimation Storyboard.TargetName="Cuerpo_Gengar"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+            <ColorAnimation Storyboard.TargetName="Picos"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+            <ColorAnimation Storyboard.TargetName="Brazo_Derecho"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+            <ColorAnimation Storyboard.TargetName="Brazo1Izqu"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+            <ColorAnimation Storyboard.TargetName="Pierna_Izquierda"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+            <ColorAnimation Storyboard.TargetName="PiernaDerecha"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+            <ColorAnimation Storyboard.TargetName="Cola"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="#FF8E6DCF" Duration="0:0:0.3" AutoReverse="True"/>
+
+        </Storyboard>
+
+        <Storyboard x:Name="AtaqueFuerteGengar">
+            <!-- Sonido -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="sndLengua" Storyboard.TargetProperty="AutoPlay">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>True</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Escalar lengua -->
+            <DoubleAnimation Storyboard.TargetName="ScaleLengua"
+            Storyboard.TargetProperty="ScaleY"
+            From="0.1" To="1.2"
+            Duration="0:0:0.2" />
+
+            <!-- Mover lengua hacia arriba -->
+            <DoubleAnimation Storyboard.TargetName="TranslateLengua"
+            Storyboard.TargetProperty="Y"
+            From="0" To="-60"
+            Duration="0:0:0.2" />
+
+            <!-- Ocultar lengua al terminar -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="lengua" Storyboard.TargetProperty="Visibility"
+               BeginTime="0:0:0.5">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ojos naranja (iluminación intensa) -->
+            <ColorAnimation Storyboard.TargetName="OjoIzq"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="Yellow" Duration="0:0:0.15" AutoReverse="True" />
+            <ColorAnimation Storyboard.TargetName="OjoDerecho"
+            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+            To="Yellow" Duration="0:0:0.15" AutoReverse="True" />
+
+            <!-- Boca enfadada (curva cerrada agresiva) -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="curvaDebajo" Storyboard.TargetProperty="Data">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                    <DiscreteObjectKeyFrame.Value>
+                        M1.5,1.5 L3.5605695,30 C54.18557,10 104.81057,10 155.43557,30 L157.49612,1.5 157.47257,2.9 
+            C156.40476,10 121.90319,15 79.49807,15 37.092956,15 2.5913668,10 1.5235444,2.9 z
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ocultar dientes al atacar fuerte -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_1Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_2Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_3Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_4Diente" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Collapsed</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Vibración fuerte eje X -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformGengar" Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-7"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="7"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.40" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.45" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Vibración leve eje Y -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="transformGengar" Storyboard.TargetProperty="Y">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.40" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.45" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+        <Storyboard x:Name="ImpactoVisualStoryboard" x:Key="ImpactoVisualKey">
+            <!-- Onda Expansiva -->
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement2"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement2"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement2"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement3"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement3"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement3"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement4"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement4"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement4"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement5"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement5"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement5"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement6"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement6"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement6"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement7"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement7"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement7"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement8"
+                 Storyboard.TargetProperty="Width"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement8"
+                 Storyboard.TargetProperty="Height"
+                 From="0" To="300" Duration="0:0:0.2" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="ImpactoVisualElement8"
+                 Storyboard.TargetProperty="Opacity"
+                 From="0.5" To="0" Duration="0:0:0.4"/>
+
+            <!-- Oscurecer el color de Gengar durante el ataque -->
+            <ColorAnimation Storyboard.TargetName="Cuerpo_Gengar"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+            <ColorAnimation Storyboard.TargetName="Picos"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+            <ColorAnimation Storyboard.TargetName="Brazo_Derecho"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+            <ColorAnimation Storyboard.TargetName="Brazo1Izqu"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+            <ColorAnimation Storyboard.TargetName="Pierna_Izquierda"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+            <ColorAnimation Storyboard.TargetName="PiernaDerecha"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+            <ColorAnimation Storyboard.TargetName="Cola"
+                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                To="#FF3C2F60" Duration="0:0:0.2" AutoReverse="True"/>
+
+        </Storyboard>
+
+    </UserControl.Resources>
+
+    <Grid x:Name="gridGeneral">
+        <!-- Primero, las definiciones de filas y columnas -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="257*"/>
+            <ColumnDefinition Width="21*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <!-- Luego, los elementos visuales -->
+        <MediaElement x:Name="sndGolpe" Source="AssetsGengarRSR/golpeDebil.mp3" AutoPlay="False" Volume="1.0" />
+        <MediaElement x:Name="sndLloro"
+              Source="AssetsGengarRSR/lloro.mp3"
+              AutoPlay="False"
+              Volume="1.0"
+              Visibility="Collapsed" />
+        <!-- 🔊 SONIDO DE DEFENSA -->
+        <MediaElement x:Name="sndDefensa"
+        Source="AssetsGengarRSR/defensa.mp3"
+        AutoPlay="False"
+        Volume="1.0"
+        Visibility="Collapsed"/>
+
+        <MediaElement x:Name="sndDescanso"
+              Source="AssetsGengarRSR/sonidoDormir.mp3"
+              AutoPlay="False"
+              Volume="0.6"
+              Visibility="Collapsed"/>
+
+        <MediaElement x:Name="sndLengua" Source="AssetsGengarRSR/sonidoLengua.mp3" AutoPlay="False" Volume="1" />
+
+        <Image x:Name="fondoPokemon" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="4" Source="/AssetsGengarRSR/fondoGengar.png" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Image x:Name="iconoVida"
+           Source="/AssetsGengarRSR/corazon.png"
+           Grid.Row="0" Grid.Column="0"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center" />
+
+        <Image x:Name="iconoEnergia"
+           Source="/AssetsGengarRSR/energia.png"
+           Grid.Row="1" Grid.Column="0"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"/>
+
+        <Image x:Name="pocionVida"
+           Source="/AssetsGengarRSR/red-potion.png"
+           Grid.Row="0" Grid.Column="2"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"
+            />
+
+        <Image x:Name="pocionEnergia"
+           Source="/AssetsGengarRSR/yellow-potion.png"
+           Grid.Row="1" Grid.Column="2"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"/>
+
+        <ProgressBar x:Name="ProgressBarVida"
+             Grid.Row="0" Grid.Column="1"
+             Margin="5"
+             Background="#4CE60A0A"
+             Foreground="#FFE60A0A"
+             VerticalAlignment="Stretch"
+             Value="100" />
+
+        <ProgressBar x:Name="ProgressBarEner"
+             Grid.Row="1" Grid.Column="1"
+             Margin="5"
+             Background="#4CFFF000"
+             Foreground="#FFFFF900"
+             VerticalAlignment="Stretch"
+             Value="100" />
+
+        <!-- Metemos todo dentro de un ViewBox para hacer que el tamaño del pokemon sea adaptativo -->
+        <Viewbox Grid.Row="2" Grid.ColumnSpan="3" Stretch="Uniform">
+            <Canvas x:Name="cvGengar" Tapped="enfadarGengar" Background="Transparent" Height="520" Width="550" Margin="0,110,-60,0">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="transformGengar" />
+                        <ScaleTransform x:Name="scaleGengar" ScaleX="1" ScaleY="1"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+                <!-- Canvas para el cuerpo -->
+                <Canvas x:Name="cvCuerpo">
+                    <Ellipse x:Name="Cuerpo_Gengar" Fill="#5A3E85" Stroke="Black" StrokeThickness="2"
+                             Width="235" Height="255" Canvas.Left="138.533" Canvas.Top="138.39"
+                             HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Ellipse.RenderTransform>
+                            <CompositeTransform />
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                    <Canvas x:Name="Cuernos" HorizontalAlignment="Left" Height="139" Canvas.Left="109.333" Canvas.Top="65.976" VerticalAlignment="Top" Width="303">
+                        <Path
+                            Width="301" Canvas.Top="1.214" Stretch="Fill" Stroke="Black" x:Name="Picos" Canvas.Left="1.567" Height="138" Fill="#5A3E85" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Data="M357.77806,203.77354 L410.72221,101.91333 361.3606,123.9485 312.42588,145.79311 320.85127,112.23916 281.13153,132.81093 273.78871,98.530113 267.06743,67.151035 252.06136,99.219895 238.13554,128.9802 212.04686,101.6557 212.64891,132.17138 187.965,114.22098 195.99228,141.74493 109.99998,103.65019 118.2467,122.0161 129.30537,146.64436 139.5174,169.38711 153.90542,201.43002"/>
+                    </Canvas>
+                </Canvas>
+
+                <Image x:Name="Gota1"
+                Source="/AssetsGengarRSR/sudor.png"
+                Width="30" Height="30"
+                Canvas.Left="220" Canvas.Top="190"
+                Visibility="Collapsed"
+                 RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <CompositeTransform />
+                    </Image.RenderTransform>
+                </Image>
+
+                <Image x:Name="Gota2"
+                Source="/AssetsGengarRSR/sudor.png"
+                Width="30" Height="30"
+                Canvas.Left="260" Canvas.Top="190"
+                Visibility="Collapsed"
+                RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <CompositeTransform />
+                    </Image.RenderTransform>
+                </Image>
+
+                <!-- Canvas para la cola -->
+                <Canvas x:Name="cvCola">
+                    <Path x:Name="Cola" Fill="#5A3E85" Height="29" Stroke="Black" Stretch="Fill" Width="66" HorizontalAlignment="Left" Canvas.Left="221" Canvas.Top="386" VerticalAlignment="Top"
+                        Data="M220.89714,385.2545 L238.54899,388.79134 255.90131,389.71239 269.86295,388.69926 281.03226,387.04136 280.24251,394.23574 280.83281,400.48875 283.22623,406.75192 285.56978,411.04405 274.45116,411.04405 260.0898,408.77824 249.12271,405.32139 238.55256,400.36058 228.77584,393.30453 220.7479,385.2545"/>
+                </Canvas>
+
+                <!-- Canvas para el ojo derecho -->
+                <Canvas x:Name="cvOjoDer">
+                    <Path x:Name="OjoDerecho" Fill="Red" Stroke="Black" StrokeThickness="2"
+                Canvas.Left="263.6" Canvas.Top="228.968"
+                Data="M60.8,1 L60.97,1.58 C61.60,3.86 61.94,6.25 61.94,8.71 61.94,24.45 48.28,37.21 31.43,37.21 15.38,37.21 2.22,25.61 1.02,10.90 L1,10.49 z"
+                Tapped="enfadarOjoDerecho"
+                RenderTransformOrigin="0.733,-0.175" Height="34" Stretch="Fill" Width="67"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform x:Name="scaleOjoDer" />
+                                <SkewTransform/>
+                                <RotateTransform Angle="-21.813"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+
+                    <Path x:Name="LineaOjoDerecho" Fill="#FFF4F4F5" Height="42" Canvas.Left="265.7"
+                    Stroke="Black" Stretch="Fill" Canvas.Top="217.44" Width="73"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Data="M269.3,258.34 L338.39999,217.44">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform x:Name="rotLineaOjoDer" />
+                                <TranslateTransform x:Name= "transLineaOjoDer"/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+
+                    <!-- Pupila del ojo derecho -->
+                    <Ellipse x:Name="PupilaDer" Fill="Black" Stroke="Black"
+                    Width="7" Height="12" Canvas.Left="293" Canvas.Top="242.6"
+                    RenderTransformOrigin="0.5,0.5"
+                    HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Ellipse.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                </Canvas>
+                
+                <!-- Canvas para el ojo izquierdo -->
+                <Canvas x:Name="cvOjoIzq">
+                    <Path x:Name="OjoIzq" Fill="Red" Stroke="Black" StrokeThickness="2"
+                Canvas.Left="181.012" Canvas.Top="244.871"
+                Data="M60.8,1 L60.97,1.58 C61.60,3.86 61.94,6.25 61.94,8.71 61.94,24.45 48.28,37.21 31.43,37.21 15.38,37.21 2.22,25.61 1.02,10.90 L1,10.49 z"
+                Tapped="enfadarOjoI"
+                RenderTransformOrigin="0.733,-0.175" Height="38" Stretch="Fill" Width="73"
+                HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform x:Name="scaleOjoIzq"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="53.86"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+
+                    <Path x:Name="LineaOjoIzq" Fill="#FFF4F4F5" Height="62" Canvas.Left="184"
+                    Stroke="Black" Stretch="Fill" Canvas.Top="198.94" Width="60"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Data="M183.10013,198.92917 L188.8,204.54 248.03255,261.76208">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform x:Name= "rotLineaOjoIzq"/>
+                                <TranslateTransform x:Name= "transLineaOjoIzq"/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+
+                    <!-- Pupila del ojo izquierdo -->
+                    <Ellipse x:Name="PupilaIzq" Fill="Black" Stroke="Black"
+                    Width="7" Height="12" Canvas.Left="216.2" Canvas.Top="238"
+                    RenderTransformOrigin="0.5,0.5"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+
+                </Canvas>
+
+                <!-- Canvas para la boca -->
+                <Canvas x:Name="cvBoca" >
+                    <Canvas.RenderTransform>
+                        <TranslateTransform/>
+                    </Canvas.RenderTransform>
+
+                    <Path x:Name="Boca_Gengar"
+                    Fill="White"
+                     Stroke="Black"
+                     StrokeThickness="2"
+                     RenderTransformOrigin="0.5,0.5">
+                        <Path.RenderTransform>
+                            <CompositeTransform ScaleY="1"/>
+                        </Path.RenderTransform>
+                    </Path>
+
+                    <Path x:Name="curvaDebajo"
+                    Fill="White"
+                    HorizontalAlignment="Center"
+                    Height="65"
+                    Canvas.Left="176.665"
+                    Stroke="Black"
+                    Stretch="Fill"
+                    StrokeThickness="3"
+                    Canvas.Top="263.121"
+                    VerticalAlignment="Center"
+                    Width="159"
+                    Data="M1.5,1.5 L3.5605695,2.6411837 C54.18557,30.168527 104.81057,30.168527 155.43557,2.6411837 L157.49612,1.5000089 157.47257,2.9789411 C156.40476,36.481033 121.90319,63.378692 79.49807,63.378692 37.092956,63.378692 2.5913668,36.481033 1.5235444,2.9789411 z"/>
+
+                    <Path x:Name="_1Diente" Fill="#FFF4F4F5" Height="35" Stroke="Black" Stretch="Fill" Width="3" HorizontalAlignment="Left" Canvas.Left="206" Canvas.Top="278" VerticalAlignment="Top"
+                        Data="M206.05,277.79 L208.4,310.88001" />
+
+                    <Path x:Name="_2Diente" Fill="#FFF4F4F5" Height="39" Stroke="Black" Stretch="Fill" Width="3" HorizontalAlignment="Left" Canvas.Left="236" Canvas.Top="285" VerticalAlignment="Top"
+                        Data="M236.05,285.39 L238.4,322.88001"/>
+                    <Path x:Name="_3Diente" Fill="#FFF4F4F5" Height="38" Stroke="Black" Stretch="Fill" Width="1" HorizontalAlignment="Left" Canvas.Left="278" Canvas.Top="285" VerticalAlignment="Top"
+                        Data="M278.05,284.99 L277.79999,321.87999"/>
+                    <Path x:Name="_4Diente" Fill="#FFF4F4F5" Height="34" Stroke="Black" Stretch="Fill" Width="2" HorizontalAlignment="Left" Canvas.Left="310" Canvas.Top="274" VerticalAlignment="Top"
+                        Data="M310.85,275.19 L310.00001,306.88"/>
+                </Canvas>
+
+                <!-- Canvas para el brazo izquierdo -->
+                <Canvas x:Name="cvBrazoIzq">
+                    <Path x:Name="Brazo1Izqu" Fill="#5A3E85" Height="140" Stroke="Black" Stretch="Fill" Width="65" HorizontalAlignment="Center" Canvas.Left="90.528" Canvas.Top="201.461" VerticalAlignment="Center"
+                        Data="M155.03863,202.27827 L145.05932,209.36129 138.56078,214.60877 132.96192,219.83315 127.08679,225.48637 122.31443,231.22581 117.44052,236.91058 111.65276,244.5085 105.91577,252.76236 102.6665,258.66578 99.417228,264.5692 95.759352,272.37495 93.575629,278.3423 91.970146,284.23904 90.961605,291.4586 90.38409,298.77505 90.05324,305.63965 90.096638,313.00391 90.673236,319.38768 91.826715,326.07111 92.980195,332.43631 95.882994,339.93802 98.772335,345.28078 106.25894,354.23669 106.82195,339.81009 118.06838,350.84509 116.9149,337.28781 131.73453,344.01089 130.04949,332.023 130.22321,325.8669 131.26149,319.71077 134.21709,311.74968 137.67753,306.70511 142.00308,301.66054 141.02262,289.0951 140.71984,279.20134 140.61891,270.57179 140.82077,260.07341 141.42634,250.269 142.6375,242.48451 144.88678,232.613 147.48211,224.41558 149.78907,216.21816 z"/>
+
+                    <Image x:Name="PuñoIzquierdoGengar"
+                    Source="/AssetsGengarRSR/Puño_Gengar.png"
+                    Width="110" Height="110"
+                    Canvas.Left="62" Canvas.Top="250"
+                    Visibility="Collapsed"
+                    RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="205"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Canvas>
+
+                <!-- Brazo derecho y puño como un solo conjunto rotado -->
+                <Canvas x:Name="cvBrazoDer" Canvas.Left="357.72" Canvas.Top="203.91">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform x:Name="transformBrazoPuño" CenterX="0" CenterY="32"/>
+                    </Canvas.RenderTransform>
+
+                    <!-- Brazo derecho (Path) -->
+                    <Path x:Name="Brazo_Derecho" Fill="#5A3E85" Height="134" Stroke="Black" Stretch="Fill" Width="62"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Data="M369.45698,295.36038 L373.4257,300.42873 376.88763,305.92329 379.06405,310.70729 379.81417,316.38668 379.26665,323.79683 377.54133,330.43798 390.99197,324.32331 391.17966,333.68011 398.53743,324.1049 400.92526,333.66291 408.55026,321.2959 412.675,308.26592 414.21286,299.80025 414.46456,292.9731 413.90705,284.47553 412.82619,275.67303 410.66447,267.35616 408.23253,259.32914 405.53038,252.99556 402.28781,246.40086 398.77501,240.62362 394.992,235.10905 389.85792,229.04735 384.1834,223.56063 378.7791,219.17322 373.10459,215.61605 365.28981,212.13343 358.80052,210.48639 361.06175,215.05289 363.23454,219.75684 364.81297,224.16287 366.19409,228.16836 367.5752,232.57439 368.56172,236.78015 369.74554,241.38646 370.53475,245.79249 370.92935,249.79798 371.52126,255.40566 371.91587,260.01197 372.11317,264.01746 372.19456,267.75758 371.91587,272.97973 371.52126,277.38576 371.32766,280.91059 370.92935,285.19646 370.23263,290.35853 z" />
+
+                    <Image x:Name="PuñoGengar"
+                    Source="/AssetsGengarRSR/Puño_Gengar.png"
+                    Width="110" Height="110"
+                    Canvas.Left="-14" Canvas.Top="20"
+                    Visibility="Collapsed"
+                    RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="210" TranslateY="0"/>
+                        </Image.RenderTransform>
+                    </Image>
+
+                </Canvas>
+
+                <!-- Canvas para la pierna izquierda -->
+                <Canvas x:Name="cvPiernaIzq" Canvas.Left="136.635" Canvas.Top="324.905">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform x:Name="rotPiernaIzq" CenterX="0" CenterY="20" />
+                            <TranslateTransform x:Name="transPiernaIzq" />
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+
+
+                    <Path x:Name="Pierna_Izquierda" Fill="#5A3E85" Height="100" Stroke="Black" Stretch="Fill" Width="85"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Data="M152.91892,324.90486 L159.47689,337.04882 165.89125,346.65364 172.74296,355.49212 179.93483,362.54246 189.26481,370.41024 198.93495,376.89861 204.81479,380.57705 211.97769,384.52621 218.60081,387.08198 212.40197,395.47723 207.56887,402.10505 200.84455,410.05844 193.90265,415.47842 183.74597,420.55294 172.95449,424.05917 164.06739,426.06201 168.08774,416.7415 151.79472,422.26468 155.61196,413.64851 139.49587,417.18335 148.56279,406.13698 142.44771,396.36094 138.44128,385.53549 136.96344,372.50077 137.80303,362.77996 140.11154,352.83823 143.67923,341.12907 148.08638,332.73383 z" >
+                        <Path.RenderTransform>
+                            <CompositeTransform />
+                        </Path.RenderTransform>
+                    </Path>
+
+                </Canvas>
+
+                <!-- Canvas para la pierna derecha -->
+                <Canvas x:Name="cvPiernaDer">
+                    <Path x:Name="PiernaDerecha" Fill="#5A3E85" Height="108" Stroke="Black" Stretch="Fill" Width="90" HorizontalAlignment="Left" Canvas.Left="282" Canvas.Top="327" VerticalAlignment="Top"
+                        Data="M287.05892,390.06606 L282.18573,388.30683 292.41242,384.47313 296.47729,382.58303 301.58476,379.7548 306.92652,376.45519 312.07407,372.89718 316.6729,369.09 321.03972,364.52249 325.21013,360.18779 328.57472,356.59022 331.71417,353.12226 335.22849,349.1156 339.35196,343.45913 342.95999,337.56698 347.0314,329.62899 349.78111,324.26755 352.71863,316.89731 354.61147,322.18004 356.52157,328.69145 358.48228,335.10911 361.10392,342.51609 363.81161,352.41521 365.09222,359.53103 365.59219,366.97507 365.36371,373.88739 364.93362,383.65769 363.42831,391.8993 359.98759,401.57254 356.76192,408.86066 352.89112,415.02186 351.17076,417.7207 353.10616,422.12304 356.11679,429.6189 345.79464,424.59812 347.94509,437.6162 336.11763,429.73398 335.90259,442.98939 324.93531,437.06019 317.40874,433.01986 309.45209,426.55532 301.28039,419.28272 300.44941,409.58592 298.31591,402.7847 293.05668,395.01547 z"/>
+                </Canvas>
+
+                <Path x:Name="OjoXIzq" Data="M0,0 L20,20 M0,20 L20,0"
+                Stroke="Black" StrokeThickness="4" Visibility="Collapsed"
+                Canvas.Left="211" Canvas.Top="231" Width="20" Height="20"/>
+                <Path x:Name="OjoXDer" Data="M0,0 L20,20 M0,20 L20,0"
+                Stroke="Black" StrokeThickness="4" Visibility="Collapsed"
+                Canvas.Left="286" Canvas.Top="229" Width="20" Height="20"/>
+
+                <Image x:Name="KOImage" Source="AssetsGengarRSR/KO.png" Width="70" Height="70"
+                Canvas.Left="230" Canvas.Top="160" Visibility="Collapsed">
+                    <Image.RenderTransform>
+                        <TranslateTransform />
+                    </Image.RenderTransform>
+                </Image>
+
+                <Grid>
+                    <!-- Sombra detrás -->
+                    <TextBlock
+                    x:Name="txtDerrotadoSombra"
+                    Text="¡GENGAR HA SIDO DERROTADO!"
+                    FontSize="42"
+                    FontWeight="Bold"
+                    FontFamily="Segoe UI Black"
+                    Foreground="Black"
+                    Opacity="0.5"
+                    Margin="-35,20,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Visibility="Collapsed"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
+                        <TextBlock.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+
+                    <!-- Texto principal encima -->
+                    <TextBlock
+                    x:Name="txtDerrotado"
+                    Text="¡GENGAR HA SIDO DERROTADO!"
+                    FontSize="42"
+                    FontWeight="Bold"
+                    FontFamily="Segoe UI Black"
+                    Foreground="Red"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="-135,20,0,0"
+                    Visibility="Collapsed"
+                    TextAlignment="Center"
+                    Opacity="0"
+                    TextWrapping="Wrap">
+                        <TextBlock.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Corazón herido sobre la cabeza -->
+                <Image x:Name="corazonHerido" Source="AssetsGengarRSR/corazonHerido.png"
+                Width="60" Height="60"
+                Canvas.Left="230" Canvas.Top="150"
+                Visibility="Collapsed"/>
+
+                <!-- Lágrima debajo del ojo izquierdo -->
+                <Image x:Name="lagrimaIzq" Source="AssetsGengarRSR/lagrimasLlorar.png"
+                Width="40" Height="40"
+                Canvas.Left="215" Canvas.Top="245"
+                Visibility="Collapsed">
+                    <Image.RenderTransform>
+                        <TranslateTransform x:Name="transLagrimaIzq"/>
+                    </Image.RenderTransform>
+                </Image>
+
+                <!-- Lágrima debajo del ojo derecho -->
+                <Image x:Name="lagrimaDer" Source="AssetsGengarRSR/lagrimasLlorar.png"
+                Width="40" Height="40"
+                Canvas.Left="255" Canvas.Top="245"
+                Visibility="Collapsed">
+                    <Image.RenderTransform>
+                        <TranslateTransform x:Name="transLagrimaDer"/>
+                    </Image.RenderTransform>
+                </Image>
+
+                <!-- ESCUDO FRONTAL -->
+                <Image x:Name="escudo" 
+                Source="AssetsGengarRSR/escudo.png"
+                Width="250"
+                Height="250"
+                Visibility="Collapsed"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="132,160,0,0">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="EscudoScale" ScaleX="0" ScaleY="0"/>
+                            <TranslateTransform x:Name="EscudoTranslate"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <!-- ⚡️ DESTELLO DEFENSIVO cuadrado -->
+                <Rectangle x:Name="DestelloDefensa"
+                Width="400" Height="380"
+                Fill="White"
+                Opacity="0"
+                RadiusX="0" RadiusY="0"
+                Visibility="Collapsed"
+                Canvas.Left="65"
+                Canvas.Top="65">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <!-- AURA MÁGICA del escudo (rectángulo también) -->
+                <Rectangle x:Name="AuraEscudo"
+                Width="400" Height="380"
+                Fill="#8820D0FF"
+                Opacity="0.3"
+                Visibility="Collapsed"
+                Canvas.Left="65"
+                Canvas.Top="65">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <Ellipse x:Name="Particula1" Width="20" Height="20" Fill="#99D0F0FF"
+                Opacity="0" Canvas.Left="200" Canvas.Top="120"/>
+                <Ellipse x:Name="Particula2" Width="14" Height="14" Fill="#88FFFFFF"
+                Opacity="0" Canvas.Left="230" Canvas.Top="160"/>
+                <Ellipse x:Name="Particula3" Width="18" Height="18" Fill="#77B0E0FF"
+                Opacity="0" Canvas.Left="170" Canvas.Top="190"/>
+
+                <Image x:Name="imgZzz"
+                Source="AssetsGengarRSR/dormir.gif"
+                Width="100"
+                Height="100"
+                Canvas.Left="210"
+                Canvas.Top="130"
+                Visibility="Collapsed">
+                    <Image.RenderTransform>
+                        <TranslateTransform />
+                    </Image.RenderTransform>
+                </Image>
+
+                <!-- ⭐ Estrellas más grandes y mejor posicionadas -->
+                <Image x:Name="estrella1" Source="AssetsGengarRSR/estrella.png" Width="34" Height="34"
+                Canvas.Left="330" Canvas.Top="170" Visibility="Collapsed" Opacity="0"/>
+                <Image x:Name="estrella2" Source="AssetsGengarRSR/estrella.png" Width="30" Height="30"
+                Canvas.Left="310" Canvas.Top="160" Visibility="Collapsed" Opacity="0"/>
+                <Image x:Name="estrella3" Source="AssetsGengarRSR/estrella.png" Width="28" Height="28"
+                Canvas.Left="345" Canvas.Top="155" Visibility="Collapsed" Opacity="0"/>
+
+                <Image x:Name="estrella4" Source="AssetsGengarRSR/estrella.png" Width="34" Height="34"
+                Canvas.Left="170" Canvas.Top="170" Visibility="Collapsed" Opacity="0"/>
+                <Image x:Name="estrella5" Source="AssetsGengarRSR/estrella.png" Width="30" Height="30"
+                Canvas.Left="150" Canvas.Top="160" Visibility="Collapsed" Opacity="0"/>
+                <Image x:Name="estrella6" Source="AssetsGengarRSR/estrella.png" Width="28" Height="28"
+                Canvas.Left="185" Canvas.Top="155" Visibility="Collapsed" Opacity="0"/>
+
+
+                <Image x:Name="lengua"
+                Source="AssetsGengarRSR/lengua.png"
+                Width="120"
+                Height="200"
+                Visibility="Collapsed"
+                Canvas.Left="200"
+                Canvas.Top="358"
+                RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="ScaleLengua" ScaleX="1" ScaleY="1"/>
+                            <TranslateTransform x:Name="TranslateLengua" X="0" Y="0"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+                <Ellipse x:Name="ImpactoVisualElement" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="320" Canvas.Top="420">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement2" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="300" Canvas.Top="440">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform2"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement3" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="290" Canvas.Top="430">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform3"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement4" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="280" Canvas.Top="450">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform4"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement5" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="200" Canvas.Top="420">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform5"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement6" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="180" Canvas.Top="440">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform6"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement7" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="170" Canvas.Top="430">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform7"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Ellipse x:Name="ImpactoVisualElement8" Fill="Red" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Canvas.Left="160" Canvas.Top="450">
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="ImpactoTransform8"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+
+                <Canvas>
+                    <Image x:Name="gengar" Source="/AssetsGengarRSR/GENGAR.png" Width="250" Height="250" Canvas.Left="130" Canvas.Top="418"/>
+                </Canvas>
+
+            </Canvas>
+        </Viewbox>
+
+    </Grid>
+    </UserControl>
+        
+
+    

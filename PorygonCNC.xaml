@@ -1,0 +1,787 @@
+﻿<UserControl
+    x:Class="IPOkemonApp.PorygonCNC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProyectoUWPenBlanco"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="estatico">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(Canvas.Top)" EnableDependentAnimation="True">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="40"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(Canvas.Top)" EnableDependentAnimation="True">
+                <DiscreteDoubleKeyFrame KeyTime="00:00:00" Value="71"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="87"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="71"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="10"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-15"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-10"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="-1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="15"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="Torso" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="Torso" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Torso" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="AtaqueFuerte">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="35"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-20"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value="2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value="-2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-10"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="25"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="path10" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF9F4D54"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF4EB2BD"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="path16" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFF4C5CB"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="path17" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF8C474D"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFC2E1E4"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFF4C5CB"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFC2E1E4"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFF4C5CB"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path3" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFF4C5CB"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFC2E1E4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path6" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF55B4C4"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFE86375"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path5" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF55B4C4"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFE86375"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFE86375"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF55B4C4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path7" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF487379"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF9F4D54"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF9F4D54"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF487379"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path13" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF52ABB4"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFC95D6A"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path12" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF52ABB4"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFE25F6D"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path11" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFE25F6D"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF52ABB4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path14" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FFF4C5CB"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FFC2E1E3"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path15" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF9F4D54"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF4B8389"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path9" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:01.1000000" Value="#FF9F4D54"/>
+                <EasingColorKeyFrame KeyTime="00:00:01.2000000" Value="#FF4F99A1"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="AtaqueDebil">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-90"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-136"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-141"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-143"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-130"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-120"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-161"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-154.429"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-140"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-126"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-80"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="-76.4444"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-122"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="-100"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-99.999"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="23.53"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-29.847"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="79.54"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-45.519"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-62.273"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-75.733"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="219.93"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-72.887"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="22.781"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="310.521"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="227.15"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-60.365"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="-41.314"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="-111.764"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-420.588"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-339.27"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="-397.575"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-266.4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-417.059"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="-246.953"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="-436.031"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-250.476"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-436.323"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-279.779"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="-441.209"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-181.182"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="-432.85"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="escudo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-26"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-26"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="97.058"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="97.058"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="20.588"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="20.588"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-75"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-75"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-102.941"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-106.941"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-107.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-109.08"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="-54.942"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="-54.976"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="55.882"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3000000" Value="49.481"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="descanso">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Torso" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="23"/>
+                <DiscreteDoubleKeyFrame KeyTime="00:00:03.5000000" Value="24"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="77"/>
+                <DiscreteDoubleKeyFrame KeyTime="00:00:03.5000000" Value="78"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="30"/>
+                <DiscreteDoubleKeyFrame KeyTime="00:00:03.5000000" Value="29"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="57"/>
+                <DiscreteDoubleKeyFrame KeyTime="00:00:03.5000000" Value="56"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="23"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.5000000" Value="24"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-17"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="21"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.314"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="-0.2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.059"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5000000" Value="0.929"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="conEscudo">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF4C7B83"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF4C8373"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path9" To="#FF4FA18C" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path12" To="#FFE2956D" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path11" To="#FF52BEB4" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path13" To="#FFC97B6A" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path18" To="#FF8C614D" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path14" To="#FFC2FFE3" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path15" To="#FF4BAF89" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path7" To="#FF9F7254" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path8" To="#FF489679" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path5" To="#FFE88F75" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path6" To="#FFE8AE75" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path2" To="#FFF4E1CB" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path1" To="#FFF4FFCB" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path4" To="#FF55DDC4" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path3" To="#FFC2FBE4" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimation Duration="00:00:00.3000000" Storyboard.TargetName="path19" To="#FF478D72" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+            <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="path10" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF4EE7BD"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Cansado">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.008"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.459"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-0.059"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="4.06"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cabeza" To="24.706" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cabeza" To="47.647" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_izq" To="22" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_izq" To="-11.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_izq" To="2.941" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_dcha" To="25" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_dcha" To="11.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_dcha" To="11.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+        </Storyboard>
+        <Storyboard x:Name="Herido">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.008"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.459"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-0.059"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="4.06"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cabeza" To="62.941" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cabeza" To="24.118" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_izq" To="3" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_izq" To="-50" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_izq" To="-2.941" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_dcha" To="25" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_dcha" To="11.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Pata_dcha" To="11.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cabeza" To="18" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cola" To="25" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cola" To="52.941" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"/>
+            <DoubleAnimation Duration="00:00:00.5000000" Storyboard.TargetName="Cola" To="11.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"/>
+        </Storyboard>
+        <Storyboard x:Name="Derrotado">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="5.882">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="205.882">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Torso" To="11.118" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Torso" To="66.706" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="38.975">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Pata_dcha" To="-7.471" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Pata_dcha" To="91.882" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Pata_izq" To="-7.765" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Pata_izq" To="71.529" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Pata_izq" To="46.157" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Cola" To="54.242" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Cola" To="173.529" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.9000000" Storyboard.TargetName="Cola" To="14.706" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="quitarCansado">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.263"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0.459"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.89"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="5.53"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="4.06"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0.825"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="11.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="11.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="25"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="24.706"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="47.647"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-11.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="2.941"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="22"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="quitarHerido">
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="Pata_izq" To="3" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="11.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="52.941"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cola" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="25"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="11.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="11.765"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_dcha" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="25"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="62.941"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="24.118"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Cabeza" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="18"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pata_izq" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-2.941"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.459"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.008"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pupila" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="4.06"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-0.058"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="quitarConEscudo">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF4C7B83"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF4C7A83"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="path10" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[2].(GradientStop.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF4EB2BD"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFF4E1CB"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFF4C5CB"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFF4FFCB"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFF4C5CB"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path3" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFC2FBE4"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFC2E1E4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF55DDC4"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF55B4C4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path6" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFE8AE75"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFE86375"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path5" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFE88F75"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFE86375"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path7" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF9F7254"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF9F4D54"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF489679"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF487379"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path13" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFC97B6A"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFC95D6A"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path12" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFE2956D"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFE25F6D"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path9" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF4FA18C"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF4F99A1"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path11" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF52BEB4"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF52ABB4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path18" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF8C614D"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF8C474D"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path14" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFC2FFE3"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FFC2E1E3"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path15" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF4BAF89"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF4B8389"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path19" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                <EasingColorKeyFrame KeyTime="00:00:00" Value="#FF478D72"/>
+                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="#FF476E72"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid x:Name="gridGeneral">
+        <Grid.Background>
+            <ImageBrush ImageSource="/AssetsPorygonCNC/background.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <ProgressBar x:Name="health_progressbar" Grid.Column="1" Margin="5,5,5,5" Value="79" Foreground="Red" VerticalAlignment="Stretch">
+            <ProgressBar.Background>
+                <SolidColorBrush Color="Red" Opacity="0.2"/>
+            </ProgressBar.Background>
+        </ProgressBar>
+        <ProgressBar x:Name="energy_progressbar" Grid.Column="1" Grid.Row="1" Margin="5,5,5,5" Foreground="#FFFFDE00" Value="50" VerticalAlignment="Stretch">
+            <ProgressBar.Background>
+                <SolidColorBrush Color="#FFFFAF00" Opacity="0.2"/>
+            </ProgressBar.Background>
+        </ProgressBar>
+        <TextBlock x:Name="pokeName" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Width="697" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Run Language="es-es" Text="Porygon"/>
+        </TextBlock>
+        <Image x:Name="iconoVida" Source="/AssetsPorygonCNC/corazon.png" Margin="5"/>
+        <Image x:Name="iconoEnergia" Grid.Row="1" Margin="5" Source="/AssetsPorygonCNC/energia.png"/>
+        <Image x:Name="pocimaVida" Grid.Column="2" Margin="5" Source="/AssetsPorygonCNC/red-potion.png" Tapped="RedPotion_Tapped"/>
+        <Image x:Name="pocimaEnergia" Grid.Row="1" Grid.Column="2" Margin="5" Source="/AssetsPorygonCNC/yellow-potion.png" Tapped="YellowPotion_Tapped"/>
+        <Viewbox Grid.Row="2" Grid.Column="1">
+            <Canvas x:Name="Porygon" Height="500" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Canvas x:Name="Cola" HorizontalAlignment="Left" Height="202" Canvas.Left="329" Canvas.Top="41" VerticalAlignment="Top" Width="68" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="path17" Height="200" Stroke="Black" Stretch="Fill" Width="39" 
+                        Data="M57.185435,-98.796951 L65.736594,-84.089819 53.840671,97.39572 48.920703,100.87911 44.812369,81.918766 27.055555,66.636507 z" Canvas.Left="29" Canvas.Top="2" UseLayoutRounding="False">
+                        <Path.Fill>
+                            <LinearGradientBrush EndPoint="1.724,-1.625" StartPoint="0.474,0.872">
+                                <GradientStop Color="#FF476E71"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                    <Path x:Name="path16" Height="168" Stroke="Black" Stretch="Fill" Width="59" 
+                        Data="M99.261657,-1.1212164 L108.21977,-0.047806123 79.666667,165.70667 66.777949,154.75588 50.772503,156.35284 z" UseLayoutRounding="False">
+                        <Path.Fill>
+                            <LinearGradientBrush EndPoint="0.862,-0.015" StartPoint="0.336,0.743">
+                                <GradientStop Color="#FFC2E1E4"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                </Canvas>
+                <Canvas x:Name="Pata_dcha" HorizontalAlignment="Left" Height="107" Canvas.Left="131" Canvas.Top="264" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform Rotation="0"/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="path9" Height="132" Stroke="Black" Width="46" Fill="#FF4F99A1" 
+                        Data="M12.534139,0.49999955 L45.509454,28.53121 L43.944289,103.41243 L38.961117,131.52761 L0.5,111.81802 z" UseLayoutRounding="False" Canvas.Left="-0.005" Canvas.Top="-28.029"/>
+                    <Path x:Name="path" Height="124" Stroke="Black" Width="98" Fill="#FF4C7A83" Canvas.Left="38.971" Canvas.Top="-17.441" UseLayoutRounding="False" Data="M9.4410823,18.147177 L97.676059,0.50000027 L11.537047,123.93142 L0.50000003,121.19908 z"/>
+                </Canvas>
+                <Canvas x:Name="Torso" HorizontalAlignment="Left" Height="200" Canvas.Left="154" Canvas.Top="198" VerticalAlignment="Top" Width="229" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.Projection>
+                        <PlaneProjection/>
+                    </Canvas.Projection>
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="path12" Height="129" Stroke="Black" Width="134" RenderTransformOrigin="0.5,0.499999997424491" 
+                        Stretch="Fill" Fill="#FFE25F6D" 
+                        Data="M-76.534537,-5.9334745 L25.05461,-2.6797171 46.293308,31.115064 -85.044533,122.01445 -49.783753,55.161861 z" Canvas.Left="92" Canvas.Top="6" UseLayoutRounding="False">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-16.859"/>
+                                <TranslateTransform X="7.1108437068290726" Y="-0.016426293798680547"/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                    <Path Fill="#FFF4F4F5" Height="34" Stroke="Black" Stretch="Fill" Width="8" 
+                        Data="M376.24074,226.61873 L383.62502,258.65084" Canvas.Left="221" Canvas.Top="25" UseLayoutRounding="False"/>
+                    <Path x:Name="path11" Height="128" Stroke="Black" Stretch="Fill" Width="114" Fill="#FF52ABB4" 
+                        Data="M47.9151,-17.535619 L91.391859,33.140868 74.842447,107.15449 -23.53361,22.176759 15.32335,7.4538275 41.39675,-19.287008 z" Canvas.Left="23" Canvas.Top="24" UseLayoutRounding="False"/>
+                    <Path x:Name="path13" Height="27" Stroke="Black" Stretch="Fill" Width="99" Fill="#FFC95D6A" 
+                        Data="M58.483507,2.694418 L-33.643849,26.350308 -39.578459,25.093522 -22.843108,8.5462564 z" Canvas.Left="87" UseLayoutRounding="False"/>
+                    <Path Fill="#FFF4F4F5" Height="126" Stroke="Black" Stretch="Fill" Width="28" 
+                        Data="M247.1276,224.14774 L273.65835,349.23903" Canvas.Left="93" Canvas.Top="26" UseLayoutRounding="False"/>
+                    <Path x:Name="path18" Height="175" Stroke="Black" Width="114" Fill="#FF8C474D" 
+                        Data="M5.9756406,126.10319 L107.37666,0.99846493 L113.98515,32.715064 L49.928237,146.54105 L28.661685,174.00153 z" Canvas.Left="114.52" Canvas.Top="25.5" UseLayoutRounding="False"/>
+                    <Path x:Name="path14" Height="85" Stroke="Black" Stretch="Fill" Width="120" Fill="#FFC2E1E3" 
+                        Data="M-4.4949673,-18.928347 L93.611783,63.21929 -26.712741,41.651867 z" Canvas.Top="66" UseLayoutRounding="False"/>
+                    <Path x:Name="path15" Height="71" Stroke="Black" Stretch="Fill" Width="141" Fill="#FF4B8389" 
+                        Data="M-33.065616,-22.683317 L84.205403,-1.8190603 105.90753,47.433508 52.034752,29.276588 z" Canvas.Left="2" Canvas.Top="129" UseLayoutRounding="False"/>
+                </Canvas>
+                <Canvas x:Name="Cabeza" HorizontalAlignment="Left" Height="225" Canvas.Left="57" Canvas.Top="70" VerticalAlignment="Top" Width="233" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="path7" Height="138" Stroke="Black" Stretch="Fill" Width="131" Fill="#FF9F4D54" 
+                        Data="M176.5881,123.52297 L188.52118,80.878625 232.17877,60.853613 217.87571,119.38488 158.39417,181.27196 114.62182,198.76244 103.07716,163.59125 133.26313,131.36502 z" Canvas.Left="102" Canvas.Top="59" UseLayoutRounding="False"/>
+                    <Path x:Name="Ojo" Height="75" Stroke="Black" Stretch="Fill" Width="74" Fill="#FFDDD0D0" 
+                        Data="M53.404406,-10.018254 L78.751419,13.730716 66.944928,55.993697 24.333052,63.228173 6.3411782,43.753229 16.356906,-1.0798118 z" Canvas.Left="115" Canvas.Top="55" UseLayoutRounding="False"/>
+                    <Ellipse x:Name="Pupila" Height="15" Stroke="Black" Width="15" Fill="Black" HorizontalAlignment="Left" Canvas.Left="143" Canvas.Top="86" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.RenderTransform>
+                            <CompositeTransform/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                    <Path Fill="#FFF4F4F5" Height="21" Stroke="Black" Stretch="Fill" Width="45" 
+                        Data="M290,129.665 L244.75,148.415" Canvas.Left="188" Canvas.Top="59" UseLayoutRounding="False"/>
+                    <Path Height="51" Stroke="Black" Stretch="Fill" Width="56" Fill="#FFB4A9A9" 
+                        Data="M190.16667,198.95648 L233.41023,191.47164 245,148.79" Canvas.Left="133" Canvas.Top="79" UseLayoutRounding="False"/>
+                    <Path x:Name="path8" Height="63" Stroke="Black" Stretch="Fill" Width="70" Fill="#FF487379" 
+                        Data="M56.068745,-2.3582797 L67.789228,33.700014 -0.066963195,61.261189 z" Canvas.Left="45" Canvas.Top="161" UseLayoutRounding="False"/>
+                    <Path x:Name="path5" Height="53" Stroke="Black" Stretch="Fill" Width="47" Fill="#FFE86375" 
+                        Data="M-17.826845,41.666731 L9.6663004,0.9949962 27.239656,20.428468 -3.1848423,52.138947 z" Canvas.Left="87" Canvas.Top="109" UseLayoutRounding="False"/>
+                    <Path x:Name="path6" Height="70" Stroke="Black" Stretch="Fill" Width="71" Fill="#FFE86375" 
+                        Data="M-0.55367109,-9.3506712 L41.484492,39.221907 -0.60481702,59.987855 -25.670103,35.737584 z" Canvas.Left="162" Canvas.Top="10" UseLayoutRounding="False"/>
+                    <Path x:Name="path2" Height="56" Stroke="Black" Stretch="Fill" Width="111" Fill="#FFF4C5CB" 
+                        Data="M-0.19130903,0.56736254 L54.817528,10.723871 27.988362,56.11044 -55.296661,37.552319 z" Canvas.Left="78" UseLayoutRounding="False"/>
+                    <Path x:Name="path1" Height="114" Stroke="Black" Stretch="Fill" Width="144" Fill="#FFF4C5CB" 
+                        Data="M1.9428903E-16,1.54 L80.277778,20.206667 45.648149,28.570428 35.832025,74.361599 8.7579504,114.64067 -55.250001,96.879573 z" Canvas.Left="19" Canvas.Top="37" UseLayoutRounding="False"/>
+                    <Path x:Name="path4" Height="75" Stroke="Black" Stretch="Fill" Width="65" Fill="#FF55B4C4" 
+                        Data="M51.277951,-0.53622151 L66.611285,10.463778 8.0882271,74.527108 2.9318111,72.63208 z" Canvas.Left="38" Canvas.Top="150" UseLayoutRounding="False"/>
+                    <Path x:Name="path3" Height="90" Stroke="Black" Stretch="Fill" Width="87" Fill="#FFC2E1E4" 
+                        Data="M-0.16920521,-0.0052059198 L67.493966,18.760203 18.924699,92.473637 -19.075091,78.277703 z" Canvas.Top="133" UseLayoutRounding="False"/>
+                </Canvas>
+                <Canvas x:Name="Pata_izq" HorizontalAlignment="Left" Height="197" Canvas.Left="310" Canvas.Top="255" VerticalAlignment="Top" Width="136" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.Projection>
+                        <PlaneProjection/>
+                    </Canvas.Projection>
+                    <Canvas.RenderTransform>
+                        <CompositeTransform/>
+                    </Canvas.RenderTransform>
+                    <Path x:Name="path19" Height="171" Stroke="Black" Stretch="Fill" Width="135" Fill="#FF476E72" 
+                        Data="M55.676668,159.64127 L62.278348,172.51726 55.55032,159.64542 89.537917,35.857837 128.70578,7.5571686 126.76478,46.466586 64.651786,177.05763 0.76785714,152.36614 -6.9322016,139.05339 z" Canvas.Left="1" Canvas.Top="26" UseLayoutRounding="False"/>
+                    <Path Height="55" Stroke="Black" Stretch="Fill" Width="111" 
+                        Data="M0.5,0.5 L51.314304,-19.482103 109.43655,7.4394047 70.596683,37.30831 z" Canvas.Left="25" UseLayoutRounding="False">
+                        <Path.Fill>
+                            <LinearGradientBrush EndPoint="0.714,3.76" StartPoint="0.491,0.14">
+                                <GradientStop Color="#FF53B0C2"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                    <Path x:Name="path10" Height="160" Stroke="Black" Stretch="Fill" Width="97" RenderTransformOrigin="0.5,0.5" 
+                        Data="M1.2513739,-1.9578195 L71.373139,33.54017 37.78117,156.97004 -24.970071,136.20696 z" Canvas.Top="19" UseLayoutRounding="False">
+                        <Path.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="White" Offset="0.079"/>
+                                <GradientStop Color="#FF33A7B3" Offset="1"/>
+                                <GradientStop Color="#FF4EB2BD" Offset="0.878"/>
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+                </Canvas>
+            </Canvas>
+
+        </Viewbox>
+        <MediaElement x:Name="soundAtaqueDebil" AutoPlay="False" Volume="100" Source="/AssetsPorygonCNC/ataque_debil_cut.mp3"/>
+        <MediaElement x:Name="soundAtaqueFuerte" AutoPlay="False" Volume="100" Source="/AssetsPorygonCNC/ataque_fuerte.mp3"/>
+        <MediaElement x:Name="soundAtaqueEscudo" AutoPlay="False" Volume="100" Source="/AssetsPorygonCNC/escudo.mp3"/>
+        <MediaElement x:Name="soundDescanso" AutoPlay="False" Volume="100" Source="/AssetsPorygonCNC/descanso.mp3"/>
+        <MediaElement x:Name="soundDerrotado" AutoPlay="False" Volume="50" Source="/AssetsPorygonCNC/derrotado.mp3"/>
+    </Grid>
+</UserControl>

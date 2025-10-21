@@ -1,0 +1,704 @@
+﻿<UserControl
+    x:Class="IPOkemonApp.WartortleAAA"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wartortle"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <UserControl.Resources>
+
+
+
+        <Storyboard x:Name="AtaqueDebil">
+
+            <!-- Golpe de cola hacia la derecha -->
+            <DoubleAnimation Storyboard.TargetName="RotarCola"
+                     Storyboard.TargetProperty="Angle"
+                     From="0" To="35"
+                     Duration="0:0:0.45" AutoReverse="True"/>
+
+            <!-- Efecto de sacudida vertical (impacto) -->
+            <DoubleAnimation Storyboard.TargetName="TransformacionWartortle"
+                     Storyboard.TargetProperty="Y"
+                     From="0" To="-20"
+                     Duration="0:0:0.10" AutoReverse="True" BeginTime="0:0:0.1"/>
+
+            <!-- Brillo en la cola -->
+            <ColorAnimation Storyboard.TargetName="BrilloCola"
+                    Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                    To="White" Duration="0:0:0.15" AutoReverse="True" />
+        </Storyboard>
+
+        <Storyboard x:Name="IdleWartortle">
+            <!-- Mostrar todo el personaje -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WartortleCanvas"
+                                   Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>Visible</DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Restaurar posición (por si se había movido) -->
+            <DoubleAnimation Storyboard.TargetName="TransformacionWartortle"
+                     Storyboard.TargetProperty="X"
+                     To="0" Duration="0:0:0.1" />
+            <DoubleAnimation Storyboard.TargetName="TransformacionWartortle"
+                     Storyboard.TargetProperty="Y"
+                     To="0" Duration="0:0:0.1" />
+
+            <!-- Restaurar opacidad completa por si estaba atenuado -->
+            <DoubleAnimation Storyboard.TargetName="WartortleCanvas"
+                     Storyboard.TargetProperty="Opacity"
+                     To="1" Duration="0:0:0.1" />
+        </Storyboard>
+
+
+
+        <Storyboard x:Name="Descansar">
+
+            <!-- Ocultar los ojos normales -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoIzq" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Collapsed"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3.0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjoDer" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Collapsed"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3.0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar la imagen de ojos dormidos -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OjosDormidos" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Visible"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3.0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar el gif Zzz -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GifDormir" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Visible"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:3.0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+
+        <Storyboard x:Name="KO">
+
+            <!-- Caída del cuerpo en eje Y -->
+            <DoubleAnimation
+                Storyboard.TargetName="TransformacionWartortle"
+                Storyboard.TargetProperty="Y"
+                To="80"
+                Duration="0:0:0.5"
+                AutoReverse="False" />
+
+            <!-- Temblor en eje X -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TransformacionWartortle"
+                                   Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Mostrar imagen KO -->
+            <DoubleAnimation
+                Storyboard.TargetName="ImagenKO"
+                Storyboard.TargetProperty="Opacity"
+                From="0" To="1"
+                BeginTime="0:0:0.3"
+                Duration="0:0:0.4" />
+
+        </Storyboard>
+
+
+        <Storyboard x:Name="Herido">
+
+            <!-- Temblor -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TransformacionWartortle"
+                                   Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Ojo morado -->
+            <ColorAnimation Storyboard.TargetName="IrisIzq"
+                    Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                    To="#7E4C9B" Duration="0:0:0.3"/>
+
+            <!-- Ocultar diente -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Diente1" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar herida visual -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeridaVisual" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar herida visual 2 -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeridaVisual2" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Cansado">
+            <!-- Mostrar sudor -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Sudor" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Ojos tristes (baja opacidad) -->
+            <DoubleAnimation Storyboard.TargetName="IrisIzq" Storyboard.TargetProperty="Opacity"
+                     To="0.5" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetName="IrisDer" Storyboard.TargetProperty="Opacity"
+                     To="0.5" Duration="0:0:0.2"/>
+
+            <!-- Bajada leve del cuerpo por fatiga -->
+            <DoubleAnimation Storyboard.TargetName="TransformacionWartortle"
+                     Storyboard.TargetProperty="Y"
+                     To="20" Duration="0:0:0.2"/>
+        </Storyboard>
+
+        <Storyboard x:Name="Defensa">
+
+            <!-- Mostrar escudo -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EscudoGigante" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Mostrar campo de fuerza -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CampoDeFuerza" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Opacidad del campo de fuerza (pulsante) -->
+            <DoubleAnimation Storyboard.TargetName="CampoDeFuerza"
+                     Storyboard.TargetProperty="Opacity"
+                     From="0.3" To="0.8"
+                     Duration="0:0:0.5"
+                     AutoReverse="True"
+                     RepeatBehavior="Forever"/>
+
+            <!-- Vibración/expansión del campo de fuerza -->
+            <DoubleAnimation Storyboard.TargetName="EscalaCampo"
+                     Storyboard.TargetProperty="ScaleX"
+                     From="1" To="1.1"
+                     Duration="0:0:0.5"
+                     AutoReverse="True"
+                     RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetName="EscalaCampo"
+                     Storyboard.TargetProperty="ScaleY"
+                     From="1" To="1.1"
+                     Duration="0:0:0.5"
+                     AutoReverse="True"
+                     RepeatBehavior="Forever"/>
+        </Storyboard>
+
+        <Storyboard x:Name="AtaqueFuerte">
+
+            <!-- Visibilidad del chorro (Mostrar y Ocultar) -->
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChorroAgua"
+                                   Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:4" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <!-- Movimiento hacia adelante del chorro (5 segundos) -->
+            <DoubleAnimation Storyboard.TargetName="ChorroAguaTransform"
+                     Storyboard.TargetProperty="X"
+                     From="-350" To="-600"
+                     Duration="0:0:4" />
+
+            <!-- Efecto de sacudida inicial del cuerpo al lanzar -->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TransformacionWartortle"
+                                   Storyboard.TargetProperty="Y">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+
+
+
+    </UserControl.Resources>
+
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="257*"/>
+            <ColumnDefinition Width="21*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <MediaElement x:Name="SonidoKO"
+              Source="Assets/ko.mp3"
+              AutoPlay="False"
+              Volume="0.2"
+              Visibility="Collapsed"/>
+
+        <MediaPlayerElement x:Name="SnorePlayer"
+                    Source="ms-appx:///Assets/Ronquido.mp3"
+                    AutoPlay="False"
+                    Visibility="Collapsed" />
+
+        <MediaElement x:Name="SonidoDebil" 
+                      Source="Assets/debil.mp3"
+                      AutoPlay="False"
+                      Volume="0.1"
+                      Visibility="Collapsed"/>
+
+        <MediaElement x:Name="SonidoHerido"
+              Source="Assets/herido.mp3"
+              AutoPlay="False"
+              Visibility="Collapsed"
+              Volume="0.1"/>
+
+        <MediaElement x:Name="SonidoEscudo"
+              AutoPlay="False"
+              Volume="0.6"
+              Visibility="Collapsed"
+              Source="Assets/escudo.mp3"/>
+
+        <MediaElement x:Name="SonidoFuerte"
+              Source="ms-appx:///Assets/fuerte.mp3"
+              Volume="0.3"
+              AutoPlay="False"/>
+
+
+
+
+        <Image x:Name="fondoPokemon" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="4" Source="/AssetsWartortleAAA/fondo.png" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Image x:Name="pocenergia"  Source="/AssetsWartortleAAA/yellow-potion.png" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1" Tapped="AumentarEnergia"/>
+        <Image x:Name="salud"  Source="/AssetsWartortleAAA/corazon.png" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Image x:Name="energiaIcono"  Source="/AssetsWartortleAAA/energia.png" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" />
+        <ProgressBar x:Name="ProgressBarVida" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Stretch" Background="#4CE60A0A" Foreground="#FFE60A0A" Value="100"/>
+        <ProgressBar x:Name="ProgressBarEner" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Stretch" Background="#4CFFF000" Foreground="#FFFFF900" Value="100" />
+        <Image x:Name="vidaPot"  Source="/AssetsWartortleAAA/red-potion.png" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Tapped="AumentarVida"/>
+      
+
+
+        <Canvas x:Name="WartortleCanvas" Grid.Column="1" Grid.Row="2" Width="500" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+
+
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform x:Name="TransformacionWartortle"  X="0" Y="0"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+
+            <!-- Canvas para la cabeza -->
+            <Canvas x:Name="Cola" Width="400" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform x:Name="RotarCola" Angle="0" CenterX="250" CenterY="250"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Path x:Name="BrilloCola" Fill="#A7C7E7" Height="203" Canvas.Left="233.333" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="92.27" Width="69" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Data="M233.25317,164.62841 L234.06144,161.18685 233.5,158.52 233.5,154.4825 233.5,150.33284 234,145.10822 234,139.30653 235,135.31262 237.625,130.07061 239.34375,124.03437 241.90039,119.50717 245.40055,114.41847 248.70627,108.56647 251.47104,105.27412 255.6182,101.96734 260.11095,98.39135 266.06341,95.8168 272.08057,93.74132 275.65284,92.703576 282.55718,91.925269 289.41077,91.925269 294.96038,92.938554 300.14378,95.218444 304.21646,97.751654 309.77011,101.55147 313.84278,105.09796 317.17497,109.65774 319.95724,114.6113 C319.95724,114.6113 321.06131,117.23871 321.41644,118.0142 321.77158,118.78968 321.96363,121.14576 321.96363,121.92124 321.96363,122.69673 322.69996,125.9286 323.05803,126.96258 323.41611,127.99656 323.60523,132.74084 323.60523,133.51632 323.60523,134.29181 323.78763,136.91923 323.78763,136.91923 323.78763,136.91923 323.37656,139.48843 323.0199,140.52241 322.66325,141.55639 322.44749,144.5289 322.44749,144.5289 L320.66423,147.63085 C320.66423,147.63085 318.6115,149.5453 318.25485,150.32079 317.8982,151.09627 314.10358,153.18868 314.10358,153.18868 314.10358,153.18868 311.60701,155.51514 310.8937,156.29063 310.1804,157.06611 312.29647,159.98336 312.29647,159.98336 312.29647,159.98336 313.94622,163.11492 314.30287,163.8904 314.65953,164.66589 315.04061,167.40004 315.39726,168.17553 315.75392,168.95101 316.67406,174.09911 316.67406,174.09911 316.67406,174.09911 316.76765,177.59501 316.76765,178.37065 316.76765,179.1463 317.39551,182.01977 317.03885,182.79542 316.6822,183.57106 316.30926,187.03275 316.30926,188.59296 316.30926,190.15317 314.10358,192.28839 314.10358,192.28839 L315.94446,193.2562 318.68045,194.7686 321.0944,198.04547 C321.0944,198.04547 324.73583,200.80224 325.09248,201.57441 325.44913,202.34657 328.00018,206.61575 328.00018,206.61575 L330.54441,211.15296 C330.54441,211.15296 331.6348,214.16198 331.6348,214.93396 331.6348,215.70594 332.36172,219.9753 332.36172,219.9753 332.36172,219.9753 332.36039,223.49478 332.36039,224.26044 332.36039,225.0261 332.7252,229.28935 332.72519,230.05798 332.72518,230.82661 332.36173,235.89236 332.36173,235.89236 332.36173,235.89236 332.36174,239.21075 332.36173,239.97654 332.36172,240.74232 331.6348,244.0607 331.6348,245.08175 331.6348,246.10279 330.18095,249.21507 330.18095,249.21507 330.18095,249.21507 328.7271,254.00929 328.36364,254.77383 328.00018,255.53838 326.18287,259.35395 326.18287,259.35395 326.18287,259.35395 324.72902,261.63706 324.36556,262.3981 324.00209,263.15914 321.45786,266.45698 321.45786,266.45698 L317.45977,273.56 314.91554,276.35048 309.4636,281.92375 306.19244,285.47989 301.10397,289.53339 297.46935,291.05345 290.92703,292.82234 285.4751,294.33663 279.6597,295.34366 272.75392,295.34366 269.84622,295.59541 267.66545,295.09129 265.48468,292.57062 260.75967,287.27722 259.30582,284.75655 261.12313,282.23588 263.3039,279.46314 263.3039,275.51406 262.72943,270.87488 264.27313,265.09529 265.00006,259.71786 266.2116,253.66826 265.48468,243.92169 265.41223,238.4666 264.20069,231.82881 263.3039,224.26044 261.52324,215.96712 260.03274,209.13642 258.57889,203.84301 256.67607,198.06032 253.1365,189.57456 249.61893,184.38718 246.25272,179.51338 242.22309,174.85531 236.4077,169.05778 233.5,166.78918 z"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="36" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" VerticalAlignment="Center" Width="25" Canvas.Left="265.344" Canvas.Top="189.425"
+
+                        Data="M338.59441,253.46847 L335.53771,251.7397 332.00658,249.58784 329.50506,249.75311 326.45562,250.36774 C326.45562,250.36774 324.11076,252.0481 323.8917,253.12851 323.67264,254.20892 321.86192,255.81537 321.86192,255.81537 L320.43564,260.46933 318.50943,266.44227 317.87448,270.95066 317.44065,279.28705 318.43159,288.3295 319.34096,290.90217 320.00201,292.99616 320.88294,294.97457 322.27898,296.60246 324.04552,297.83932 325.8386,298.23065 327.49398,297.30046 329.33024,295.09014 330.35855,291.83283 331.15219,287.8508 331.17085,284.85396 331.01961,281.71191 330.50545,278.22194 329.07214,274.9933"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="83" Stroke="#0D1B2A"  StrokeThickness="2" Stretch="Fill" VerticalAlignment="Center" Width="23" Canvas.Left="259.5" Canvas.Top="123.318"
+
+                        Data="M332,174.37333 L331.54907,171.24398 330.48797,166.57403 327.63025,163.26763 325.34885,162.08467 322.69516,162.6622 320.43542,164.57895 318.43634,168.5019 317.24519,171.60704 316.19468,176.82454 316.17962,180.96532 316.35523,186.31261 317.07275,188.97293 317.59959,192.00299 318.47766,194.60065 319.35574,196.72433 C319.35574,196.72433 320.15529,198.37366 320.55686,199.36703 320.65323,199.6054 320.72667,199.806 320.76066,199.93698 320.83799,200.23502 320.84721,200.68042 320.83332,201.08558 320.81566,201.60048 320.76066,202.05041 320.76066,202.05041 L320.39111,203.34854 320.39111,205.65662 C320.39111,205.65662 320.33015,206.33575 320.39111,207.27989 320.4287,207.86211 320.4581,208.74941 320.39111,209.09016 320.21549,209.98349 320.21685,211.8742 320.21685,211.8742 L320.08127,213.42765 319.8594,216.01176 C319.8594,216.01176 319.8594,217.37242 319.8594,218.03499 319.8594,218.20618 319.82296,219.16628 319.77079,219.5258 319.62105,220.55769 319.23908,222.6139 319.23908,222.6139 L318.70738,226.55389 C318.70738,226.55389 318.78256,227.89638 318.70738,228.25766 318.50506,229.22992 317.90982,230.77189 317.90982,231.23928 317.90982,231.88034 317.55535,233.15603 317.55535,233.15603 L316.74423,235.43162 316.74187,237.94463 C316.74187,237.94463 316.44727,239.21818 316.14365,240.54373 315.87307,241.72508 315.95437,242.44698 315.87162,242.84627 315.807,243.15802 315.53163,244.61962 315.3255,245.33722 314.97138,246.56999 314.71959,247.31868 314.71959,247.31868 L314.36512,249.55489 314.12792,251.55902 C314.12792,251.55902 313.71718,252.55238 313.64302,252.91685 313.52711,253.48656 312.52053,255.02122 312.41553,255.41163 312.35412,255.63998 312.41622,256.50583 311.54857,258.38696 309.98382,261.77948 308.60498,266.46062 308.60498,266.46062"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="41"  Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" VerticalAlignment="Center" Width="24" Canvas.Left="253.625" Canvas.Top="234.395"
+
+                        Data="M302.97229,316.43108 L306.59755,313.72188 310.62561,309.98305 312.77391,307.53843 315.34054,304.50818 317.50877,300.69117 319.53799,296.16798 321.39813,292.41511 322.40218,288.99261 323.78394,285.68067 324.75582,281.81671 325.68269,278.70013 326.61235,275.56774 327.4092,270.86916" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <CompositeTransform Rotation="-0.234"/>
+                    </Path.RenderTransform>
+                </Path>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="9" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" VerticalAlignment="Center" Width="23" Canvas.Left="252.917" Canvas.Top="274"
+
+                        Data="M304.64523,323.28051 L308.96871,323.45208 312.67845,322.84323 316.09262,320.81192 319.67296,318.53497 321.86794,315.99759 323.66981,313.8797"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="25" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" VerticalAlignment="Center" Width="16" Canvas.Left="271.083" Canvas.Top="153.353"
+
+                        Data="M322.25611,196.07827 L324.21356,196.41598 325.99275,197.0161 328.52486,197.62424 329.19528,198.03622 329.46216,199.11653 C329.46216,199.11653 329.72905,199.56968 329.72904,199.90418 329.72904,200.00435 329.4801,200.39755 329.55611,200.55205 329.73391,200.91348 330.03077,201.34972 330.03077,201.51536 330.03077,201.62796 329.86092,202.04393 329.68299,202.44879 329.48728,202.8941 329.2818,203.32598 329.2818,203.32598 329.2818,203.32598 329.33048,203.47902 329.38396,203.6856 329.47881,204.052 329.58877,204.58686 329.46904,204.73506 329.2818,204.96681 328.53284,206.9215 328.53284,206.9215 L329.64008,200.70938 330.08487,197.92327 332.93299,197.91256 334.90681,197.76046 337.03016,197.53232 338.26878,197.07603"/>
+
+
+
+
+
+
+
+            </Canvas>
+
+            <!-- Canvas para la cabeza -->
+            <Canvas x:Name="HeadCanvas" Width="400" Height="200" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" />
+                </Canvas.RenderTransform>
+
+                <Path Fill="#88A3D4" Height="138" Canvas.Left="128.426" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="72.353" Width="84" HorizontalAlignment="Center" VerticalAlignment="Center" Data= "M134.16667,189.35333 L133.75023,188.40714 132.33301,185.187 131.26368,183.27708 131.26368,180.40808 131.10207,176.59807 131.10207,174.30833 130.93181,171.80117 130.93181,169.56447 131.11188,166.26598 131.2916,162.9428 131.47131,159.42174 131.2916,155.50212 130.57274,153.03416 129.97375,151.07576 129.50788,148.41724 128.21325,145.4429 127.71762,142.65529 C127.71762,142.65529 127.98633,140.23356 127.71762,139.7147 127.44891,139.19583 127.71762,137.4744 127.71762,137.4744 L127.71762,134.36131 C127.71762,134.36131 127.71552,131.42114 127.71762,130.90235 127.71971,130.38356 127.71762,127.94535 127.71762,127.94535 L127.9934,125.16985 129.36183,121.71947 130.73027,118.77132 130.73027,116.34905 131.82501,112.69918 132.0987,109.02433 134.28819,106.06885 135.38107,101.59005 137.17371,98.433373 138.54447,95.533886 141.93383,91.381086 145.21021,88.006936 148.48658,84.632787 151.64998,82.037287 153.98326,79.647636 156.40259,77.751411 159.21955,75.635054 165.32039,72.909779 169.70022,71.464318 174.88894,69.740794 180.48835,68.709992 183.69129,68.366622 188.83173,68.194277 192.97187,68.712394 196.62996,69.230168 199.78664,69.920533 203.43003,70.783489 206.10848,71.819036 210.22939,74.856404 214.14976,77.070204 216.70833,79.370425 218.49065,81.035307 220.05521,83.10046 221.92267,84.28672 222.8334,85.421984 221.7532,88.482778 220.91755,90.711328 220.39746,93.024903 220.22799,96.139502 C220.22799,96.139502 219.94888,97.482721 219.71959,98.345677 219.4903,99.208633 219.44048,100.07822 219.21118,100.94118 218.98189,101.80413 218.36384,103.49518 218.36384,104.18555 218.36384,104.87591 218.02491,106.39305 218.02491,106.91083 218.02491,107.4286 217.85544,109.37655 217.85544,109.37655 L217.85544,111.7125 C217.85544,111.7125 217.85544,112.92727 217.85544,114.308 217.85544,115.68873 217.85544,117.16305 217.85544,117.16305 L218.36384,119.88833 C218.36384,119.88833 219.04172,122.09583 219.04172,122.6136 219.04172,123.13137 219.30525,125.13987 219.30525,125.13987 219.30525,125.13987 219.65977,126.98447 219.88906,127.67483 220.11835,128.3652 221.41427,130.01078 221.41427,130.01078 L222.43107,132.08717 224.12575,133.64447 225.7028,135.50521 227.16618,137.05853 C227.16618,137.05853 228.63106,138.43926 229.31303,138.78444 229.99501,139.12962 229.86546,139.47481 230.54356,139.81999 231.22166,140.16517 233.8044,140.85554 233.8044,140.85554 L237.53614,141.20072 240.12488,141.20072 240.12488,142.75404 240.12488,144.82514 240.12488,147.5866 240.12488,149.13992 C240.12488,149.13992 239.54733,150.86583 239.54733,151.3836 239.54733,151.90138 239.09542,153.62729 239.09542,153.62729 L238.86946,155.69838 238.19159,157.59689 237.96563,160.35835 236.60989,162.77463 235.70606,165.1909 235.02819,167.60718 233.22053,170.54123 231.86479,172.95751 230.735,175.0286 230.05713,176.58193 229.1533,177.96266 227.5716,180.37893 226.21586,182.27744 224.63416,184.17594 222.8265,186.24704 221.69671,188.31813 219.88906,190.21663 218.0814,191.94045 215.36991,194.00324 213.78821,195.55041 210.85077,198.1393 208.36524,200.21876 204.29801,202.99128 201.58652,204.37415 199.32695,206.10706 195.03377,206.79869 191.41845,207.8334 186.89931,208.35092 181.70229,209.38947 175.38636,210.00047 169.21111,210.08707 164.75121,207.7834 158.20274,205.75611 156.39509,205.06398 154.13551,204.02578 150.97211,202.29545 147.80871,199.52691 144.87127,197.96961 141.70787,195.89321 136.51085,192.95165 133.1215,188.27975"/>
+
+
+                <Canvas x:Name="OjoIzq" Width="400" Height="200" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+
+                    <Path x:Name="GloboIzq" Fill="White" Height="41" Canvas.Left="133.926" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="134.582" Width="9" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M145.21195,173.42701 L138.65013,172.10484 137.40283,171.32774 136.11109,170.39456 135.46522,169.85798 134.64321,168.5282 134.16226,167.44427 133.30569,165.69411 132.09424,163.54986 131.62981,161.46986 131.39814,159.2682 130.76617,156.99754 130.04189,154.99875 130.18085,152.73133 130.4427,150.28978 131.07031,148.40514 131.57858,146.60442 133.10337,145.32495 131.83271,143.56528 C131.83271,143.56528 136.14524,146.42686 136.4071,146.71189 136.66895,146.99692 138.69429,148.37096 138.69429,148.37096 L140.21909,149.28084 141.19327,150.16637 140.98149,151.29215 140.72736,152.2978 C140.72736,152.2978 140.39328,153.78766 140.39328,154.1677 140.39328,154.54774 140.21909,156.37137 140.21909,156.75141 140.21909,157.13145 140.39328,159.39325 140.39328,159.8683 140.39328,160.34335 140.65514,161.00842 140.39328,161.48347 140.13143,161.95852 140.65514,163.76371 140.917,164.04874 141.17886,164.33377 141.22789,165.70959 141.48975,166.08963 141.75161,166.46967 141.99802,167.76572 141.99802,167.76572 L143.06672,169.45334 C143.06672,169.45334 143.85822,170.88946 143.85822,171.17449 143.85822,171.45952 144.73265,172.17127 144.73265,172.17127 144.73265,172.17127 144.801,172.93083 144.801,172.93083"/>
+                    <Path x:Name="IrisIzq" Fill="#A6400B" Height="33" Canvas.Left="138.583" Stroke="#0B1B2A" Stretch="Fill"  StrokeThickness="1" Canvas.Top="143.353" Width="8" HorizontalAlignment="Center" VerticalAlignment="Center"
+                  
+                            Data= "M140.03237,143.51527 C140.03237,143.51527 140.75028,145.04462 140.83361,145.29462 140.91694,145.54462 141.64481,147.04621 141.64481,147.04621 L142.16191,148.55861 142.79727,149.40458 143.01248,150.62656 142.74263,152.39597 142.39187,152.08993 141.25487,151.84853 140.67199,151.96168 140.24357,152.72948 139.79976,153.18488 139.63494,154.08251 C139.63494,154.08251 139.63495,155.3504 139.63494,155.60404 139.63493,155.85769 139.75216,157.72504 139.75216,157.72504 L140.04524,158.78533 140.80722,159.84559 141.39337,160.11039 C141.39337,160.11039 141.45198,161.18829 141.45198,161.45785 141.45198,161.72741 141.62783,163.37387 141.68644,163.83015 141.74506,164.28643 142.03813,167.51377 142.03813,167.51377 142.03813,167.51377 142.37191,168.82323 142.37191,169.19747 142.37191,169.57171 143.13217,170.93607 143.13217,170.93607 143.13217,170.93607 143.64219,171.83569 143.86076,172.01568 144.07934,172.19568 145.12851,172.46531 145.12851,172.46531 145.12851,172.46531 144.93231,173.19646 144.93231,173.65365 144.93231,174.11084 144.47451,175.57937 144.47451,175.85453 144.47451,176.12969 143.95131,177.78025 143.95131,177.78025 L142.83952,178.05281 141.72772,177.50218 141.33533,176.21824 141.00833,174.75088 140.68133,172.64155 140.35433,170.3488 139.96193,168.42289 139.63493,165.94671 139.24254,162.37002 139.1024,158.88504 139.1024,157.05084 139.24617,154.48295 139.46139,151.45652 139.46139,149.34719 139.53312,147.14615 139.82008,145.31195 139.89182,143.29432"/>
+                    <Path x:Name="PupilaIzq" Fill="#0B111A" Height="22" Canvas.Left="141.375" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="148.708" Width="6" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Data="M143.625,149.77 C143.625,149.77 144.125,151.145 144.5,151.52 144.875,151.895 145.70313,152.8325 145.70313,153.16063 145.70313,153.48875 146.68433,153.63751 146.4135,153.84862 145.94869,154.21093 147.34565,154.87086 147.34565,154.87086 L146.8396,156.03504 146.98572,158.60817 146.98572,160.26533 C146.98572,160.26533 147.13184,161.79589 147.13184,162.12387 147.13184,162.45184 146.8396,164.21962 146.8396,164.55052 146.8396,164.88143 146.8396,165.96337 146.8396,165.96337 L146.40125,166.60258 145.52454,166.18176 144.20947,165.65574 142.74829,164.18289 142.06336,162.60484 141.80993,160.60597 141.27775,158.18629 141.13836,157.28454 141.13139,157.23946 142.84032,156.7303 143.87603,155.6041 144.41194,154.01571 143.51187,152.22725 142.93153,151.24285 142.76263,148.86492"/>
+                    <Ellipse x:Name="ReflejoIzq" Fill="White" Height="7" Canvas.Left="139.917" Stroke="#0B1B2A" Canvas.Top="151.853" StrokeThickness="0.05" Width="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Path Fill="Transparent" Height="6" Canvas.Left="147.926" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="148.708" Width="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                            Data ="M148.08503,148.34188 L148.08787,150.33799 148.21839,152.61687 148.63913,155.94322"/>
+                    <Path Fill="Transparent" Height="6" Canvas.Left="147.926" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="148.708" Width="2"
+
+                        Data ="M148.08503,148.34188 L148.08787,150.33799 148.21839,152.61687 148.63913,155.94322" UseLayoutRounding="False"/>
+
+
+                </Canvas>
+                <Canvas x:Name="OjoDer" Width="400" Height="200" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+
+                    <Path x:Name="IrisDer" Fill="#A6400B" Height="43" Canvas.Left="175.227" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="131.686" Width="14" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                            Data="M174.87204,146.5902 L176.80612,144.42952 180.47778,141.18275 184.71875,137.47 187.625,134.93172 189.68882,133.35689 190.71289,132.57546 193.8461,130.38081 C193.8461,130.38081 192.02912,134.25959 192.20728,134.69098 192.38545,135.12238 193.30533,136.8753 193.4835,137.59429 193.66166,138.31328 194.20111,139.96564 194.20111,140.39704 194.20111,140.82844 195.3436,144.04749 195.3436,144.62269 195.3436,145.19788 195.92161,147.18527 195.92161,147.61666 195.92161,148.04806 196.40049,151.96903 196.40049,152.40813 196.40049,152.84723 196.38833,154.40157 196.38833,154.97163 196.38833,155.54169 195.82313,158.9593 195.82313,158.9593 L194.92055,162.47225 C194.92055,162.47225 193.48458,165.0883 193.48458,165.50951 193.48458,165.93071 192.4916,168.63461 192.4916,169.06108 192.4916,169.48755 191.33248,171.7768 191.33248,171.7768 191.33248,171.7768 189.61875,174.28753 189.26243,174.72008 188.9061,175.15262 187.33039,176.9038 187.33039,176.9038 L184.3737,178.04313 181.87941,178.04313 180.81042,176.03778 C180.81042,176.03778 179.02879,172.1703 178.67246,171.74058 178.31613,171.31086 177.42531,168.73255 177.42531,168.73255 L177.06898,166.15423 176.53449,162.85971 176,159.5652 176,156.55716 176.35633,152.54645 175.82184,147.81953 175.27802,145.67093"/>
+                    <Ellipse x:Name="PupilaDer" Height="22" Canvas.Left="179.375" Stroke="#0B1B2A" Fill="#0B111A" Canvas.Top="143.895" Width="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Ellipse x:Name="ReflejoDer" Height="12" Canvas.Left="179.385" Stroke="#0B1B2A"  Fill="White" Canvas.Top="141.645" Width="7" StrokeThickness="0.5" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-1.102"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.106"/>
+                            </TransformGroup>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                    <Path x:Name="GloboDer" Fill="#FFF4F4F5" Height="32" Canvas.Left="169.25" Stroke="#0B1B2A" StrokeThickness="1" Stretch="Fill" Canvas.Top="144.207" Width="13" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                            Data ="M176.89156,145.07769 L173.57555,146.22125 172.16574,146.67701 170.33986,147.25127 167.94437,148.01953 166.38597,148.846 165.59363,149.04809 164.93542,149.2733 164.64368,149.28986 C164.64368,149.28986 166.29975,148.90144 166.29975,149.08242 166.29975,149.2634 166.15106,150.33413 166.15106,150.33413 L166.25847,151.602 C166.25847,151.602 166.25847,153.48181 166.25847,153.67627 166.25847,153.87073 168.33226,156.20152 168.33226,156.20152 L169.41459,157.7475 170.71338,158.5849 173.31096,159.47319 175.25914,159.7875 177.42379,160.03559 179.73049,159.97463 183.3555,159.85453 184.39039,159.64378 183.59146,159.52145 182.26181,159.42318 180.97295,159.0559 179.25447,157.89284 178.39523,156.66857 177.16985,155.51227 176.42655,154.09488 176.108,152.73782 176.03232,151.66399 175.68326,150.59667 175.77241,149.42018 176.24713,148.36956 176.13973,147.22105 176.46194,146.38471 176.13973,145.2867"/>
+                    <Path  Fill="Transparent" Height="8" Canvas.Left="164.938" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="148.207" Width="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+               
+                            Data ="M165.05151,148.20729 L165.16634,150.35299 165.41634,153.60214 165.6665,155.22643"/>
+                </Canvas>
+                <Canvas x:Name="Boca" Width="400" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="BocaScale" ScaleY="1"/>
+                            <TranslateTransform x:Name="BocaTranslate" X="0" Y="0"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+
+                    <Path x:Name="Nariz1" Fill="Transparent" Height="5" Canvas.Left="148.361" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="185.595" Width="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+ 
+                               Data="M148.59034,185.61622 L149.74449,188.53327 150.31663,189.6552"/>
+                    <Path x:Name="Nariz2" Fill="Transparent" Height="5" Canvas.Left="156.817" Stroke="#0B1B2A" Stretch="Fill" Canvas.Top="186.463" Width="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                               Data="M158.24172,186.15049 L157.47868,188.95234 156.91648,191.43825"/>
+                    <Path x:Name="Boca1" Fill="Transparent" Height="18" Canvas.Left="137.041" Stroke="Black" Stretch="Fill" Canvas.Top="180.633" Width="56" HorizontalAlignment="Left" VerticalAlignment="Center"
+
+                                Data="M135.39444,184.6096 L136.61321,186.32018 138.45556,187.9298 C138.45556,187.9298 139.73822,188.4996 140.48082,188.95544 141.25598,189.43126 143.1479,190.36934 143.1479,190.36934 L144.91762,191.23462 C144.91762,191.23462 146.47116,191.94263 146.86049,192.16653 147.24982,192.39043 148.2718,192.81723 148.65671,193.25103 149.04161,193.68484 150.85476,195.67747 151.0232,195.99255 151.53966,196.95866 153.94781,197.79229 153.94781,197.79229 L155.93506,196.80853 157.60148,195.17124 160.10925,193.99652 163.15739,193.46683 165.48444,193.38912 167.97861,193.32084 170.206,192.60916 C170.206,192.60916 172.1528,192.20209 172.54748,192.08932 172.94216,191.97655 175.45036,191.74744 175.45036,191.74744 175.45036,191.74744 178.83476,191.17764 179.23085,191.17764 179.62694,191.17764 183.62281,189.98107 184.02397,189.98107 184.42514,189.98107 188.00699,189.24033 188.00699,189.24033 L190.50481,187.53095 C190.50481,187.53095 191.98801,186.27381 192.26004,185.93551 192.53208,185.5972 193.46679,184.19218 193.46679,184.19218 L194.68541,181.99318"/>
+                    <Path x:Name="Diente1" Fill="#FFF4F4F5" Height="10" Canvas.Left="178" Stroke="Black" Stretch="Fill" Canvas.Top="188.895" Width="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                                Data="M178.875,192.02 L180.125,194.77 182.3125,196.25959 184.17448,196.0476 184.96941,194.77573 185.31805,193.00955 185.90252,191.07211 185.87636,189.4687 183.58501,189.65732 C183.58501,189.65732 182.05744,190.22323 181.67555,190.22323 181.29365,190.22323 179.76608,190.69482 179.76608,190.69482 L178.6204,191.07209 177.96119,191.16641 z"/>
+                    <Path x:Name="Diente2" Fill="#FFF4F4" Height="10" Canvas.Left="138.903" Stroke="Black" Stretch="Fill" Canvas.Top="186.535" Width="8" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                            Data="M140.18324,187.23124 L140.75,191.27 141.375,193.56167 142.02464,194.44655 142.83844,193.25366 143.41072,192.21798 144.25244,190.61288 143.65903,189.93514 142.67437,189.30296 141.4375,187.93847 139.23879,186.58709"/>
+
+
+                </Canvas>
+
+
+            </Canvas>
+            <Canvas x:Name="Caparazon" Width="400" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top"  Canvas.Left="-0.625" Canvas.Top="1.75" >
+                <Canvas.RenderTransform>
+                    <TranslateTransform />
+                </Canvas.RenderTransform>
+
+                <Path Fill="#FFF9AA" Height="150" Canvas.Left="147" Stroke="#0D1B2A" StrokeThickness="2"   Stretch="Fill" Canvas.Top="172.895" Width="91" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M217.8226,322.50849 L210.58668,324.27244 204.93759,325.89017 199.28642,324.84738 191.01634,323.37767 184.60085,320.5158 180.92894,318.36605 176.12721,315.67887 171.04302,310.84194 166.52375,305.73629 161.21891,301.15349 160.36231,297.86781 157.61868,293.42841 152.61631,286.66679 151.24978,283.54453 148.9805,279.2256 147.82226,273.02064 145.50579,267.50512 144.34756,262.99525 143.96854,257.44632 142.43278,251.48286 140.88141,245.1665 140.25546,240.16899 139.7189,233.27195 138.56073,224.50841 138.56073,218.87928 140.10496,208.99573 141.26313,204.0384 141.84546,198.15299 144.73764,199.09516 C144.73764,199.09516 147.44004,200.16003 148.59821,200.87017 149.75638,201.58032 150.91455,201.22525 152.07272,201.93539 153.23089,202.64553 155.24911,201.98556 156.79334,201.98556 158.33756,201.98556 163.24137,200.72307 163.24137,200.72307 163.24137,200.72307 168.26011,200.72307 169.41828,200.72307 170.57645,200.72307 174.12146,200.00164 174.12146,200.00164 L178.69152,199.21259 181.07875,197.05688 183.89471,195.15866 185.26097,193.46374 187.29248,191.42822 190.57135,188.04745 193.92503,184.40084 197.24138,181.26593 199.14215,177.17793 202.14428,171.54103 204.10408,168.13083 204.93759,165.73399 207.19723,169.22247 210.11064,171.68574 211.53878,174.39108 213.69369,177.00618 216.80069,178.6166 220.07025,177.88186 222.61636,179.1344 225.83924,179.69021 226.84968,181.95305 227.99645,184.45815 C227.99645,184.45815 230.25871,184.78988 230.64097,185.86349 231.02323,186.93711 232.89227,189.00433 232.89227,190.07795 232.89227,191.15156 233.27761,194.3724 233.66294,195.44602 234.04827,196.51963 234.87779,198.74686 234.87779,198.74686 L235.16025,203.57813 236.57252,208.1915 C236.57252,208.1915 236.19166,212.49225 236.57252,213.56587 236.95338,214.63948 235.87797,219.48488 235.87797,219.48488 L236.0409,227.91901 235.16025,231.03257 234.17644,234.2656 234.17644,237.12857 C234.17644,237.12857 233.79701,239.2758 233.79701,240.34941 233.79701,241.42303 233.41758,242.49664 233.79701,243.57025 234.17644,244.64387 233.93345,245.90375 234.31288,247.69311 234.69231,249.48247 234.4014,251.0094 235.16025,252.79876 235.91911,254.58811 236.85497,256.56208 236.85497,257.63569 236.85497,258.70931 237.60537,262.20517 237.98479,263.27878 238.36422,264.3524 240.24443,268.26338 240.24443,268.26338 L239.72638,268.3607 236.00761,269.34855 233.913,270.97175 C233.913,270.97175 232.04382,271.65882 231.29061,272.73244 230.5374,273.80605 229.1294,275.55151 229.1294,275.55151 229.1294,275.55151 227.8069,277.87888 226.67708,278.9525 225.54726,280.02611 225.10613,281.38731 224.39206,282.60471 223.84887,283.53079 221.8214,285.58912 221.8214,286.66273 221.8214,287.73634 219.74216,291.72394 219.36555,292.79756 218.98894,293.87117 218.77046,294.92254 218.39386,295.99615 218.01725,297.06977 218.14737,297.18267 217.39416,298.97203 216.64095,300.76139 216.60335,300.51168 216.60335,302.30104 216.60335,304.0904 216.59416,306.93125 216.59416,308.36273 216.59416,309.79422 216.28161,311.80881 216.28161,312.88242 216.28161,313.95604 216.68009,316.96254 216.68009,316.96254 z"/>
+                <Path Fill="#0B111A" Height="15" Canvas.Left="159.058" Stroke="#0D1B2A" Stretch="Fill" StrokeThickness="2"  Canvas.Top="203.952" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+   
+                       Data ="M159.39598,204.5871 L162.37172,209.97426 163.67953,212.0894 165.16996,214.2213 166.53698,216.21525 167.91935,218.70444 168.30341,218.70537 170.13599,217.20793 172.03688,214.83778 174.22016,210.45814 175.86369,206.94981 177.6068,204.17721 C177.6068,204.17721 178.37074,202.32046 177.3193,203.09217 176.26785,203.86388 175.63747,203.09469 174.84888,203.49348 174.0603,203.89226 171.23345,205.31656 171.23345,205.31656 171.23345,205.31656 169.07612,204.92411 168.28754,205.72168 167.49895,206.51925 164.93991,205.72168 164.93991,205.72168 L161.32448,204.5063 z"/>
+                <Path Fill="#FFF4F4F5" Height="134" Canvas.Left="206.25" Stroke="#0D1B2A" StrokeThickness="2"  Stretch="Fill" Canvas.Top="147.27" Width="49" HorizontalAlignment="Center" VerticalAlignment="Center"
+ 
+                       Data="M206.62664,173.36819 C206.62664,173.36819 208.43581,174.64163 208.79278,175.50995 209.04035,176.1122 209.25,176.71285 209.25,177.02 209.25,177.77 211.75,179.72834 211.75,179.72834 L214.25,185.09083 216.75,188.86445 218.9375,186.97764 221.36806,186.03423 223.79861,185.71977 227.44445,186.3487 C227.44445,186.3487 228.05208,186.66317 228.65972,187.92104 229.26736,189.17891 231.09027,191.69465 231.09027,191.69465 L232.60937,194.89547 234.14746,197.38081 236.01514,203.28352 237.23319,207.28015 239.06026,215.03713 C239.06026,215.03713 238.74966,218.16342 239.06026,219.10131 239.37086,220.0392 240.92387,222.24931 240.92387,223.19371 240.92387,224.13811 240.31417,229.21326 240.31417,229.21326 L240.00932,232.36344 239.70447,236.41512 239.70447,241.73997 238.78992,246.77477 238.48507,251.18022 C238.48507,251.18022 237.57052,253.71826 237.57052,255.93905 237.57052,258.15983 236.65596,260.36353 236.65596,260.36353 L236.35111,264.12846 237.26567,268.83462 C237.26567,268.83462 237.57052,272.89989 237.87537,273.83803 238.18022,274.77616 239.39962,278.5287 239.39962,280.09226 239.39962,281.65583 240.61902,283.8448 240.61902,284.78294 240.61902,285.72108 241.88814,290.3163 241.88814,290.3163 241.88814,290.3163 244.33619,293.37782 244.95134,294.9328 245.56648,296.48778 248.90715,297.55686 248.90715,297.55686 248.90715,297.55686 250.76657,298.49463 251.38637,299.43241 252.00618,300.37019 255.1052,300.67659 255.1052,300.67659 L258.51412,304.72017 260.67022,307.21444 261.89512,307.83802 263.42622,306.2718 264.6579,300.32018 263.33051,297.45089 261.69681,294.51312 259.45047,292.20487 258.4294,289.89662 255.97884,286.11948 253.57266,281.5256 252.34096,275.57398 249.79814,267.24335 247.92112,256.14325 245.25873,240.17752 245.25873,237.67158 244.64288,232.65969 244.64288,227.33456 243.71911,221.69618 243.41119,213.23862 243.10326,209.47971 242.48742,203.52809 241.87157,198.5162 240.33195,192.87783 237.56064,186.92621 234.48141,182.22757 229.86256,177.21568 226.78332,173.14352 223.08824,168.10822 221.2407,164.96115 C221.2407,164.96115 217.85355,158.63917 216.92978,158.00697 216.00601,157.37477 216.00601,152.02632 216.00601,152.02632 216.00601,152.02632 216.00601,146.05773 215.69808,145.11532 215.39016,144.17291 213.54262,140.38502 213.54262,140.38502 L212.003,141.64405 211.07923,145.73595 C211.07923,145.73595 210.15546,148.88356 210.15546,149.82785 210.15546,150.77213 210.15546,157.38212 210.15546,157.38212 210.15546,157.38212 208.92377,161.78878 208.30792,163.36258 207.69208,164.93639 206.76831,169.65781 206.76831,169.65781 L205.84454,171.86114 206.7635,173.74971"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="93" Stroke="#0D1B2A"  StrokeThickness="2"  Stretch="Fill" VerticalAlignment="Top" Width="45" Canvas.Left="170.125" Canvas.Top="216.103"
+
+                        Data="M220.09715,259.52683 C220.09715,259.52683 220.37818,264.198 220.37818,264.948 220.37818,265.698 219.98832,267.97512 220.23832,268.67262 220.48832,269.37012 220.3795,273.67444 220.3795,274.37593 220.3795,275.07741 221.4337,279.02567 221.71148,280.22089 221.98926,281.41612 222.04505,286.59733 222.04505,286.59733 222.04505,286.59733 223.18912,290.88944 223.18912,291.60228 223.18912,292.31512 225.31187,300.08432 225.31187,300.08432 L226.27979,303.1253 226.98222,306.61713 C226.98222,306.61713 228.38707,309.41054 228.38707,310.10896 228.38707,310.80738 229.76158,313.75607 229.76158,314.45166 229.76158,315.14726 230.85479,318.39838 231.12809,319.31836 231.40139,320.23834 234.20341,324.59103 234.4843,325.28424 234.7652,325.97745 236.68463,329.69808 236.95967,330.38918 237.23472,331.08028 240.91533,336.25789 240.91533,336.25789 L242.63772,338.23141 240.79785,339.39054 237.27594,341.41618 233.63655,343.52979 231.03985,343.81288 236.85699,342.03244 243.44278,338.47934 245.9495,339.31326 248.9853,340.47239 251.92911,341.47697 255.14889,342.40427 258.19503,343.27855 262.15183,344.13453 267.39689,344.75706 C267.39689,344.75706 269.60534,344.91269 269.60534,344.91269"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="12" Stroke="#0D1B2A" Stretch="Fill" StrokeThickness="2"  VerticalAlignment="Center" Width="26" Canvas.Left="151.875" Canvas.Top="256.27"
+       
+                        Data="M199.41448,296.08613 C199.41448,296.08613 204.5,302.07999 204.75,302.32999 205,302.57999 207.25,305.18019 207.25,305.18019 L209.33333,307.27144 212.24106,309.56713 216.36161,312.14056 219.89389,313.51279 223.23527,314.1704 227.19783,315.14635 229.94684,316.1439 230.99632,315.78758"/>
+                <Path Fill="#A6400B" Height="121" Canvas.Left="215"  Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="151.395" Width="42" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M216.00057,150.30267 L219.9663,152.63856 221.57737,154.81257 C221.57737,154.81257 226.67173,159.62038 225.81313,158.52418 225.11943,157.63851 229.86081,164.37059 229.86081,164.37059 L234.76709,171.78114 238.69212,179.81142 242.29005,187.8417 C242.29005,187.8417 244.1477,193.50167 244.1477,194.60844 244.1477,195.71521 245.46275,200.93619 245.71462,202.03308 245.96649,203.12996 246.71339,208.24878 247.21278,210.07693 247.71217,211.90507 249.42379,218.01766 249.42379,219.10048 249.42379,220.18331 250.66144,228.17416 250.66144,228.17416 250.66144,228.17416 251.90818,234.37451 252.15753,236.19814 252.40688,238.02177 253.24741,243.56698 253.41095,246.48708 253.55869,249.12493 254.39221,257.92415 254.39221,257.92415 254.39221,257.92415 254.93105,269.7301 255.1806,270.83099 255.43015,271.93187 254.93425,277.04986 254.93425,280.3422 254.93425,283.63454 255.25081,300.34642 255.25081,300.34642 L255.00401,308.32829 C255.00401,308.32829 254.01681,313.38392 254.01681,314.46727 254.01681,315.55063 253.52321,323.87749 253.52321,323.87749 L253.27641,325.69486 250.80841,325.33061 247.60001,319.50265 245.62561,313.31044 243.15761,305.66124 241.67681,298.37629 240.19601,289.99859 239.45561,278.34267 238.2216,267.41524 237.9748,257.58056 236.494,246.28889 236.494,236.08995 C236.494,236.08995 235.5068,225.89102 235.5068,224.79828 235.5068,223.70554 234.7664,213.14236 234.5196,212.04961 234.2728,210.95687 232.0516,200.02944 232.0516,200.02944 L228.8432,194.20148 225.8816,189.46627 222.92,184.73105 219.7116,176.35335 217.2436,171.25389 215.516,165.79017 215.01932,160.69071 215.01932,155.95549 215.01932,151.94877 216.4912,151.94877"/>
+                <Path Fill="Transparent" HorizontalAlignment="Left" Height="39" Stroke="#0D1B2A" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Center" Width="8" Canvas.Left="236.375" Canvas.Top="177.437"
+
+                        Data="M283.65147,257.68044 L288.90877,252.65034 291.22048,249.58453 292.90996,246.04027 C292.90996,246.04027 293.79109,243.26939 294.34807,241.87299 294.48163,241.53815 294.93359,238.59455 294.93359,238.59455 294.93359,238.59455 295.93327,235.51311 295.93327,235.14994 295.93327,234.78677 296.50452,231.48183 296.50452,231.11287 296.50452,230.74391 296.50452,227.53832 296.50452,227.53832 L296.50452,220.63084"/>
+                <Path Fill="Transparent" HorizontalAlignment="Center" Height="31" Stroke="#0D1B2A" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Center" Width="12" Canvas.Left="244.25" Canvas.Top="227.603"
+
+                        Data ="M294.75,299.79 L295.625,297.45501 297.04688,294.43704 297.7168,291.40191 298.4585,288.69151 299.2002,285.57891 299.84918,281.81298 300.30447,279.10645 300.65163,275.45235 300.99718,273.16964 301.53427,270.28681"/>
+
+
+
+
+            </Canvas>
+
+            <Canvas x:Name="BrazoDer" Width="400" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <Canvas.RenderTransform>
+                    <RotateTransform Angle="0" />
+                </Canvas.RenderTransform>
+
+                <Path Fill="#88A3D4" Height="96" Canvas.Left="180.125" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="184.52" Width="55" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+            Data="M229.09803,188.39324 L233.32707,195.79126 235.70276,200.63972 237.13016,206.63811 C237.13016,206.63811 238.55756,209.88356 238.55756,211.13691 238.55756,212.39026 239.15279,218.6349 239.15279,218.6349 239.15279,218.6349 239.03451,221.3053 239.03451,222.53386 239.03451,223.76241 238.56282,228.83218 238.56282,228.83218 L237.97329,233.03105 238.09402,238.72953 236.91769,242.92841 235.72532,247.90182 C235.72532,247.90182 234.19605,249.72235 233.6863,250.93629 233.17655,252.15024 232.51575,253.72418 232.00599,254.9252 231.49624,256.12623 230.40316,260.02383 230.40316,260.02383 230.40316,260.02383 227.56356,264.51401 227.09429,265.72231 226.62503,266.93061 224.84051,268.71636 223.93677,269.92118 223.03304,271.12601 221.78562,273.82014 221.78562,273.82014 L219.64452,276.81934 C219.64452,276.81934 217.70634,279.21805 216.39705,280.02378 215.08775,280.82951 212.46916,283.45587 212.46916,283.45587 L207.86847,287.91637 202.51572,290.61565 195.73557,293.31493 C195.73557,293.31493 191.10873,294.38372 189.74848,294.78732 188.38824,295.19091 182.88011,296.61404 182.88011,296.61404 L176.9274,295.60455 172.31368,292.77909 169.52512,290.35727 166.73656,285.91727 164.87752,282.68817 162.53807,275.82635 162.07321,272.19361 162.01326,267.67179 163.97746,264.97251 166.12023,261.67339 170.40575,256.87467 173.76727,252.01177 176.57395,246.7645 179.84842,241.51722 182.18732,236.26994 184.52623,230.21539 186.86513,224.96811 189.20404,219.72083 192.94628,214.06992 195.28519,207.61173 197.15631,201.55717 199.02744,196.71353 201.36634,192.67717 204.64081,189.45472 207.91527,186.24356 212.1253,183.8442 217.27089,182.64453 221.48092,182.64453 224.75539,184.2441 227.09429,186.64346 228.92261,188.34301 C228.92261,188.34301 230.70686,189.54269 230.70686,190.74237"/>
+
+                <Path Fill="#FFF4F4F5" Height="10" Canvas.Left="176.833" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="255.258" Width="5" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+            Data="M179.76612,256.42156 L178.74652,255.86996 178.00564,256.93664 177.58438,258.41634 177.05664,260.09408 176.59417,261.62187 176.59417,264.23606 176.77448,265.6054 178.21411,264.00784 179.29383,262.80966 C179.29383,262.80966 179.51056,260.8505 179.56541,260.37395 179.69982,259.20617 179.59324,254.80972 179.59324,255.10804"/>
+                <Path Fill="#FFF4F4F5" Height="9" Canvas.Left="175.667" Stroke="#0D1B2A"  StrokeThickness="2" Stretch="Fill" Canvas.Top="262.02" Width="8" HorizontalAlignment="Center" VerticalAlignment="Center"
+      
+        Data="M180.07638,263.28269 L179.53186,262.02 179,262.02 178.33333,263.01999 177.63916,264.01999 177.24569,264.85332 176.63361,265.95519 176.07282,267.92281 176.07282,268.90663 176.59618,269.39852 177.51252,270.10125 178.55977,269.76454 179.99974,269.76454 180.91608,269.9329 181.45395,269.9329 181.19745,269.0911 181.0373,268.08094 180.55684,266.69197 179.7881,262.90388"/>
+                <Path Fill="#FFF4F4F5" Height="8" Canvas.Left="179.625" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="270.02" Width="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+    
+            Data="M179.92946,270.68205 C179.92946,270.68205 180.42676,272.00375 180.67676,272.75375 180.92676,273.50375 181.125,274.11374 181.375,274.76999 181.625,275.42624 182.37518,276.24976 182.37518,276.24976 L183.66719,277.28561 184.2774,277.03496 183.93012,275.63078 182.92327,273.37492 182.38956,271.77129 182.01199,270.51804 181.25685,270.03464 180.12414,270.03464"/>
+
+            </Canvas>
+
+            <!-- Canvas para los orejas -->
+            <Canvas x:Name="OrejaIzq" Width="400" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                <Canvas.RenderTransform>
+                    <TranslateTransform x:Name="MoverOrejaIzq"/>
+                </Canvas.RenderTransform>
+
+                <Path Fill="#A7C7E7" Height="113" Canvas.Left="118.5"   StrokeThickness="2" Stroke="#0D1B2A" Stretch="Fill" Canvas.Top="28.02" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+  
+                        Data="M126.20526,146.2551 L125.05244,142.90301 123.64343,137.47637 122.74679,134.48787 121.97825,131.87293 121.59397,129.44478 120.95352,127.39018 120.44115,125.52237 120.05688,123.46777 119.73846,121.52579 119.216,119.15065 119.28833,116.74365 119.29493,114.31049 119.29493,112.21372 119.16024,110.11696 119.8007,108.33849 120.82543,107.40458 121.85016,108.33849 122.87489,109.64595 124.1558,110.01952 125.30862,111.14021 125.43671,111.14021 123.89962,107.77814 123.51534,106.28389 123.13107,104.60286 123.00298,102.73505 122.37925,100.07441 121.96987,96.621423 121.33779,93.395979 120.95352,89.47357 120.82543,85.737944 120.79777,82.717811 120.56924,79.200597 120.52485,76.457737 120.11547,73.923835 120.52485,71.012892 120.66131,68.478418 120.79777,65.749932 121.0707,63.40244 121.48008,60.68667 121.753,57.405482 122.84469,56.129238 123.25407,55.215918 123.11761,51.752355 122.84355,49.007647 122.84469,46.444147 122.70823,42.385602 122.98115,39.812789 123.11761,37.41463 123.39053,34.827758 123.39053,32.973138 123.39053,30.386099 123.66346,27.604569 124.2093,25.927234 124.2093,23.701761 125.02807,21.847133 126.52914,20.738039 127.75729,21.107736 128.71252,22.956224 C128.71252,22.956224 129.6412,24.250165 129.6412,24.804711 129.6412,25.359257 130.31306,26.2835 130.31306,26.2835 L131.10969,28.501685 C131.10969,28.501685 131.64078,29.980475 131.64078,30.535021 131.64078,31.089567 132.29622,34.231995 132.29622,34.231995 L132.81136,36.45018 C132.81136,36.45018 132.81136,37.928969 132.93775,38.483515 133.06415,39.038061 133.44804,40.516851 133.44804,40.516851 L133.57338,42.735036 C133.57338,42.735036 133.95267,44.583523 134.0791,45.507766 134.20553,46.43201 134.5764,48.650195 134.5764,49.389589 134.5764,50.128984 134.91545,52.685378 134.91546,53.424773 134.91546,54.164167 135.42783,56.421004 135.42783,57.160399 135.42783,57.899794 135.69115,61.774453 135.69115,61.774453 L135.94162,64.362335 136.57728,67.135066 C136.57728,67.135066 136.82971,69.538099 136.82971,70.092645 136.82971,70.647191 137.08579,72.680527 137.08579,72.680527 137.08579,72.680527 136.96492,75.097206 136.96492,75.651752 136.96492,76.206298 137.34918,79.150232 137.34918,79.704778 137.34918,80.259324 137.47727,83.216904 137.47727,83.77145 137.47727,84.325996 137.47727,86.913878 137.47727,86.913878 L137.47727,87.838121 136.83682,90.426003 C136.83682,90.426003 136.32445,91.350247 136.19636,91.904793 136.06827,92.459339 135.42781,94.122978 135.42781,94.122978 L134.45805,96.127614 133.79395,98.762156 133.12218,100.30689 132.35364,102.1747 131.58509,105.34998 131.00658,107.66708 130.30973,110.07 129.71244,112.61426 129.0868,114.76146 C129.0868,114.76146 128.70253,116.4251 128.70253,116.97965 128.70253,117.5342 128.25472,120.29249 128.25472,120.29249 L128.12663,122.34709 C128.12663,122.34709 127.83396,124.10395 127.83396,124.6585 127.83396,125.21304 127.70587,127.24638 127.70587,127.24638 L127.46381,129.94649 126.82335,133.44099 126.58953,135.15939 126.58953,136.63818 126.58953,139.78061 126.58953,141.2594 126.33334,142.73367 126.20525,144.39725 126.07716,145.88264"/>
+                <Path Fill="#4F677F" Height="58" Canvas.Left="129.38" Stroke="#0D1B2A" Stretch="Fill" Canvas.Top="41.613" Width="8" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data ="M129.34297,41.735677 L130.17179,44.218229 130.416,46.186665 130.9153,47.867219 131.44008,49.528671 132.15559,51.825467 132.49248,53.748551 132.81589,55.481446 133.32732,56.972389 134.50147,61.834119 135.13392,63.65027 135.28204,67.173263 135.67817,70.003587 136.24178,72.600461 136.60228,76.311936 136.56764,79.144665 136.56764,82.835527 136.95065,85.55182 136.81797,87.457823 C136.81797,87.457823 136.99326,88.559534 136.99326,88.987146 136.99326,89.414757 136.99326,90.994984 136.99326,90.994984"/>
+
+
+            </Canvas>
+
+            <Canvas x:Name="OrejaDer" Width="400" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+
+                <Canvas.RenderTransform>
+                    <TranslateTransform x:Name="MoverOrejaDer"/>
+                </Canvas.RenderTransform>
+
+                <Path Fill="#A7C7E7" Height="103" Canvas.Left="194.833"  StrokeThickness="2" Stroke="#0D1B2A" Stretch="Fill" Canvas.Top="39.706" Width="43" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M199.74538,87.112678 L200.33333,85.07205 200.87352,83.442109 201.48844,81.255386 202.91639,78.287692 204.5019,75.085705 205.5484,72.494738 206.91906,70.51436 208.28949,67.275983 209.66351,64.806504 211.72476,62.043469 213.49666,59.75663 215.50809,57.443016 217.49562,55.012553 219.28372,52.454399 221.38967,50.806016 223.3202,49.014791 225.75854,46.925061 228.5373,45.133174 230.78479,44.27957 233.7449,43.161844 236.38131,43.609328 236.89663,44.986318 237.94165,46.669305 238.46434,48.811289 238.44211,50.026013 238.16781,51.463396 238.41412,53.29658 238.9101,54.936621 238.21909,57.106984 238.39085,59.095969 237.84113,60.364938 C237.84113,60.364938 237.84113,61.588929 237.84113,62.047926 237.84113,62.506922 237.83472,63.302611 237.66296,63.761608 237.49119,64.220604 237.04079,65.916154 237.04079,66.375151 237.04079,66.834147 236.59398,68.291247 236.59398,68.291247 236.59398,68.291247 236.67666,69.631682 236.5049,70.243678 236.33314,70.855673 235.88133,71.601725 235.88133,71.601725 L235.88133,72.519719 235.70317,73.289469 236.05949,74.851414 236.5049,75.973378 236.5049,77.350367 236.77215,79.068664 C236.77215,79.068664 236.56612,79.842277 236.56612,80.301274 236.56612,80.76027 236.2226,82.749255 236.2226,82.749255 L235.85119,84.884973 235.33591,86.873958 C235.33591,86.873958 235.25135,88.293723 235.07959,88.75272 234.90783,89.211716 234.06348,90.880199 234.06348,91.339196 234.06348,91.798192 233.5482,93.656679 233.5482,93.656679 L232.58531,96.250053 C232.58531,96.250053 231.77077,97.656994 231.42725,98.436776 231.08372,99.216558 230.26918,100.6235 230.26918,100.6235 L229.64561,102.18544 228.93296,104.05978 227.86398,105.93411 226.61684,108.43322 C226.61684,108.43322 225.65057,109.70673 225.47881,110.1678 225.30705,110.62887 224.27648,112.33461 224.27648,112.33461 L221.03398,114.6661 220.50691,110.55336 220.30782,114.17989 220.69661,117.9049 C220.69661,117.9049 220.73745,120.19499 220.73745,120.66444 220.73745,121.13388 220.60383,123.01119 220.60383,123.01119 L220.33658,125.70996 219.39918,128.49702 218.59949,130.99015 217.53051,132.98489 215.74888,135.29867 213.96724,137.2511 211.42031,138.73997 207.82061,139.04733 204.61367,137.79778 203.08185,136.54412 201.36424,135.29252 199.81839,133.57157 198.25201,131.53772 197.56497,129.50387 196.71256,127.47002 196.20373,125.90552 195.86048,123.24587 195.34093,121.05557 195.16563,118.86527 194.98998,117.14432 194.63617,114.79756 194.63617,111.04276 195.34918,108.38311 195.17102,105.87991 196.24,103.53316 196.59632,101.34286 197.30898,98.839656 197.30898,96.962255 198.19979,93.676804 198.73428,91.955853 199.80326,89.452652 z"/>
+                <Path Fill="#4F677F" HorizontalAlignment="Center" Height="69" Stroke="Black" Stretch="Fill" VerticalAlignment="Center" Width="25" Canvas.Left="203.641" Canvas.Top="50"
+
+                        Data="M253.29985,160.3965 L253.28591,156.47449 253.34656,154.51115 253.56878,150.24449 253.75262,146.54471 254.11483,142.98239 254.47704,139.42007 254.83926,135.67026 255.29202,130.983 255.95466,127.24643 256.65032,123.1084 257.11664,119.05987 257.93767,115.93016 258.73305,112.60894 259.72914,107.35921 260.63467,103.98438 261.49342,100.91943 262.31013,97.799274 262.86496,95.612153 263.70447,92.250322 264.93718,88.350726 266.3256,83.900403"/>
+
+
+
+            </Canvas>
+            <Canvas x:Name="BrazoIzq" Width="400" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <Canvas.RenderTransform>
+                    <TranslateTransform />
+                </Canvas.RenderTransform>
+
+                <Path Fill="#88A3D4" Height="80" Canvas.Left="113.625" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="153.77" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M146.7094,230.03697 L144.75,230.02 141.77083,226.77 139.17534,223.8825 135.98866,220.06806 131.98482,214.27624 129.20016,210.03076 126.82922,206.15061 124.25972,201.54534 120.76203,194.78224 117.61222,188.65996 116.2043,183.73375 114.91862,178.62288 114.20973,175.34853 114.9137,173.07155 115.50033,171.91085 115.91098,170.74088 116.32162,169.69406 117.72955,170.28082 118.66817,170.28082 119.37213,168.50962 119.84144,166.74544 120.78006,164.48593 121.71868,161.46202 121.95334,158.6901 120.54541,157.9367 120.31075,156.18474 120.31075,153.69016 121.24937,152.69864 123.36126,152.94652 126.41177,153.1944 129.69694,154.68167 130.4009,155.92107 130.63556,159.1435 130.4009,160.87865 130.16625,162.86169 130.4009,165.21654 C130.4009,165.21654 130.4009,169.67837 130.4009,170.42201 130.4009,171.16565 130.45714,174.22789 130.45714,174.22789 L130.16625,177.61051 130.34318,182.17751 131.10487,184.67506 132.27814,187.89749 133.68607,190.12841 135.09399,191.86356 136.50192,193.59872 138.37916,195.08599 140.72571,197.31691 144.22206,199.72134 147.06138,201.53085 148,202.77025 147.17871,205.24904 147.06138,208.22359 146.59207,210.70239 146.24009,212.80936 C146.24009,212.80936 145.88811,216.0318 145.88811,217.02331 145.88811,218.01483 145.88811,221.85695 145.88811,221.85695 L145.88811,226.31878 146.24009,230.53273"/>
+
+                <Path Fill="#FFF4F4F5" Height="24" Canvas.Left="107.658" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="153.187" Width="16" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M113.83333,175.35333 L113.57602,175.09602 112.00034,173.52033 110.62559,171.8401 109.02171,169.93681 107.73861,166.77718 107.71964,165.11321 109.32841,164.20361 111.68914,163.98342 113.29756,163.83765 112.40399,162.21393 110.61687,161.33797 109.18716,159.87803 109.28821,158.00914 111.42269,156.78571 113.29756,156.19093 C113.29756,156.19093 114.19112,155.77436 114.72726,155.77436 115.26339,155.77436 116.47227,155.4906 116.47227,155.4906 L118.65674,155.4906 120.19214,155.92211 C120.19214,155.92211 120.02846,156.49784 120.02846,156.92964 120.02846,157.36144 120.19247,158.22504 120.02846,158.80077 119.86445,159.3765 119.70045,160.38403 119.70045,160.38403 L120.19247,160.67189 121.50488,161.10369 122.17689,161.53549 122.01302,162.83089 C122.01302,162.83089 121.35626,163.69448 121.19207,164.12628 121.02788,164.55808 120.20692,166.71707 120.20692,166.71707 120.20692,166.71707 120.04273,167.58067 119.87854,168.1564 119.71435,168.73213 118.89339,170.02753 118.89339,170.02753 L118.40082,170.89113 116.75891,170.3154 115.60957,171.17899 114.9528,171.89866 C114.9528,171.89866 114.46023,172.76225 114.46023,173.19405 114.46023,173.62585 114.29604,174.34551 114.29604,174.34551"/>
+
+                <Path Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="15" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" VerticalAlignment="Center" Width="12" Canvas.Left="111.417" Canvas.Top="157.353"
+
+                        Data="M168.51272,214.74492 L167.3049,212.08377 165.96827,209.90923 164.96522,206.88815 164.1796,203.702 163.9447,202.04039 163.58023,199.57355 163.50763,198.24487 164.89233,198.34013 166.03351,198.33952 167.72327,198.75212 170.58286,199.48889 172.66797,200.59406 173.12967,201.51503 172.61579,203.99545 172.17508,205.69234 171.58745,207.57778 170.85292,210.12311 170.19185,211.25437 169.97149,212.10282 169.37393,213.54801 167.88099,213.86138"/>
+
+
+            </Canvas>
+
+
+            <Canvas x:Name="PieIzq" Width="400" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <Canvas.RenderTransform>
+                    <TranslateTransform />
+                </Canvas.RenderTransform>
+
+                <Path Fill="#88A3D4" Height="79" Canvas.Left="143" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="276.52" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M190.74554,318.55695 L188.28415,320.73584 187.16667,321.85332 186.2497,323.38112 184.73561,325.38037 183.45862,327.44247 183.15046,328.81701 C183.15046,328.81701 183.47575,330.1499 183.47575,330.54976 183.47575,330.94963 183.31326,332.70973 183.31326,333.11472 183.31326,333.51971 183.47575,335.16077 183.47575,335.70638 183.47575,336.25199 183.96321,338.73359 183.96321,338.73359 L183.96321,339.95403 180.79649,341.7586 177.85117,344.37772 C177.85117,344.37772 175.1888,345.82488 174.72367,345.95467 174.25855,346.08447 172.91824,346.90217 172.91824,346.90217 L170.94868,347.98524 169.63564,346.90006 168.51817,344.89711 167.86796,342.90162 167.06781,341.1722 165.95531,341.1722 164.8354,342.10343 162.90191,343.03465 160.16291,344.89711 158.08054,345.56228 156.79192,345.03015 156.30424,343.30072 155.14866,340.64007 153.82083,339.70884 C153.82083,339.70884 150.80581,340.374 150.30325,340.50703 149.80069,340.64007 147.65765,341.03916 147.65765,341.03916 L146.34487,340.64007 146.67585,338.91064 147.5025,335.85089 148.32915,333.0572 149.81712,330.39654 150.31311,329.33228 152.29707,331.72687 149.81712,327.60286 148.99047,325.7404 148.16382,324.144 147.5025,322.14851 146.34519,318.95573 145.18788,315.46269 144.52373,310.85538 145.34736,305.74453 147.32409,302.49553 148.80663,298.97579 149.79499,296.66103 150.78335,294.21654 152.43062,292.17938 153.91316,289.88787 155.06625,287.33343 156.71352,285.71599 156.97532,284.77496 158.53432,288.53185 159.76134,290.04943 C159.76134,290.04943 160.83169,291.54106 160.99642,292.08249 161.16115,292.62392 162.31424,294.24821 162.64369,294.65428 162.97314,295.06035 164.62041,297.09071 164.62041,297.09071 L167.5855,300.61 C167.5855,300.61 168.73859,301.82821 169.06804,302.36964 169.39749,302.91107 171.20949,304.80607 171.53894,305.21214 171.8684,305.61822 174.66876,308.19 174.66876,308.19 174.66876,308.19 175.82185,309.27286 176.1513,309.67893 176.48075,310.085 178.29275,311.30322 178.29275,311.30322 L180.92838,313.87501 183.89346,315.77001 186.03492,316.98822 187.68218,317.80037 189.82363,318.88323 190.80842,319.15394"/>
+
+            </Canvas>
+            <Canvas x:Name="PieDer" Width="400" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-0.625" Canvas.Top="1.75" >
+
+                <Canvas.RenderTransform>
+                    <TranslateTransform />
+                </Canvas.RenderTransform>
+
+                <Path Fill="#88A3D4" Height="104" Canvas.Left="216.25" Stroke="#0D1B2A" StrokeThickness="2" Stretch="Fill" Canvas.Top="268.845" Width="57" HorizontalAlignment="Center" VerticalAlignment="Center"
+
+                        Data="M254.80638,289.8281 C254.80638,289.8281 258.94343,296.7458 259.39385,298.02432 259.97502,299.67397 261.55237,302.20346 261.69321,302.67881 261.94321,303.52256 263.3061,306.7211 263.54589,308.31725 263.66602,309.11687 265.43249,311.38845 265.43249,313.32234 265.43249,315.25623 267.40192,319.0277 267.40192,319.0277 L268.18956,323.48134 269.3907,326.87168 C269.3907,326.87168 270.17751,329.52602 270.50035,331.53189 270.82319,333.53776 270.74269,336.60122 271.07562,338.04554 271.40854,339.48986 271.83639,343.6223 271.83639,344.5006 271.83639,345.3789 271.95031,348.8904 271.95031,350.62658 271.95031,352.36276 271.69494,356.29552 272.04609,357.15909 272.39724,358.02265 273.45069,359.7378 273.45069,361.17042 273.45069,362.60304 275.20644,368.68537 275.20644,369.55248 275.20644,370.41959 275.92339,373.90498 276.64032,375.06564 277.35726,376.22631 277.17871,377.39786 277.17871,377.39786 L276.14883,378.2756 273.88808,378.23534 270.9686,377.10527 267.85454,375.78865 264.6112,373.65775 260.9344,371.54621 258,377.38157 C258,377.38157 256.59173,379.68646 255.8876,380.55079 255.18347,381.41512 252.97719,384.58433 252.97719,384.58433 L251.48256,385.00499 248.98773,384.55039 246.23441,382.51805 242.0359,379.15335 239.06195,377.10527 236.78775,375.49607 C236.78775,375.49607 233.47016,376.08476 232.4143,376.37382 231.35845,376.66289 228.76517,376.81269 226.99122,376.81269 225.21727,376.81269 222.26789,376.37382 222.26789,376.37382 L220.28214,374.18445 220.63234,370.13755 220.98254,361.7547 220.63234,358.28593 220.2118,354.51181 218.76913,351.21175 C218.76913,351.21175 215.97452,346.95875 215.62024,346.09156 215.26597,345.22437 212.29642,340.82508 212.29642,340.82508 L209.79806,336.43529 204.22512,329.74431 201.87768,325.46097 199.63809,321.33836 199.52432,316.94979 C199.52432,316.94979 198.82618,309.43412 198.82618,308.56693 198.82618,307.69974 199.17219,303.36378 199.17219,303.36378 L200.21021,298.44969 C200.21021,298.44969 201.24823,295.84812 201.59424,294.98093 201.94025,294.11373 202.97827,289.76131 202.97827,289.76131 L205.06034,285.58864 207.91025,280.49556 211.47262,276.07967 214.32252,272.54695 217.8849,269.01424 222.15975,266.36471 226.94715,264.39282 230.70945,264.59975 236.20817,266.79404 C236.20817,266.79404 238.97623,268.54954 239.66824,269.42728 240.36025,270.30503 242.73952,270.87587 243.08553,272.0462 243.43153,273.21652 245.36745,274.81229 246.05947,275.69003 246.75148,276.56778 248.09138,278.1047 248.43739,279.27503 248.7834,280.44536 250.96162,282.53721 251.30762,283.41496 251.65363,284.29271 253.41074,286.32572 253.75675,287.49605 254.10276,288.66638 255.31333,289.98491 256.00534,290.86266 256.69736,291.7404 258.16635,294.30451 258.16635,295.18225"/>
+
+
+            </Canvas>
+            <Image x:Name="ImagenKO"
+               Source="AssetsWartortleAAA/KO.png"
+               Width="80"
+               Height="80"
+               Opacity="0"
+               Canvas.Left="180"
+               Canvas.Top="50"/>
+
+            <TextBlock x:Name="OjoXIzq"
+               Text="X"
+               FontSize="28"
+               FontWeight="Bold"
+               Foreground="Black"
+               Canvas.Left="140"
+               Canvas.Top="150"
+               Visibility="Collapsed"/>
+            <TextBlock x:Name="OjoXDer"
+               Text="X"
+               FontSize="28"
+               FontWeight="Bold"
+               Foreground="Black"
+               Canvas.Left="170"
+               Canvas.Top="150"
+               Visibility="Collapsed"/>
+
+            <Image x:Name="OjosDormidos"
+               Source="AssetsWartortleAAA/ojos_dormidos.png"
+               Width="120"
+               Height="70"
+               Visibility="Collapsed"
+               Canvas.Left="105"
+               Canvas.Top="130" />
+
+
+            <Image x:Name="GifDormir"
+               Source="AssetsWartortleAAA/dormir.png"
+               Width="50"
+               Height="50"
+               Visibility="Collapsed"
+               Canvas.Left="150"
+               Canvas.Top="100"/>
+
+            <Image x:Name="HeridaVisual"
+               Source="AssetsWartortleAAA/herida.png"
+               Width="50"
+               Height="50"
+               Visibility="Collapsed"
+               Canvas.Left="140"
+               Canvas.Top="90"/>
+
+            <Image x:Name="HeridaVisual2"
+               Source="Assets/herida2.png"
+               Width="60"
+               Height="60"
+               Visibility="Collapsed"
+               Canvas.Left="240"
+               Canvas.Top="160"/>
+
+            <Image x:Name="Sudor"  
+                   Source="/AssetsWartortleAAA/sudor.png" 
+                   Height="50"
+                   Width="76"
+                   Canvas.Left="151" Canvas.Top="109"
+                   Visibility="Collapsed" />
+
+            <Image x:Name="EscudoGigante"
+                   Source="AssetsWartortleAAA/escudo.png"
+                   Width="300"
+                   Height="300"
+                   Opacity="1"
+                   Visibility="Collapsed"
+                   Canvas.Left="100"
+                   Canvas.Top="60"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Image.RenderTransform>
+            </Image>
+
+            <Ellipse x:Name="CampoDeFuerza"
+                     Width="300"
+                     Height="300"
+                     Stroke="Cyan"
+                     Fill="Cyan"
+                     StrokeThickness="5"
+                     Opacity="0.3"
+                     Visibility="Collapsed"
+                     Canvas.Left="100"
+                     Canvas.Top="60"
+                     RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <ScaleTransform x:Name="EscalaCampo" ScaleX="1" ScaleY="1"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+
+            <Image x:Name="ChorroAgua"
+                   Source="AssetsWartortleAAA/ChorroAgua.png"
+                   Width="200"
+                   Height="80"
+                   Canvas.Left="200"
+                   Canvas.Top="150"
+                   Visibility="Collapsed"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="ChorroAguaScale" ScaleX="4" ScaleY="1.3"/>
+                        <TranslateTransform x:Name="ChorroAguaTransform" X="0" Y="0"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="Wartortle"
+               Source="AssetsWartortleAAA/Wartortle.png"
+               Width="600"
+               Height="200"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Bottom"
+               Margin="0,320,150,0"
+               Visibility="Visible"
+               RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <TranslateTransform X="-50" Y="0"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+
+
+
+        </Canvas>
+
+
+    </Grid>
+
+</UserControl>
